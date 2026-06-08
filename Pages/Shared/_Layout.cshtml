@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - 智慧渔港综合管理系统</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+<!-- ======= Top Navbar ======= -->
+<nav class="top-navbar">
+    <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-sm btn-link text-white p-1" id="sidebarToggle" title="折叠/展开菜单">
+            <i class="bi bi-list fs-4"></i>
+        </button>
+        <svg class="navbar-logo" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="15" fill="#1565c0" stroke="#4fc3f7" stroke-width="1.5"/>
+            <path d="M6 22 Q10 14 16 16 Q22 18 26 10" stroke="#4fc3f7" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M8 24 L24 24" stroke="#4fc3f7" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M14 16 L16 10 L18 16" fill="#90caf9"/>
+        </svg>
+        <span class="navbar-brand-title">智慧渔港综合管理系统</span>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+        <span class="text-white-50" style="font-size:.75rem">@DateTime.Now.ToString("yyyy-MM-dd HH:mm")</span>
+        <button class="btn btn-sm btn-link text-white position-relative" title="消息通知">
+            <i class="bi bi-bell-fill fs-5"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:.6rem">3</span>
+        </button>
+        <div class="dropdown">
+            <button class="btn btn-sm btn-link text-white dropdown-toggle d-flex align-items-center gap-1" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle fs-5"></i>
+                <span style="font-size:.83rem">张海涛 / 管理员</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="font-size:.82rem">
+                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>个人中心</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>系统设置</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>退出登录</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ======= Main Wrapper ======= -->
+<div class="d-flex">
+
+<!-- ======= Sidebar ======= -->
+<nav id="sidebar">
+    <!-- 首页 -->
+    <div class="pt-2"></div>
+    <a href="/" class="sidebar-link sidebar-link-home">
+        <i class="bi bi-house-fill"></i><span>工作台首页</span>
+    </a>
+
+    <hr class="sidebar-divider">
+    <div class="sidebar-section-title">智慧管理</div>
+
+    <!-- 基础信息管理 -->
+    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuBasic" href="#">
+        <i class="bi bi-database"></i><span>基础信息管理</span><i class="bi bi-chevron-down arrow"></i>
+    </a>
+    <div class="collapse" id="menuBasic">
+        <a href="/Basic/Harbor"     class="sidebar-sublink">渔港管理</a>
+        <a href="/Basic/Vessel"     class="sidebar-sublink">渔船管理</a>
+        <a href="/Basic/Crew"       class="sidebar-sublink">船员管理</a>
+        <a href="/Basic/Berth"      class="sidebar-sublink">码头/泊位/设施管理</a>
+        <a href="/Basic/Catch"      class="sidebar-sublink">渔获物管理</a>
+        <a href="/Basic/Enterprise" class="sidebar-sublink">企业货主管理</a>
+    </div>
+
+    <!-- 港务管理 -->
+    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuPort" href="#">
+        <i class="bi bi-anchor"></i><span>港务管理</span><i class="bi bi-chevron-down arrow"></i>
+    </a>
+    <div class="collapse" id="menuPort">
+        <a href="/Port/IncomingVessel" class="sidebar-sublink">来港船舶</a>
+        <a href="/Port/PrePlan"        class="sidebar-sublink">预计划</a>
+        <a href="/Port/WorkPlan"       class="sidebar-sublink">作业计划调度</a>
+        <a href="/Port/Duty"           class="sidebar-sublink">值班值守</a>
+    </div>
+
+    <!-- 事件管理（智慧管理下） -->
+    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuEventSub" href="#">
+        <i class="bi bi-exclamation-circle"></i><span>事件管理</span><i class="bi bi-chevron-down arrow"></i>
+    </a>
+    <div class="collapse" id="menuEventSub">
+        <a href="/Event/Intake"     class="sidebar-sublink">事件接入</a>
+        <a href="/Event/Dispatch"   class="sidebar-sublink">事件分拨</a>
+        <a href="/Event/Receive"    class="sidebar-sublink">事件接收</a>
+        <a href="/Event/Handle"     class="sidebar-sublink">事件处置</a>
+        <a href="/Event/Process"    class="sidebar-sublink">过程管理</a>
+        <a href="/Event/Close"      class="sidebar-sublink">事件办结</a>
+        <a href="/Event/Evaluate"   class="sidebar-sublink">事件评价</a>
+        <a href="/Event/Statistics" class="sidebar-sublink">事件统计</a>
+        <a href="/Event/Detail"     class="sidebar-sublink">事件明细</a>
+    </div>
+
+    <!-- 任务管理 -->
+    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuTask" href="#">
+        <i class="bi bi-list-task"></i><span>任务管理</span><i class="bi bi-chevron-down arrow"></i>
+    </a>
+    <div class="collapse" id="menuTask">
+        <a href="/TaskMgmt/TaskCreate" class="sidebar-sublink">任务立项</a>
+        <a href="/TaskMgmt/Assign"     class="sidebar-sublink">任务分派</a>
+        <a href="/TaskMgmt/Handle"     class="sidebar-sublink">任务办理</a>
+        <a href="/TaskMgmt/Summary"    class="sidebar-sublink">任务总结</a>
+        <a href="/TaskMgmt/Close"      class="sidebar-sublink">任务办结</a>
+        <a href="/TaskMgmt/Remind"     class="sidebar-sublink">任务催办</a>
+        <a href="/TaskMgmt/Delay"      class="sidebar-sublink">任务延期</a>
+    </div>
+
+    <!-- 应急管理 -->
+    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuEmerg" href="#">
+        <i class="bi bi-shield-exclamation"></i><span>应急管理</span><i class="bi bi-chevron-down arrow"></i>
+    </a>
+    <div class="collapse" id="menuEmerg">
+        <a href="/Emergency/Plan"     class="sidebar-sublink">应急预案</a>
+        <a href="/Emergency/Drill"    class="sidebar-sublink">应急演练</a>
+        <a href="/Emergency/Resource" class="sidebar-sublink">应急资源</a>
+        <a href="/Emergency/Incident" class="sidebar-sublink">应急事件</a>
+    </div>
+
+    <!-- 督查督办管理 -->
+    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuSuper" href="#">
+        <i class="bi bi-clipboard-check"></i><span>督查督办管理</span><i class="bi bi-chevron-down arrow"></i>
+    </a>
+    <div class="collapse" id="menuSuper">
+        <a href="/Supervision/List"       class="sidebar-sublink">督办列表</a>
+        <a href="/Supervision/Remind"     class="sidebar-sublink">催办记录</a>
+        <a href="/Supervision/Statistics" class="sidebar-sublink">督办统计</a>
+    </div>
+
+    <!-- 智慧监管 -->
+    <a href="/Monitor/PortMonitor"    class="sidebar-link"><i class="bi bi-display"></i><span>智慧港口监管</span></a>
+    <a href="/Monitor/VesselMonitor"  class="sidebar-link"><i class="bi bi-geo-alt"></i><span>船舶实时动态监管</span></a>
+    <a href="/Monitor/WorkMonitor"    class="sidebar-link"><i class="bi bi-kanban"></i><span>调度作业监管</span></a>
+
+    <!-- 安防/巡检/设施 -->
+    <a href="/Safety/SmartSafety"     class="sidebar-link"><i class="bi bi-camera-video"></i><span>智慧安防</span></a>
+    <a href="/Safety/Patrol"          class="sidebar-link"><i class="bi bi-person-walking"></i><span>智慧巡检</span></a>
+    <a href="/Safety/Facility"        class="sidebar-link"><i class="bi bi-tools"></i><span>设施设备管理</span></a>
+
+    <hr class="sidebar-divider">
+    <div class="sidebar-section-title">事件管理（独立）</div>
+
+    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuEventTop" href="#">
+        <i class="bi bi-exclamation-triangle"></i><span>事件管理</span><i class="bi bi-chevron-down arrow"></i>
+    </a>
+    <div class="collapse" id="menuEventTop">
+        <a href="/Event/Intake"     class="sidebar-sublink">事件接入</a>
+        <a href="/Event/Dispatch"   class="sidebar-sublink">事件分拨</a>
+        <a href="/Event/Receive"    class="sidebar-sublink">事件接收</a>
+        <a href="/Event/Handle"     class="sidebar-sublink">事件处置</a>
+        <a href="/Event/Process"    class="sidebar-sublink">过程管理</a>
+        <a href="/Event/Close"      class="sidebar-sublink">事件办结</a>
+        <a href="/Event/Evaluate"   class="sidebar-sublink">事件评价</a>
+        <a href="/Event/Statistics" class="sidebar-sublink">事件统计</a>
+        <a href="/Event/Detail"     class="sidebar-sublink">事件明细</a>
+    </div>
+
+    <div class="pb-4"></div>
+</nav><!-- /#sidebar -->
+
+<!-- ======= Main Content ======= -->
+<main class="main-content flex-grow-1">
+    @RenderBody()
+</main>
+
+</div><!-- /.d-flex -->
+
+<!-- ======= Global Toast ======= -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:1100">
+    <div id="globalToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive">
+        <div class="d-flex">
+            <div class="toast-body d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill" id="toastIcon"></i>
+                <div>
+                    <div class="fw-semibold" id="toastTitle">操作成功</div>
+                    <div style="font-size:.8rem;opacity:.9" id="toastBody"></div>
+                </div>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+
+<!-- ======= Delete Confirm Modal ======= -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger"><i class="bi bi-trash me-2"></i>确认删除</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body py-3 text-center">
+                <i class="bi bi-exclamation-triangle-fill text-warning fs-2 d-block mb-2"></i>
+                <span>确定要删除该记录吗？<br>此操作不可撤销，请谨慎操作。</span>
+            </div>
+            <div class="modal-footer justify-content-center gap-2">
+                <button type="button" class="btn btn-secondary btn-sm px-4" data-bs-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-danger btn-sm px-4" onclick="confirmDelete()">确认删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<script src="~/js/site.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

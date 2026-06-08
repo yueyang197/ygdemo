@@ -1,0 +1,195 @@
+@page
+@{ ViewData["Title"] = "事件处置"; ViewData["ActiveMenu"] = "EventDispose"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-tools me-2 text-primary"></i>事件处置</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">事件管理</li><li class="breadcrumb-item active">事件处置</li></ol></nav>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body py-2">
+        <div class="row g-2 align-items-center">
+            <div class="col-md-2"><input type="text" class="form-control form-control-sm" placeholder="事件编号/标题"></div>
+            <div class="col-md-2"><select class="form-select form-select-sm"><option value="">-- 事件类型 --</option><option>安全事故</option><option>环境污染</option><option>设施故障</option><option>人员伤亡</option></select></div>
+            <div class="col-md-2"><select class="form-select form-select-sm"><option value="">-- 处置状态 --</option><option>待处置</option><option>处置中</option><option>已完成</option></select></div>
+            <div class="col-md-2"><input type="date" class="form-control form-control-sm"></div>
+            <div class="col-auto">
+                <button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button>
+                <button class="btn btn-outline-secondary btn-sm ms-1">重置</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 处置统计卡片 -->
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">待处置</div><div class="fw-bold fs-4 text-warning">4</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">处置中</div><div class="fw-bold fs-4 text-info">6</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">今日完成</div><div class="fw-bold fs-4 text-success">3</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">超时预警</div><div class="fw-bold fs-4 text-danger">1</div></div></div></div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-list-task me-2"></i>处置任务列表</span>
+        <button class="btn btn-outline-success btn-sm" onclick="showToast('数据导出中...')"><i class="bi bi-download me-1"></i>导出</button>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr><th>事件编号</th><th>事件标题</th><th>事件类型</th><th>处置部门</th><th>责任人</th><th>接收时间</th><th>处置期限</th><th>处置进度</th><th>状态</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060801</span></td>
+                    <td>3号泊位渔船碰撞事故</td><td><span class="badge bg-danger">安全事故</span></td>
+                    <td>港务安全科</td><td>陈科长</td>
+                    <td>2024-06-08 08:30</td><td><span class="text-danger fw-bold">2024-06-08 12:00</span></td>
+                    <td><div class="d-flex align-items-center gap-1"><div class="progress flex-grow-1" style="height:6px;width:60px"><div class="progress-bar bg-warning" style="width:60%"></div></div><small>60%</small></div></td>
+                    <td><span class="status-badge status-info">处置中</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showDisposeDetail('SJ2024060801')"><i class="bi bi-eye me-1"></i>详情</button>
+                        <button class="btn btn-sm btn-success" onclick="showUpdateModal('SJ2024060801')"><i class="bi bi-pencil me-1"></i>更新进度</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060802</span></td>
+                    <td>港区水域油污染报告</td><td><span class="badge bg-success">环境污染</span></td>
+                    <td>环保监察组</td><td>赵主任</td>
+                    <td>2024-06-08 10:00</td><td>2024-06-09 10:00</td>
+                    <td><div class="d-flex align-items-center gap-1"><div class="progress flex-grow-1" style="height:6px;width:60px"><div class="progress-bar bg-info" style="width:30%"></div></div><small>30%</small></div></td>
+                    <td><span class="status-badge status-info">处置中</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showDisposeDetail('SJ2024060802')"><i class="bi bi-eye me-1"></i>详情</button>
+                        <button class="btn btn-sm btn-success" onclick="showUpdateModal('SJ2024060802')"><i class="bi bi-pencil me-1"></i>更新进度</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060803</span></td>
+                    <td>起重机液压系统故障</td><td><span class="badge bg-secondary">设施故障</span></td>
+                    <td>设施维修部</td><td>孙班长</td>
+                    <td>2024-06-08 11:00</td><td>2024-06-08 17:00</td>
+                    <td><div class="d-flex align-items-center gap-1"><div class="progress flex-grow-1" style="height:6px;width:60px"><div class="progress-bar bg-success" style="width:80%"></div></div><small>80%</small></div></td>
+                    <td><span class="status-badge status-info">处置中</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showDisposeDetail('SJ2024060803')"><i class="bi bi-eye me-1"></i>详情</button>
+                        <button class="btn btn-sm btn-success" onclick="showUpdateModal('SJ2024060803')"><i class="bi bi-pencil me-1"></i>更新进度</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060804</span></td>
+                    <td>船员作业中受伤</td><td><span class="badge bg-danger">人员伤亡</span></td>
+                    <td>应急救援队</td><td>刘队长</td>
+                    <td>2024-06-08 13:20</td><td>2024-06-08 15:00</td>
+                    <td><div class="d-flex align-items-center gap-1"><div class="progress flex-grow-1" style="height:6px;width:60px"><div class="progress-bar bg-success" style="width:100%"></div></div><small>100%</small></div></td>
+                    <td><span class="status-badge status-normal">已完成</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showDisposeDetail('SJ2024060804')"><i class="bi bi-eye me-1"></i>详情</button>
+                        <button class="btn btn-sm btn-warning" onclick="showToast('已提交办结申请', 'success')"><i class="bi bi-check2-circle me-1"></i>申请办结</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060805</span></td>
+                    <td>未登记船只进港</td><td><span class="badge bg-warning text-dark">秩序违规</span></td>
+                    <td>海事执法队</td><td>刘队长</td>
+                    <td>2024-06-08 11:30</td><td>2024-06-08 16:00</td>
+                    <td><div class="d-flex align-items-center gap-1"><div class="progress flex-grow-1" style="height:6px;width:60px"><div class="progress-bar bg-secondary" style="width:0%"></div></div><small>0%</small></div></td>
+                    <td><span class="status-badge status-warning">待处置</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showDisposeDetail('SJ2024060805')"><i class="bi bi-eye me-1"></i>详情</button>
+                        <button class="btn btn-sm btn-info" onclick="showToast('已开始处置', 'info')"><i class="bi bi-play-circle me-1"></i>开始处置</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav><ul class="pagination pagination-sm mb-0">
+            <li class="page-item active"><a class="page-link">1</a></li>
+            <li class="page-item"><a class="page-link">2</a></li>
+            <li class="page-item"><a class="page-link">下一页</a></li>
+        </ul></nav>
+    </div>
+</div>
+
+<!-- 处置详情弹窗 -->
+<div class="modal fade" id="disposeDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-tools me-2"></i>事件处置详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="alert alert-warning py-2 mb-3">
+                    <strong>SJ2024060801</strong> — 3号泊位渔船碰撞事故 &nbsp;<span class="badge bg-danger">安全事故</span>&nbsp;<span class="badge bg-danger">紧急</span>
+                </div>
+                <div class="row g-2 mb-3" style="font-size:.85rem">
+                    <div class="col-md-4"><span class="text-muted">处置部门：</span><strong>港务安全科</strong></div>
+                    <div class="col-md-4"><span class="text-muted">责任人：</span>陈科长</div>
+                    <div class="col-md-4"><span class="text-muted">处置期限：</span><span class="text-danger">2024-06-08 12:00</span></div>
+                </div>
+                <h6 class="mb-2">处置过程记录</h6>
+                <div style="border-left:3px solid #0d6efd;padding-left:1rem">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between"><span class="fw-bold text-primary">陈科长</span><small class="text-muted">2024-06-08 08:45</small></div>
+                        <div style="font-size:.85rem">已接收事件，立即组织港务安全人员赶赴现场，初步评估碰撞情况。</div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between"><span class="fw-bold text-primary">张安全员</span><small class="text-muted">2024-06-08 09:15</small></div>
+                        <div style="font-size:.85rem">到达现场：两艘渔船轻微碰撞，无人员伤亡，船体轻微受损，已清理现场保障航道通畅。</div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between"><span class="fw-bold text-primary">陈科长</span><small class="text-muted">2024-06-08 10:30</small></div>
+                        <div style="font-size:.85rem">完成事故笔录，已联系双方船主确认责任，正在协调赔偿事宜。</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关闭</button></div>
+        </div>
+    </div>
+</div>
+
+<!-- 更新进度弹窗 -->
+<div class="modal fade" id="updateProgressModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-pencil me-2"></i>更新处置进度</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">处置进度 <span id="progressValue">60</span>%</label>
+                    <input type="range" class="form-range" min="0" max="100" value="60" oninput="document.getElementById('progressValue').textContent=this.value">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">处置记录 <span class="text-danger">*</span></label>
+                    <textarea class="form-control" rows="4" placeholder="请详细描述本次处置情况..."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">是否可以办结</label>
+                    <div>
+                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="canClose" value="yes"><label class="form-check-label">可以办结</label></div>
+                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="canClose" value="no" checked><label class="form-check-label">继续处置</label></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button>
+                <button class="btn btn-success btn-sm" onclick="submitProgress()"><i class="bi bi-check-lg me-1"></i>提交更新</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function showDisposeDetail(id) {
+    new bootstrap.Modal(document.getElementById('disposeDetailModal')).show();
+}
+function showUpdateModal(id) {
+    new bootstrap.Modal(document.getElementById('updateProgressModal')).show();
+}
+function submitProgress() {
+    bootstrap.Modal.getInstance(document.getElementById('updateProgressModal')).hide();
+    showToast('处置进度已更新', 'success');
+}
+</script>
+}

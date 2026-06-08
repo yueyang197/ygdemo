@@ -1,0 +1,71 @@
+@page
+@{ ViewData["Title"] = "任务催办"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-bell me-2 text-primary"></i>任务催办</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">任务管理</li><li class="breadcrumb-item active">任务催办</li></ol></nav>
+    </div>
+    <button class="btn btn-warning btn-sm" onclick="batchUrge()"><i class="bi bi-bell-fill me-1"></i>批量催办</button>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">任务编号/标题</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">负责部门</label><select class="form-select form-select-sm"><option value="">全部</option><option>港务安全科</option><option>设施维修部</option><option>环保监察组</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">超期状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>即将超期</option><option>已超期</option><option>严重超期</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<!-- 统计 -->
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">待催办任务</div><div class="fw-bold fs-4 text-danger">8</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">今日已催办</div><div class="fw-bold fs-4 text-warning">3</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">已超期任务</div><div class="fw-bold fs-4 text-danger">5</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">本月催办次数</div><div class="fw-bold fs-4 text-info">21</div></div></div></div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6><i class="bi bi-exclamation-triangle me-2 text-warning"></i>需催办任务列表</h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th><input type="checkbox"></th><th>任务编号</th><th>任务标题</th><th>负责部门</th><th>负责人</th><th>截止时间</th><th>超期状态</th><th>已催办次数</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td><input type="checkbox"></td><td>RW-20240601-003</td><td>港区消防设施年检</td><td>港务安全科</td><td>陈科长</td><td>2024-06-05</td><td><span class="badge bg-danger">超期3天</span></td><td>2次</td><td><button class="btn btn-warning btn-action me-1" onclick="urgeTask('RW-20240601-003')"><i class="bi bi-bell me-1"></i>催办</button><button class="btn btn-primary btn-action" onclick="openModal('urgeLogModal')">记录</button></td></tr>
+                <tr><td><input type="checkbox"></td><td>RW-20240603-007</td><td>船员安全培训组织</td><td>海事执法队</td><td>刘队长</td><td>2024-06-07</td><td><span class="badge bg-danger">超期1天</span></td><td>1次</td><td><button class="btn btn-warning btn-action me-1" onclick="urgeTask('RW-20240603-007')"><i class="bi bi-bell me-1"></i>催办</button><button class="btn btn-primary btn-action" onclick="openModal('urgeLogModal')">记录</button></td></tr>
+                <tr><td><input type="checkbox"></td><td>RW-20240605-011</td><td>港区环境卫生整治</td><td>环保监察组</td><td>赵主任</td><td>2024-06-10</td><td><span class="badge bg-warning text-dark">即将超期</span></td><td>0次</td><td><button class="btn btn-warning btn-action me-1" onclick="urgeTask('RW-20240605-011')"><i class="bi bi-bell me-1"></i>催办</button><button class="btn btn-primary btn-action" onclick="openModal('urgeLogModal')">记录</button></td></tr>
+                <tr><td><input type="checkbox"></td><td>RW-20240602-005</td><td>泊位安全隔离设施修缮</td><td>设施维修部</td><td>孙班长</td><td>2024-06-04</td><td><span class="badge bg-danger">超期4天</span></td><td>3次</td><td><button class="btn btn-warning btn-action me-1" onclick="urgeTask('RW-20240602-005')"><i class="bi bi-bell me-1"></i>催办</button><button class="btn btn-primary btn-action" onclick="openModal('urgeLogModal')">记录</button></td></tr>
+                <tr><td><input type="checkbox"></td><td>RW-20240606-015</td><td>新进船员档案录入</td><td>港务安全科</td><td>陈科长</td><td>2024-06-09</td><td><span class="badge bg-warning text-dark">即将超期</span></td><td>0次</td><td><button class="btn btn-warning btn-action me-1" onclick="urgeTask('RW-20240606-015')"><i class="bi bi-bell me-1"></i>催办</button><button class="btn btn-primary btn-action" onclick="openModal('urgeLogModal')">记录</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="urgeLogModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-clock-history me-2"></i>催办记录</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="mb-2"><strong>任务：</strong>港区消防设施年检</div>
+                <table class="table table-sm">
+                    <thead><tr><th>催办时间</th><th>催办人</th><th>催办方式</th><th>回复情况</th></tr></thead>
+                    <tbody>
+                        <tr><td>2024-06-06 10:00</td><td>管理员</td><td>系统消息</td><td>已读未回复</td></tr>
+                        <tr><td>2024-06-07 09:00</td><td>管理员</td><td>电话+系统</td><td>承诺今日完成</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function urgeTask(id) { showToast('已发送催办通知：' + id, 'warning'); }
+function batchUrge() { showToast('已批量发送催办通知', 'warning'); }
+</script>
+}

@@ -1,0 +1,123 @@
+@page
+@{ ViewData["Title"] = "事件办结"; ViewData["ActiveMenu"] = "EventClose"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-check-circle me-2 text-primary"></i>事件办结</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">事件管理</li><li class="breadcrumb-item active">事件办结</li></ol></nav>
+    </div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">事件编号</label><input type="text" class="form-control form-control-sm" placeholder="请输入"></div>
+        <div class="col-md-2"><label class="form-label mb-1">事件类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>安全事故</option><option>环境污染</option><option>设施故障</option><option>秩序违规</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">办结时间</label><input type="date" class="form-control form-control-sm"></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">本月办结</div><div class="fw-bold fs-4 text-success">38</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">平均处置时长</div><div class="fw-bold fs-4 text-primary">4.2h</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">按时完成率</div><div class="fw-bold fs-4 text-info">92%</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">满意度评价</div><div class="fw-bold fs-4 text-warning">4.6分</div></div></div></div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6><i class="bi bi-list-check me-2"></i>已办结事件列表</h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>事件编号</th><th>事件类型</th><th>事件标题</th><th>紧急程度</th><th>受理时间</th><th>办结时间</th><th>处置时长</th><th>经办人</th><th>是否按时</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><span class="text-primary fw-semibold">SJ2024060801</span></td>
+                    <td><span class="badge bg-secondary">安全事故</span></td>
+                    <td>3号泊位渔船碰撞事故</td>
+                    <td><span class="badge bg-danger">紧急</span></td>
+                    <td>2024-06-08 08:20</td>
+                    <td>2024-06-08 11:45</td>
+                    <td>3h 25m</td>
+                    <td>陈科长</td>
+                    <td><span class="badge bg-success">按时完成</span></td>
+                    <td><button class="btn btn-primary btn-action" onclick="openModal('viewCloseModal')">详情</button></td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">SJ2024060802</span></td>
+                    <td><span class="badge bg-secondary">环境污染</span></td>
+                    <td>港区水域油污染报告</td>
+                    <td><span class="badge bg-warning text-dark">一般</span></td>
+                    <td>2024-06-08 09:35</td>
+                    <td>2024-06-08 16:10</td>
+                    <td>6h 35m</td>
+                    <td>赵主任</td>
+                    <td><span class="badge bg-success">按时完成</span></td>
+                    <td><button class="btn btn-primary btn-action" onclick="openModal('viewCloseModal')">详情</button></td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">SJ2024060705</span></td>
+                    <td><span class="badge bg-secondary">设施故障</span></td>
+                    <td>卸货平台液压故障</td>
+                    <td><span class="badge bg-warning text-dark">一般</span></td>
+                    <td>2024-06-07 10:00</td>
+                    <td>2024-06-07 18:30</td>
+                    <td>8h 30m</td>
+                    <td>孙班长</td>
+                    <td><span class="badge bg-danger">超时完成</span></td>
+                    <td><button class="btn btn-primary btn-action" onclick="openModal('viewCloseModal')">详情</button></td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">SJ2024060703</span></td>
+                    <td><span class="badge bg-secondary">秩序违规</span></td>
+                    <td>无证船只擅自靠泊</td>
+                    <td><span class="badge bg-info">低级</span></td>
+                    <td>2024-06-07 14:20</td>
+                    <td>2024-06-07 15:50</td>
+                    <td>1h 30m</td>
+                    <td>刘队长</td>
+                    <td><span class="badge bg-success">按时完成</span></td>
+                    <td><button class="btn btn-primary btn-action" onclick="openModal('viewCloseModal')">详情</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 38 条记录</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link">2</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="viewCloseModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-check-circle me-2"></i>办结详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="alert alert-success py-2"><i class="bi bi-check-circle me-2"></i>事件已于 <strong>2024-06-08 11:45</strong> 办结，处置时长 <strong>3小时25分钟</strong>，按时完成</div>
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6"><span class="text-muted">事件编号：</span><strong>SJ2024060801</strong></div>
+                    <div class="col-md-6"><span class="text-muted">事件类型：</span>安全事故</div>
+                    <div class="col-md-6"><span class="text-muted">事件标题：</span>3号泊位渔船碰撞事故</div>
+                    <div class="col-md-6"><span class="text-muted">经办部门：</span>港务安全科</div>
+                    <div class="col-md-6"><span class="text-muted">经办人：</span>陈科长</div>
+                    <div class="col-md-6"><span class="text-muted">处置结果：</span>已处置</div>
+                </div>
+                <hr>
+                <h6>处置总结</h6>
+                <p class="text-muted" style="font-size:.84rem">事故发生后迅速响应，疏导相关船只，联系船主进行责任认定，安排港区维修人员检查受损设施。经核查，事故因能见度低导致操作失误，已对船主进行安全教育，登记在案并出具事故处理报告。</p>
+                <hr>
+                <h6>办结证明</h6>
+                <div class="p-3 bg-light rounded border">
+                    <div class="row g-2" style="font-size:.83rem">
+                        <div class="col-6"><span class="text-muted">办结时间：</span>2024-06-08 11:45</div>
+                        <div class="col-6"><span class="text-muted">办结人：</span>陈科长</div>
+                        <div class="col-6"><span class="text-muted">审核人：</span>港务主任李志</div>
+                        <div class="col-6"><span class="text-muted">归档编号：</span>ARC-20240608-001</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button><button class="btn btn-primary btn-sm" onclick="showToast('已生成PDF报告','success')"><i class="bi bi-file-pdf me-1"></i>导出报告</button></div>
+        </div>
+    </div>
+</div>

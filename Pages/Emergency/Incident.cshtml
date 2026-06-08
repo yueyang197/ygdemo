@@ -1,0 +1,137 @@
+@page
+@{ ViewData["Title"] = "应急事件"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-exclamation-triangle me-2 text-danger"></i>应急事件处置</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">应急管理</li><li class="breadcrumb-item active">应急事件</li></ol></nav>
+    </div>
+    <button class="btn btn-danger btn-sm" onclick="openModal('addIncidentModal')"><i class="bi bi-plus-circle me-1"></i>上报应急事件</button>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">今日事件</div><div class="fw-bold fs-4 text-danger">3</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">处置中</div><div class="fw-bold fs-4 text-warning">2</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">本月累计</div><div class="fw-bold fs-4 text-info">18</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">平均响应(分钟)</div><div class="fw-bold fs-4 text-success">8.5</div></div></div></div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">事件编号/名称</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">事件类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>火灾险情</option><option>台风应急</option><option>人员伤亡</option><option>溢油污染</option><option>设备故障</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">响应级别</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>一级（重大）</option><option>二级（较大）</option><option>三级（一般）</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">处置状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>响应中</option><option>处置中</option><option>已结束</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6><i class="bi bi-exclamation-triangle me-2 text-danger"></i>应急事件列表</h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>事件编号</th><th>事件名称</th><th>事件类型</th><th>响应级别</th><th>发生时间</th><th>发生地点</th><th>响应时间</th><th>处置负责人</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>1</td><td>YJ-20240608-001</td><td>仓库区域烟雾火警</td><td><span class="badge bg-danger">火灾险情</span></td><td><span class="badge bg-danger">一级</span></td>
+                    <td>2024-06-08 14:55</td><td>东仓库B区</td><td>3分12秒</td><td>消防队长陈明</td>
+                    <td><span class="badge-status status-process">处置中</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncidentModal')">详情</button><button class="btn btn-warning btn-action" onclick="showToast('已更新处置进度')">更新</button></td>
+                </tr>
+                <tr>
+                    <td>2</td><td>YJ-20240608-002</td><td>3号泊位渔船碰撞</td><td><span class="badge bg-warning text-dark">安全事故</span></td><td><span class="badge bg-warning text-dark">二级</span></td>
+                    <td>2024-06-08 08:15</td><td>3号泊位</td><td>5分40秒</td><td>港务队长刘强</td>
+                    <td><span class="badge-status status-process">处置中</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncidentModal')">详情</button><button class="btn btn-warning btn-action" onclick="showToast('已更新处置进度')">更新</button></td>
+                </tr>
+                <tr>
+                    <td>3</td><td>YJ-20240607-005</td><td>港区水域油污泄漏</td><td><span class="badge bg-info">溢油污染</span></td><td><span class="badge bg-warning text-dark">二级</span></td>
+                    <td>2024-06-07 16:30</td><td>2号泊位附近水域</td><td>7分15秒</td><td>环保监察赵主任</td>
+                    <td><span class="badge-status status-done">已结束</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncidentModal')">详情</button><button class="btn btn-outline-secondary btn-action" onclick="showToast('报告已下载')">报告</button></td>
+                </tr>
+                <tr>
+                    <td>4</td><td>YJ-20240605-003</td><td>船员高空坠落受伤</td><td><span class="badge bg-danger">人员伤亡</span></td><td><span class="badge bg-danger">一级</span></td>
+                    <td>2024-06-05 10:20</td><td>装卸区吊机平台</td><td>4分50秒</td><td>应急救援队孙班长</td>
+                    <td><span class="badge-status status-done">已结束</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncidentModal')">详情</button><button class="btn btn-outline-secondary btn-action" onclick="showToast('报告已下载')">报告</button></td>
+                </tr>
+                <tr>
+                    <td>5</td><td>YJ-20240603-002</td><td>台风"强台"紧急应对</td><td><span class="badge bg-primary">台风应急</span></td><td><span class="badge bg-danger">一级</span></td>
+                    <td>2024-06-03 06:00</td><td>全港区</td><td>即时启动</td><td>港长王建国</td>
+                    <td><span class="badge-status status-done">已结束</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncidentModal')">详情</button><button class="btn btn-outline-secondary btn-action" onclick="showToast('报告已下载')">报告</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 18 条记录，显示第 1-5 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link">2</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="addIncidentModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white"><h5 class="modal-title"><i class="bi bi-exclamation-triangle me-2"></i>上报应急事件</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="alert alert-danger py-2"><i class="bi bi-exclamation-triangle me-2"></i>请如实填报应急事件信息，系统将自动启动应急响应流程！</div>
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">事件名称 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="请简要描述事件"></div>
+                    <div class="col-md-6"><label class="form-label">事件类型 <span class="text-danger">*</span></label><select class="form-select form-select-sm"><option>火灾险情</option><option>台风应急</option><option>人员伤亡</option><option>溢油污染</option><option>设备故障</option><option>其他</option></select></div>
+                    <div class="col-md-6"><label class="form-label">响应级别</label><select class="form-select form-select-sm"><option>一级（重大）</option><option>二级（较大）</option><option>三级（一般）</option></select></div>
+                    <div class="col-md-6"><label class="form-label">发生地点 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="请输入具体地点"></div>
+                    <div class="col-md-6"><label class="form-label">发生时间</label><input type="datetime-local" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">上报人</label><input class="form-control form-control-sm"></div>
+                    <div class="col-12"><label class="form-label">事件描述 <span class="text-danger">*</span></label><textarea class="form-control form-control-sm" rows="3" placeholder="请详细描述事件经过、影响范围及伤亡情况..."></textarea></div>
+                    <div class="col-12"><label class="form-label">现场照片</label><input type="file" class="form-control form-control-sm" accept="image/*" multiple></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-danger btn-sm" onclick="saveForm('addIncidentModal')"><i class="bi bi-exclamation-triangle me-1"></i>立即上报并启动响应</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewIncidentModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-exclamation-triangle me-2 text-danger"></i>应急事件详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6"><span class="text-muted">事件编号：</span><strong>YJ-20240608-001</strong></div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-process">处置中</span></div>
+                    <div class="col-md-6"><span class="text-muted">事件名称：</span>仓库区域烟雾火警</div>
+                    <div class="col-md-6"><span class="text-muted">类型：</span><span class="badge bg-danger">火灾险情</span></div>
+                    <div class="col-md-6"><span class="text-muted">响应级别：</span><span class="badge bg-danger">一级（重大）</span></div>
+                    <div class="col-md-6"><span class="text-muted">发生地点：</span>东仓库B区</div>
+                    <div class="col-md-6"><span class="text-muted">发生时间：</span>2024-06-08 14:55</div>
+                    <div class="col-md-6"><span class="text-muted">响应时间：</span>3分12秒</div>
+                    <div class="col-md-6"><span class="text-muted">处置负责人：</span>消防队长陈明</div>
+                    <div class="col-md-6"><span class="text-muted">启用预案：</span>EP-2024-001 港区火灾应急处置预案</div>
+                </div>
+                <hr>
+                <h6>处置进展</h6>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-time">14:55</div><div class="timeline-user">消防系统</div><div class="timeline-content">消防感烟探测器触发告警，自动上报系统</div></div>
+                    <div class="timeline-item"><div class="timeline-time">14:58</div><div class="timeline-user">陈明</div><div class="timeline-content">启动一级应急响应，消防队出动，疏散仓库区人员</div></div>
+                    <div class="timeline-item"><div class="timeline-time">15:05</div><div class="timeline-user">陈明</div><div class="timeline-content">现场确认为局部烟雾，正在排查起火点，已联系消防中队支援</div></div>
+                </div>
+                <div class="mt-3">
+                    <h6>调用资源</h6>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-secondary">灭火器 ×8</span>
+                        <span class="badge bg-secondary">消防水带 ×2</span>
+                        <span class="badge bg-secondary">应急救援队 ×12人</span>
+                        <span class="badge bg-secondary">医疗急救组 ×4人</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-warning btn-sm" onclick="showToast('已更新处置进度')">更新进度</button><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

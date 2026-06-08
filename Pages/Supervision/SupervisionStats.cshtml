@@ -1,0 +1,101 @@
+@page
+@{ ViewData["Title"] = "督查统计"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-bar-chart-line me-2 text-primary"></i>督查统计分析</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">督查督办</li><li class="breadcrumb-item active">督查统计</li></ol></nav>
+    </div>
+    <div>
+        <select class="form-select form-select-sm d-inline-block" style="width:120px"><option>2024年</option><option>2023年</option></select>
+        <button class="btn btn-outline-primary btn-sm ms-2"><i class="bi bi-download me-1"></i>导出报告</button>
+    </div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">本年督查总数</div><div class="fw-bold fs-4 text-primary">186</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">已完成</div><div class="fw-bold fs-4 text-success">162</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">整改中</div><div class="fw-bold fs-4 text-warning">18</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">整改完成率</div><div class="fw-bold fs-4 text-info">87.1%</div></div></div></div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-8">
+        <div class="content-card">
+            <div class="content-card-header"><h6>月度督查趋势</h6></div>
+            <div class="card-body"><canvas id="monthTrendChart" height="100"></canvas></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="content-card">
+            <div class="content-card-header"><h6>督查类型分布</h6></div>
+            <div class="card-body"><canvas id="typeDistChart" height="180"></canvas></div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="content-card">
+            <div class="content-card-header"><h6>部门整改情况排名</h6></div>
+            <div class="table-container">
+                <table class="table table-hover table-sm">
+                    <thead><tr><th>排名</th><th>部门</th><th>督查次数</th><th>整改完成</th><th>完成率</th><th>评级</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>港务安全科</td><td>42</td><td>40</td><td>95.2%</td><td><span class="badge bg-success">优秀</span></td></tr>
+                        <tr><td>2</td><td>设施维修部</td><td>38</td><td>35</td><td>92.1%</td><td><span class="badge bg-success">优秀</span></td></tr>
+                        <tr><td>3</td><td>海事执法队</td><td>30</td><td>26</td><td>86.7%</td><td><span class="badge bg-primary">良好</span></td></tr>
+                        <tr><td>4</td><td>环保监察组</td><td>28</td><td>24</td><td>85.7%</td><td><span class="badge bg-primary">良好</span></td></tr>
+                        <tr><td>5</td><td>后勤保障部</td><td>22</td><td>17</td><td>77.3%</td><td><span class="badge bg-warning text-dark">一般</span></td></tr>
+                        <tr><td>6</td><td>信息技术组</td><td>26</td><td>20</td><td>76.9%</td><td><span class="badge bg-warning text-dark">一般</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="content-card">
+            <div class="content-card-header"><h6>问题类型统计</h6></div>
+            <div class="table-container">
+                <table class="table table-hover table-sm">
+                    <thead><tr><th>问题类型</th><th>发现数</th><th>已整改</th><th>整改率</th><th>趋势</th></tr></thead>
+                    <tbody>
+                        <tr><td>安全设施缺陷</td><td>52</td><td>48</td><td>92.3%</td><td><span class="text-success">↓改善</span></td></tr>
+                        <tr><td>操作规程违规</td><td>38</td><td>32</td><td>84.2%</td><td><span class="text-warning">→持平</span></td></tr>
+                        <tr><td>设备维护不及时</td><td>34</td><td>30</td><td>88.2%</td><td><span class="text-success">↓改善</span></td></tr>
+                        <tr><td>证件资质过期</td><td>28</td><td>26</td><td>92.9%</td><td><span class="text-success">↓改善</span></td></tr>
+                        <tr><td>环保违规行为</td><td>20</td><td>16</td><td>80.0%</td><td><span class="text-danger">↑上升</span></td></tr>
+                        <tr><td>其他</td><td>14</td><td>10</td><td>71.4%</td><td><span class="text-warning">→持平</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+const monthCtx = document.getElementById('monthTrendChart').getContext('2d');
+new Chart(monthCtx, {
+    type: 'bar',
+    data: {
+        labels: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+        datasets: [
+            { label: '督查次数', data: [12,10,15,18,14,16,0,0,0,0,0,0], backgroundColor: 'rgba(13,110,253,0.7)' },
+            { label: '整改完成', data: [10,9,13,16,12,14,0,0,0,0,0,0], backgroundColor: 'rgba(25,135,84,0.7)' }
+        ]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true } } }
+});
+
+const typeCtx = document.getElementById('typeDistChart').getContext('2d');
+new Chart(typeCtx, {
+    type: 'pie',
+    data: {
+        labels: ['安全督查','环保督查','设备督查','证件督查','其他'],
+        datasets: [{ data: [45, 22, 18, 10, 5], backgroundColor: ['#0d6efd','#198754','#ffc107','#0dcaf0','#6c757d'] }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+</script>
+}

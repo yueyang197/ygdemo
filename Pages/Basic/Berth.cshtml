@@ -1,0 +1,105 @@
+@page
+@{ ViewData["Title"] = "码头/泊位/设施管理"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-grid-3x3-gap me-2 text-primary"></i>码头/泊位/设施管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">基础信息管理</li><li class="breadcrumb-item active">码头/泊位/设施管理</li></ol></nav>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('addBerthModal')"><i class="bi bi-plus-circle me-1"></i>新增泊位</button>
+</div>
+
+<!-- 状态概览 -->
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="stat-card blue"><div class="stat-card-icon"><i class="bi bi-grid-3x3-gap"></i></div><div class="stat-card-info"><div class="stat-value">248</div><div class="stat-label">泊位总数</div></div></div></div>
+    <div class="col-md-3"><div class="stat-card green"><div class="stat-card-icon"><i class="bi bi-check-circle"></i></div><div class="stat-card-info"><div class="stat-value">163</div><div class="stat-label">空闲泊位</div></div></div></div>
+    <div class="col-md-3"><div class="stat-card orange"><div class="stat-card-icon"><i class="bi bi-anchor"></i></div><div class="stat-card-info"><div class="stat-value">78</div><div class="stat-label">占用泊位</div></div></div></div>
+    <div class="col-md-3"><div class="stat-card red"><div class="stat-card-icon"><i class="bi bi-wrench"></i></div><div class="stat-card-info"><div class="stat-value">7</div><div class="stat-label">维修中</div></div></div></div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">泊位编号/名称</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">所属渔港</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>东方渔港</option><option>海丰渔港</option><option>南湾渔港</option><option>三都渔港</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">泊位类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>综合泊位</option><option>渔获卸货泊位</option><option>修船泊位</option><option>补给泊位</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>空闲</option><option>占用</option><option>维修</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+        <div class="col-md-auto ms-auto"><button class="btn btn-outline-success btn-sm" onclick="exportData()"><i class="bi bi-file-excel me-1"></i>导出</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>泊位列表 <span class="badge bg-primary ms-1">共248条</span></h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>泊位编号</th><th>泊位名称</th><th>所属渔港</th><th>泊位类型</th><th>长度(m)</th><th>水深(m)</th><th>吨位限制(t)</th><th>当前停靠船只</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>DF-A-01</td><td>东方港A1泊位</td><td>东方渔港</td><td>综合泊位</td><td>120</td><td>6.5</td><td>500</td><td>海阔天空号</td><td><span class="badge-status status-warning">占用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(1)">删除</button></td></tr>
+                <tr><td>2</td><td>DF-A-02</td><td>东方港A2泊位</td><td>东方渔港</td><td>渔获卸货泊位</td><td>100</td><td>5.8</td><td>300</td><td>—</td><td><span class="badge-status status-normal">空闲</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(2)">删除</button></td></tr>
+                <tr><td>3</td><td>DF-B-01</td><td>东方港B1修船泊位</td><td>东方渔港</td><td>修船泊位</td><td>80</td><td>4.5</td><td>200</td><td>凤翔海洋号</td><td><span class="badge-status status-pending">维修</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(3)">删除</button></td></tr>
+                <tr><td>4</td><td>HF-01</td><td>海丰港1号泊位</td><td>海丰渔港</td><td>综合泊位</td><td>95</td><td>5.2</td><td>350</td><td>鱼跃龙门号</td><td><span class="badge-status status-warning">占用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(4)">删除</button></td></tr>
+                <tr><td>5</td><td>HF-02</td><td>海丰港2号泊位</td><td>海丰渔港</td><td>补给泊位</td><td>70</td><td>4.0</td><td>150</td><td>—</td><td><span class="badge-status status-normal">空闲</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(5)">删除</button></td></tr>
+                <tr><td>6</td><td>SD-01</td><td>三都港1号泊位</td><td>三都渔港</td><td>渔获卸货泊位</td><td>130</td><td>7.0</td><td>600</td><td>蓬莱仙境号</td><td><span class="badge-status status-warning">占用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(6)">删除</button></td></tr>
+                <tr><td>7</td><td>SP-A-01</td><td>石浦港A1综合泊位</td><td>石浦渔港</td><td>综合泊位</td><td>150</td><td>8.0</td><td>800</td><td>—</td><td><span class="badge-status status-normal">空闲</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(7)">删除</button></td></tr>
+                <tr><td>8</td><td>ND-01</td><td>宁德港1号泊位</td><td>宁德渔港</td><td>综合泊位</td><td>110</td><td>6.0</td><td>450</td><td>碧海蓝天号</td><td><span class="badge-status status-warning">占用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(8)">删除</button></td></tr>
+                <tr><td>9</td><td>XP-01</td><td>霞浦港1号泊位</td><td>霞浦渔港</td><td>补给泊位</td><td>75</td><td>4.2</td><td>180</td><td>—</td><td><span class="badge-status status-normal">空闲</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(9)">删除</button></td></tr>
+                <tr><td>10</td><td>LM-01</td><td>龙门港1号泊位</td><td>龙门渔港</td><td>渔获卸货泊位</td><td>88</td><td>5.0</td><td>280</td><td>—</td><td><span class="badge-status status-normal">空闲</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewBerthModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addBerthModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(10)">删除</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 248 条记录，显示第 1-10 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">2</a></li><li class="page-item"><a class="page-link" onclick="changePage(3)">3</a></li><li class="page-item"><a class="page-link">…</a></li><li class="page-item"><a class="page-link">25</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<!-- 新增弹窗 -->
+<div class="modal fade" id="addBerthModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新增泊位</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">泊位编号 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="如：DF-A-01"></div>
+                    <div class="col-md-6"><label class="form-label">泊位名称 <span class="text-danger">*</span></label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">所属渔港</label><select class="form-select form-select-sm"><option>东方渔港</option><option>海丰渔港</option><option>南湾渔港</option><option>三都渔港</option><option>石浦渔港</option></select></div>
+                    <div class="col-md-6"><label class="form-label">泊位类型</label><select class="form-select form-select-sm"><option>综合泊位</option><option>渔获卸货泊位</option><option>修船泊位</option><option>补给泊位</option></select></div>
+                    <div class="col-md-4"><label class="form-label">泊位长度（m）</label><input type="number" class="form-control form-control-sm"></div>
+                    <div class="col-md-4"><label class="form-label">水深（m）</label><input type="number" class="form-control form-control-sm"></div>
+                    <div class="col-md-4"><label class="form-label">吨位限制（t）</label><input type="number" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">状态</label><select class="form-select form-select-sm"><option>空闲</option><option>占用</option><option>维修</option></select></div>
+                    <div class="col-12"><label class="form-label">配套设施说明</label><textarea class="form-control form-control-sm" rows="2" placeholder="如：冷藏库、加冰站、给水给电设施等"></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addBerthModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<!-- 查看弹窗 -->
+<div class="modal fade" id="viewBerthModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>泊位详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2">
+                    <div class="col-6"><span class="text-muted">泊位编号：</span><strong>DF-A-01</strong></div>
+                    <div class="col-6"><span class="text-muted">泊位名称：</span><strong>东方港A1泊位</strong></div>
+                    <div class="col-6"><span class="text-muted">所属渔港：</span>东方渔港</div>
+                    <div class="col-6"><span class="text-muted">泊位类型：</span>综合泊位</div>
+                    <div class="col-4"><span class="text-muted">长度：</span>120m</div>
+                    <div class="col-4"><span class="text-muted">水深：</span>6.5m</div>
+                    <div class="col-4"><span class="text-muted">限吨：</span>500t</div>
+                    <div class="col-6"><span class="text-muted">当前停靠：</span>海阔天空号</div>
+                    <div class="col-6"><span class="text-muted">状态：</span><span class="badge-status status-warning">占用</span></div>
+                    <div class="col-12"><span class="text-muted">配套设施：</span>冷藏库×2、加冰站、给水给电接口、起重设备</div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

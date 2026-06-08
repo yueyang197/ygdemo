@@ -1,0 +1,154 @@
+@page
+@{ ViewData["Title"] = "港区监控"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-camera-video me-2 text-primary"></i>港区实时监控</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">智慧监管</li><li class="breadcrumb-item active">港区监控</li></ol></nav>
+    </div>
+    <div class="d-flex gap-2">
+        <button class="btn btn-outline-danger btn-sm"><i class="bi bi-record-circle me-1"></i>录像</button>
+        <button class="btn btn-primary btn-sm" onclick="showToast('已刷新监控画面')"><i class="bi bi-arrow-clockwise me-1"></i>刷新</button>
+    </div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">摄像头总数</div><div class="fw-bold fs-4 text-primary">48</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">在线正常</div><div class="fw-bold fs-4 text-success">45</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">离线/故障</div><div class="fw-bold fs-4 text-danger">3</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">今日告警</div><div class="fw-bold fs-4 text-warning">2</div></div></div></div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-8">
+        <div class="content-card h-100">
+            <div class="content-card-header d-flex justify-content-between align-items-center">
+                <h6><i class="bi bi-grid me-2"></i>监控画面 <span class="badge bg-success ms-1">实时</span></h6>
+                <div class="d-flex gap-1">
+                    <button class="btn btn-outline-secondary btn-sm" onclick="setLayout(4)">4画面</button>
+                    <button class="btn btn-primary btn-sm" onclick="setLayout(9)">9画面</button>
+                    <button class="btn btn-outline-secondary btn-sm" onclick="setLayout(16)">16画面</button>
+                </div>
+            </div>
+            <div class="p-3" id="cameraGrid">
+                <div class="row g-2" id="camGridRow">
+                    <div class="col-4" onclick="openModal('fullViewModal')">
+                        <div class="cam-cell position-relative" style="background:#0a1628;border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:16/9">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center flex-column">
+                                <i class="bi bi-camera-video text-secondary fs-4"></i>
+                                <div class="text-secondary" style="font-size:.7rem;margin-top:4px">CAM-01 东门入口</div>
+                            </div>
+                            <div class="position-absolute top-0 start-0 p-1"><span class="badge bg-success" style="font-size:.65rem">在线</span></div>
+                        </div>
+                    </div>
+                    <div class="col-4" onclick="openModal('fullViewModal')">
+                        <div class="cam-cell position-relative" style="background:#0a1628;border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:16/9">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center flex-column">
+                                <i class="bi bi-camera-video text-secondary fs-4"></i>
+                                <div class="text-secondary" style="font-size:.7rem;margin-top:4px">CAM-02 1号泊位</div>
+                            </div>
+                            <div class="position-absolute top-0 start-0 p-1"><span class="badge bg-success" style="font-size:.65rem">在线</span></div>
+                        </div>
+                    </div>
+                    <div class="col-4" onclick="openModal('fullViewModal')">
+                        <div class="cam-cell position-relative" style="background:#0a1628;border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:16/9">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center flex-column">
+                                <i class="bi bi-camera-video text-warning fs-4"></i>
+                                <div class="text-warning" style="font-size:.7rem;margin-top:4px">CAM-03 仓储区</div>
+                            </div>
+                            <div class="position-absolute top-0 start-0 p-1"><span class="badge bg-danger" style="font-size:.65rem">告警</span></div>
+                        </div>
+                    </div>
+                    <div class="col-4" onclick="openModal('fullViewModal')">
+                        <div class="cam-cell position-relative" style="background:#0a1628;border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:16/9">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center flex-column">
+                                <i class="bi bi-camera-video text-secondary fs-4"></i>
+                                <div class="text-secondary" style="font-size:.7rem;margin-top:4px">CAM-04 2号泊位</div>
+                            </div>
+                            <div class="position-absolute top-0 start-0 p-1"><span class="badge bg-success" style="font-size:.65rem">在线</span></div>
+                        </div>
+                    </div>
+                    <div class="col-4" onclick="openModal('fullViewModal')">
+                        <div class="cam-cell position-relative" style="background:#0a1628;border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:16/9">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center flex-column">
+                                <i class="bi bi-camera-video-off text-muted fs-4"></i>
+                                <div class="text-muted" style="font-size:.7rem;margin-top:4px">CAM-05 西码头</div>
+                            </div>
+                            <div class="position-absolute top-0 start-0 p-1"><span class="badge bg-secondary" style="font-size:.65rem">离线</span></div>
+                        </div>
+                    </div>
+                    <div class="col-4" onclick="openModal('fullViewModal')">
+                        <div class="cam-cell position-relative" style="background:#0a1628;border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:16/9">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center flex-column">
+                                <i class="bi bi-camera-video text-secondary fs-4"></i>
+                                <div class="text-secondary" style="font-size:.7rem;margin-top:4px">CAM-06 出港通道</div>
+                            </div>
+                            <div class="position-absolute top-0 start-0 p-1"><span class="badge bg-success" style="font-size:.65rem">在线</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="content-card mb-3">
+            <div class="content-card-header"><h6><i class="bi bi-exclamation-triangle me-2 text-warning"></i>告警信息</h6></div>
+            <div class="p-2">
+                <div class="alert alert-danger py-2 px-3 mb-2" style="font-size:.82rem">
+                    <div class="d-flex justify-content-between"><strong>CAM-03 仓储区</strong><small>14:32</small></div>
+                    <div>检测到异常人员活动</div>
+                </div>
+                <div class="alert alert-warning py-2 px-3 mb-2" style="font-size:.82rem">
+                    <div class="d-flex justify-content-between"><strong>CAM-11 危险品区</strong><small>11:05</small></div>
+                    <div>烟雾传感器触发预警</div>
+                </div>
+                <div class="alert alert-secondary py-2 px-3 mb-0" style="font-size:.82rem">
+                    <div class="d-flex justify-content-between"><strong>CAM-05 西码头</strong><small>08:20</small></div>
+                    <div>摄像头离线，请检查</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-card">
+            <div class="content-card-header"><h6><i class="bi bi-list-ul me-2"></i>摄像头列表</h6></div>
+            <div style="max-height:220px;overflow-y:auto">
+                <table class="table table-sm mb-0" style="font-size:.8rem">
+                    <thead><tr><th>编号</th><th>位置</th><th>状态</th></tr></thead>
+                    <tbody>
+                        <tr><td>CAM-01</td><td>东门入口</td><td><span class="badge bg-success">在线</span></td></tr>
+                        <tr><td>CAM-02</td><td>1号泊位</td><td><span class="badge bg-success">在线</span></td></tr>
+                        <tr><td>CAM-03</td><td>仓储区</td><td><span class="badge bg-danger">告警</span></td></tr>
+                        <tr><td>CAM-04</td><td>2号泊位</td><td><span class="badge bg-success">在线</span></td></tr>
+                        <tr><td>CAM-05</td><td>西码头</td><td><span class="badge bg-secondary">离线</span></td></tr>
+                        <tr><td>CAM-06</td><td>出港通道</td><td><span class="badge bg-success">在线</span></td></tr>
+                        <tr><td>CAM-07</td><td>3号泊位</td><td><span class="badge bg-success">在线</span></td></tr>
+                        <tr><td>CAM-08</td><td>油库区域</td><td><span class="badge bg-success">在线</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="fullViewModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" style="background:#0a1628;border:1px solid #1e3a5f">
+            <div class="modal-header" style="border-bottom:1px solid #1e3a5f"><h5 class="modal-title text-light"><i class="bi bi-camera-video me-2"></i>CAM-01 东门入口 — 全屏查看</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body d-flex align-items-center justify-content-center" style="min-height:400px;flex-direction:column;gap:12px">
+                <i class="bi bi-camera-video text-secondary" style="font-size:4rem"></i>
+                <div class="text-secondary">实时视频流（演示模式）</div>
+                <div class="d-flex gap-2 mt-2">
+                    <button class="btn btn-outline-light btn-sm"><i class="bi bi-zoom-in"></i></button>
+                    <button class="btn btn-outline-light btn-sm"><i class="bi bi-zoom-out"></i></button>
+                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-record-circle me-1"></i>截图</button>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top:1px solid #1e3a5f"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function setLayout(n) { showToast(n + '画面布局已切换'); }
+</script>
+}

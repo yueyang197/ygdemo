@@ -1,0 +1,107 @@
+@page
+@{ ViewData["Title"] = "调度监控"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-diagram-3 me-2 text-primary"></i>调度监控</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">智慧监管</li><li class="breadcrumb-item active">调度监控</li></ol></nav>
+    </div>
+    <div>
+        <span class="badge bg-success me-2"><i class="bi bi-circle-fill me-1" style="font-size:.6rem"></i>系统运行正常</span>
+        <button class="btn btn-outline-primary btn-sm" onclick="showToast('已刷新调度数据')"><i class="bi bi-arrow-clockwise me-1"></i>刷新</button>
+    </div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">今日调度任务</div><div class="fw-bold fs-4 text-primary">42</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">进行中</div><div class="fw-bold fs-4 text-warning">8</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">已完成</div><div class="fw-bold fs-4 text-success">31</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">异常任务</div><div class="fw-bold fs-4 text-danger">3</div></div></div></div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-8">
+        <div class="content-card">
+            <div class="content-card-header"><h6><i class="bi bi-list-task me-2"></i>实时调度任务</h6></div>
+            <div class="table-container">
+                <table class="table table-hover" style="font-size:.85rem">
+                    <thead><tr><th>任务编号</th><th>任务类型</th><th>执行单位</th><th>负责人</th><th>开始时间</th><th>预计完成</th><th>状态</th><th>操作</th></tr></thead>
+                    <tbody>
+                        <tr><td>RW-001</td><td>船舶引导</td><td>引航队</td><td>张引航</td><td>08:00</td><td>09:30</td><td><span class="badge bg-success">已完成</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('taskDetailModal')">详情</button></td></tr>
+                        <tr><td>RW-002</td><td>装卸调度</td><td>装卸二队</td><td>李班长</td><td>09:00</td><td>12:00</td><td><span class="badge bg-warning text-dark">进行中</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('taskDetailModal')">详情</button></td></tr>
+                        <tr><td>RW-003</td><td>安全巡查</td><td>港务安全科</td><td>陈科长</td><td>09:30</td><td>11:00</td><td><span class="badge bg-warning text-dark">进行中</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('taskDetailModal')">详情</button></td></tr>
+                        <tr><td>RW-004</td><td>设备维护</td><td>设施维修部</td><td>王师傅</td><td>10:00</td><td>14:00</td><td><span class="badge bg-danger">异常</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('taskDetailModal')">详情</button></td></tr>
+                        <tr><td>RW-005</td><td>渔获卸载</td><td>渔获处理中心</td><td>孙主任</td><td>10:30</td><td>13:00</td><td><span class="badge bg-warning text-dark">进行中</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('taskDetailModal')">详情</button></td></tr>
+                        <tr><td>RW-006</td><td>补给配送</td><td>物资保障队</td><td>刘保障</td><td>11:00</td><td>12:30</td><td><span class="badge bg-secondary">待开始</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('taskDetailModal')">详情</button></td></tr>
+                        <tr><td>RW-007</td><td>环境清洁</td><td>港区清洁组</td><td>清洁队</td><td>14:00</td><td>16:00</td><td><span class="badge bg-secondary">待开始</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('taskDetailModal')">详情</button></td></tr>
+                        <tr><td>RW-008</td><td>灯塔维护</td><td>导航设施组</td><td>赵技术</td><td>15:00</td><td>17:00</td><td><span class="badge bg-danger">异常</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('taskDetailModal')">详情</button></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="content-card mb-3">
+            <div class="content-card-header"><h6><i class="bi bi-exclamation-triangle me-2 text-danger"></i>异常告警</h6></div>
+            <div class="p-3">
+                <div class="alert alert-danger py-2 mb-2" style="font-size:.82rem">
+                    <strong>RW-004</strong> 设备维护任务异常<br><small class="text-muted">10:45 — 设备故障，需紧急处置</small>
+                    <div class="mt-1"><button class="btn btn-danger btn-sm py-0" onclick="showToast('已派人处理')">立即处理</button></div>
+                </div>
+                <div class="alert alert-danger py-2 mb-2" style="font-size:.82rem">
+                    <strong>RW-008</strong> 灯塔维护超时<br><small class="text-muted">11:00 — 超出预计时间30分钟</small>
+                    <div class="mt-1"><button class="btn btn-danger btn-sm py-0" onclick="showToast('已发送催促')">发送催促</button></div>
+                </div>
+                <div class="alert alert-warning py-2 mb-0" style="font-size:.82rem">
+                    <strong>RW-002</strong> 装卸进度偏慢<br><small class="text-muted">11:10 — 完成率仅45%，建议增援</small>
+                    <div class="mt-1"><button class="btn btn-warning btn-sm py-0" onclick="showToast('已申请增援')">申请增援</button></div>
+                </div>
+            </div>
+        </div>
+        <div class="content-card">
+            <div class="content-card-header"><h6><i class="bi bi-bar-chart me-2"></i>今日完成率</h6></div>
+            <div class="p-3 text-center">
+                <canvas id="dispatchChart" height="180"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="taskDetailModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-info-circle me-2"></i>任务详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2">
+                    <div class="col-6"><span class="text-muted">任务编号：</span><strong>RW-002</strong></div>
+                    <div class="col-6"><span class="text-muted">状态：</span><span class="badge bg-warning text-dark">进行中</span></div>
+                    <div class="col-6"><span class="text-muted">任务类型：</span>装卸调度</div>
+                    <div class="col-6"><span class="text-muted">执行单位：</span>装卸二队</div>
+                    <div class="col-6"><span class="text-muted">负责人：</span>李班长</div>
+                    <div class="col-6"><span class="text-muted">计划工时：</span>3小时</div>
+                    <div class="col-6"><span class="text-muted">开始时间：</span>09:00</div>
+                    <div class="col-6"><span class="text-muted">预计完成：</span>12:00</div>
+                    <div class="col-12 mt-2"><span class="text-muted">任务进度：</span>
+                        <div class="progress mt-1"><div class="progress-bar bg-warning" style="width:45%">45%</div></div>
+                    </div>
+                    <div class="col-12 mt-2"><span class="text-muted">任务描述：</span>负责3号泊位渔船"闽渔00312"的渔获卸载装卸作业，预计卸货量80吨。</div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+const ctx = document.getElementById('dispatchChart').getContext('2d');
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['已完成', '进行中', '待开始', '异常'],
+        datasets: [{ data: [31, 8, 3, 3], backgroundColor: ['#28a745','#ffc107','#6c757d','#dc3545'] }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } } }
+});
+</script>
+}

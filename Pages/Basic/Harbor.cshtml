@@ -1,0 +1,144 @@
+@page
+@{ ViewData["Title"] = "渔港管理"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-building me-2 text-primary"></i>渔港管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">智慧管理</li><li class="breadcrumb-item">基础信息管理</li><li class="breadcrumb-item active">渔港管理</li></ol></nav>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('addHarborModal')"><i class="bi bi-plus-circle me-1"></i>新增渔港</button>
+</div>
+
+<!-- 搜索栏 -->
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">渔港名称</label><input type="text" class="form-control form-control-sm" placeholder="输入渔港名称"></div>
+        <div class="col-md-2"><label class="form-label mb-1">所在区域</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>东部海区</option><option>南部海区</option><option>北部海区</option><option>中部内湾</option></select>
+        </div>
+        <div class="col-md-2"><label class="form-label mb-1">渔港等级</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>国家级中心渔港</option><option>一级渔港</option><option>二级渔港</option><option>三级渔港</option></select>
+        </div>
+        <div class="col-md-2"><label class="form-label mb-1">状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>正常运营</option><option>扩建中</option><option>临时关闭</option></select>
+        </div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-counterclockwise me-1"></i>重置</button></div>
+        <div class="col-md-auto ms-auto"><button class="btn btn-outline-success btn-sm" onclick="exportData()"><i class="bi bi-file-excel me-1"></i>导出</button></div>
+    </div>
+</div>
+
+<!-- 列表 -->
+<div class="content-card">
+    <div class="content-card-header">
+        <h6>渔港列表 <span class="badge bg-primary ms-1">共12条</span></h6>
+        <span class="text-muted" style="font-size:.75rem">最后更新：2024-06-08 10:30</span>
+    </div>
+    <div class="table-container">
+        <table class="table table-hover" id="harborTable">
+            <thead>
+                <tr>
+                    <th>序号</th><th>渔港编码</th><th>渔港名称</th><th>所在区域</th><th>渔港等级</th>
+                    <th>泊位数</th><th>容纳量(艘)</th><th>负责人</th><th>联系电话</th><th>状态</th><th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>HP-2023-001</td><td>东方中心渔港</td><td>东部海区</td><td>国家级中心渔港</td><td>68</td><td>350</td><td>王建国</td><td>0596-8231456</td><td><span class="badge-status status-normal">正常运营</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(1)">删除</button></td></tr>
+                <tr><td>2</td><td>HP-2023-002</td><td>海丰渔港</td><td>南部海区</td><td>一级渔港</td><td>42</td><td>200</td><td>李明海</td><td>0596-8236789</td><td><span class="badge-status status-normal">正常运营</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(2)">删除</button></td></tr>
+                <tr><td>3</td><td>HP-2023-003</td><td>南湾渔港</td><td>南部海区</td><td>一级渔港</td><td>35</td><td>180</td><td>张海波</td><td>0596-8241234</td><td><span class="badge-status status-process">扩建中</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(3)">删除</button></td></tr>
+                <tr><td>4</td><td>HP-2023-004</td><td>龙门渔港</td><td>东部海区</td><td>二级渔港</td><td>28</td><td>140</td><td>陈志远</td><td>0596-8245678</td><td><span class="badge-status status-normal">正常运营</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(4)">删除</button></td></tr>
+                <tr><td>5</td><td>HP-2023-005</td><td>三都渔港</td><td>北部海区</td><td>一级渔港</td><td>55</td><td>280</td><td>林福生</td><td>0593-7812345</td><td><span class="badge-status status-normal">正常运营</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(5)">删除</button></td></tr>
+                <tr><td>6</td><td>HP-2023-006</td><td>石浦渔港</td><td>东部海区</td><td>国家级中心渔港</td><td>82</td><td>420</td><td>郑海丽</td><td>0574-6534567</td><td><span class="badge-status status-normal">正常运营</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(6)">删除</button></td></tr>
+                <tr><td>7</td><td>HP-2023-007</td><td>温岭渔港</td><td>东部海区</td><td>二级渔港</td><td>30</td><td>160</td><td>吴胜利</td><td>0576-8934567</td><td><span class="badge-status status-normal">正常运营</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(7)">删除</button></td></tr>
+                <tr><td>8</td><td>HP-2023-008</td><td>洞头渔港</td><td>东部海区</td><td>二级渔港</td><td>22</td><td>110</td><td>许国强</td><td>0577-6523456</td><td><span class="badge-status status-warning">临时关闭</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(8)">删除</button></td></tr>
+                <tr><td>9</td><td>HP-2023-009</td><td>宁德渔港</td><td>北部海区</td><td>一级渔港</td><td>48</td><td>240</td><td>刘宏远</td><td>0593-2837456</td><td><span class="badge-status status-normal">正常运营</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(9)">删除</button></td></tr>
+                <tr><td>10</td><td>HP-2023-010</td><td>霞浦渔港</td><td>北部海区</td><td>二级渔港</td><td>26</td><td>130</td><td>蔡建华</td><td>0593-5612789</td><td><span class="badge-status status-normal">正常运营</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewHarborModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('editHarborModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(10)">删除</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 12 条记录，每页显示 10 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">2</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">›</a></li></ul></nav>
+    </div>
+</div>
+
+<!-- 新增弹窗 -->
+<div class="modal fade" id="addHarborModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新增渔港</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">渔港名称 <span class="text-danger">*</span></label><input type="text" class="form-control form-control-sm" placeholder="请输入渔港名称"></div>
+                    <div class="col-md-6"><label class="form-label">渔港编码 <span class="text-danger">*</span></label><input type="text" class="form-control form-control-sm" placeholder="系统自动生成" readonly></div>
+                    <div class="col-md-6"><label class="form-label">所在区域</label><select class="form-select form-select-sm"><option>东部海区</option><option>南部海区</option><option>北部海区</option><option>中部内湾</option></select></div>
+                    <div class="col-md-6"><label class="form-label">渔港等级</label><select class="form-select form-select-sm"><option>国家级中心渔港</option><option>一级渔港</option><option>二级渔港</option><option>三级渔港</option></select></div>
+                    <div class="col-md-4"><label class="form-label">泊位数</label><input type="number" class="form-control form-control-sm" placeholder="0"></div>
+                    <div class="col-md-4"><label class="form-label">容纳量（艘）</label><input type="number" class="form-control form-control-sm" placeholder="0"></div>
+                    <div class="col-md-4"><label class="form-label">岸线长度（米）</label><input type="number" class="form-control form-control-sm" placeholder="0"></div>
+                    <div class="col-md-6"><label class="form-label">负责人姓名</label><input type="text" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">联系电话</label><input type="text" class="form-control form-control-sm"></div>
+                    <div class="col-12"><label class="form-label">详细地址</label><input type="text" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">经度</label><input type="text" class="form-control form-control-sm" placeholder="118.xxxxxx"></div>
+                    <div class="col-md-6"><label class="form-label">纬度</label><input type="text" class="form-control form-control-sm" placeholder="26.xxxxxx"></div>
+                    <div class="col-md-6"><label class="form-label">状态</label><select class="form-select form-select-sm"><option>正常运营</option><option>扩建中</option><option>临时关闭</option></select></div>
+                    <div class="col-12"><label class="form-label">备注</label><textarea class="form-control form-control-sm" rows="2"></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addHarborModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<!-- 查看弹窗 -->
+<div class="modal fade" id="viewHarborModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>渔港详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3" style="font-size:.85rem">
+                    <div class="col-md-6"><span class="text-muted">渔港名称：</span><strong>东方中心渔港</strong></div>
+                    <div class="col-md-6"><span class="text-muted">渔港编码：</span><strong>HP-2023-001</strong></div>
+                    <div class="col-md-6"><span class="text-muted">所在区域：</span>东部海区</div>
+                    <div class="col-md-6"><span class="text-muted">渔港等级：</span>国家级中心渔港</div>
+                    <div class="col-md-4"><span class="text-muted">泊位数：</span>68</div>
+                    <div class="col-md-4"><span class="text-muted">容纳量：</span>350艘</div>
+                    <div class="col-md-4"><span class="text-muted">岸线长度：</span>1,200米</div>
+                    <div class="col-md-6"><span class="text-muted">负责人：</span>王建国</div>
+                    <div class="col-md-6"><span class="text-muted">联系电话：</span>0596-8231456</div>
+                    <div class="col-12"><span class="text-muted">详细地址：</span>福建省漳州市东方镇临海路88号</div>
+                    <div class="col-md-6"><span class="text-muted">坐标：</span>117.6234°E, 24.5123°N</div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-normal">正常运营</span></div>
+                    <div class="col-12"><span class="text-muted">备注：</span>国家级示范渔港，具备完整的冷链储存和渔获交易功能</div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button><button class="btn btn-warning btn-sm" onclick="closeModal('viewHarborModal');openModal('editHarborModal')">编 辑</button></div>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑弹窗（复用新增，预填数据） -->
+<div class="modal fade" id="editHarborModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-pencil me-2"></i>编辑渔港</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">渔港名称</label><input type="text" class="form-control form-control-sm" value="东方中心渔港"></div>
+                    <div class="col-md-6"><label class="form-label">渔港编码</label><input type="text" class="form-control form-control-sm" value="HP-2023-001" readonly></div>
+                    <div class="col-md-6"><label class="form-label">所在区域</label><select class="form-select form-select-sm"><option selected>东部海区</option><option>南部海区</option><option>北部海区</option><option>中部内湾</option></select></div>
+                    <div class="col-md-6"><label class="form-label">渔港等级</label><select class="form-select form-select-sm"><option selected>国家级中心渔港</option><option>一级渔港</option><option>二级渔港</option><option>三级渔港</option></select></div>
+                    <div class="col-md-4"><label class="form-label">泊位数</label><input type="number" class="form-control form-control-sm" value="68"></div>
+                    <div class="col-md-4"><label class="form-label">容纳量（艘）</label><input type="number" class="form-control form-control-sm" value="350"></div>
+                    <div class="col-md-4"><label class="form-label">岸线长度（米）</label><input type="number" class="form-control form-control-sm" value="1200"></div>
+                    <div class="col-md-6"><label class="form-label">负责人姓名</label><input type="text" class="form-control form-control-sm" value="王建国"></div>
+                    <div class="col-md-6"><label class="form-label">联系电话</label><input type="text" class="form-control form-control-sm" value="0596-8231456"></div>
+                    <div class="col-12"><label class="form-label">详细地址</label><input type="text" class="form-control form-control-sm" value="福建省漳州市东方镇临海路88号"></div>
+                    <div class="col-md-6"><label class="form-label">状态</label><select class="form-select form-select-sm"><option selected>正常运营</option><option>扩建中</option><option>临时关闭</option></select></div>
+                    <div class="col-12"><label class="form-label">备注</label><textarea class="form-control form-control-sm" rows="2">国家级示范渔港，具备完整的冷链储存和渔获交易功能</textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('editHarborModal')">保 存</button></div>
+        </div>
+    </div>
+</div>

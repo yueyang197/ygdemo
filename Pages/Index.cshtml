@@ -1,0 +1,312 @@
+@page
+@{
+    ViewData["Title"] = "工作台首页";
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-grid-1x2-fill me-2 text-primary"></i>工作台总览</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item active">首页</li></ol></nav>
+    </div>
+    <div class="text-muted" style="font-size:.8rem"><i class="bi bi-calendar3 me-1"></i>@DateTime.Now.ToString("yyyy年MM月dd日 dddd")</div>
+</div>
+
+<!-- Stat Cards Row 1 -->
+<div class="row g-3 mb-3">
+    <div class="col-xl-2 col-md-4 col-6">
+        <div class="stat-card blue">
+            <div class="stat-card-icon"><i class="bi bi-building"></i></div>
+            <div class="stat-card-info">
+                <div class="stat-value">12</div>
+                <div class="stat-label">渔港总数</div>
+                <div class="stat-change text-success"><i class="bi bi-arrow-up-short"></i>较上月 +1</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-6">
+        <div class="stat-card green">
+            <div class="stat-card-icon"><i class="bi bi-water"></i></div>
+            <div class="stat-card-info">
+                <div class="stat-value">863</div>
+                <div class="stat-label">在册渔船</div>
+                <div class="stat-change text-muted"><i class="bi bi-dash"></i>环比持平</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-6">
+        <div class="stat-card cyan">
+            <div class="stat-card-icon"><i class="bi bi-person-fill"></i></div>
+            <div class="stat-card-info">
+                <div class="stat-value">2,341</div>
+                <div class="stat-label">登记船员</div>
+                <div class="stat-change text-success"><i class="bi bi-arrow-up-short"></i>较上月 +23</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-6">
+        <div class="stat-card orange">
+            <div class="stat-card-icon"><i class="bi bi-anchor"></i></div>
+            <div class="stat-card-info">
+                <div class="stat-value">87</div>
+                <div class="stat-label">今日在港</div>
+                <div class="stat-change text-danger"><i class="bi bi-arrow-down-short"></i>较昨日 -5</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-6">
+        <div class="stat-card red">
+            <div class="stat-card-icon"><i class="bi bi-exclamation-circle-fill"></i></div>
+            <div class="stat-card-info">
+                <div class="stat-value">17</div>
+                <div class="stat-label">今日事件</div>
+                <div class="stat-change text-danger"><i class="bi bi-arrow-up-short"></i>较昨日 +3</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-6">
+        <div class="stat-card purple">
+            <div class="stat-card-icon"><i class="bi bi-list-task"></i></div>
+            <div class="stat-card-info">
+                <div class="stat-value">34</div>
+                <div class="stat-label">待办任务</div>
+                <div class="stat-change text-warning"><i class="bi bi-clock"></i>5项逾期</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row -->
+<div class="row g-3 mb-3">
+    <!-- 船舶动态折线图 -->
+    <div class="col-xl-5 col-lg-6">
+        <div class="content-card h-100">
+            <div class="content-card-header">
+                <h6><i class="bi bi-graph-up me-2 text-primary"></i>船舶进出港趋势（近7天）</h6>
+                <span class="badge bg-primary-subtle text-primary" style="font-size:.7rem">实时更新</span>
+            </div>
+            <div class="content-card-body">
+                <div class="chart-container" style="height:220px">
+                    <canvas id="vesselTrendChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 事件类型饼图 -->
+    <div class="col-xl-3 col-lg-6">
+        <div class="content-card h-100">
+            <div class="content-card-header">
+                <h6><i class="bi bi-pie-chart me-2 text-warning"></i>事件类型分布</h6>
+            </div>
+            <div class="content-card-body">
+                <div class="chart-container" style="height:220px">
+                    <canvas id="eventPieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 各港船舶柱状图 -->
+    <div class="col-xl-4 col-lg-12">
+        <div class="content-card h-100">
+            <div class="content-card-header">
+                <h6><i class="bi bi-bar-chart me-2 text-success"></i>各渔港今日在港船舶</h6>
+            </div>
+            <div class="content-card-body">
+                <div class="chart-container" style="height:220px">
+                    <canvas id="harborBarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 第二行：快速入口 + 最新事件 + 待办任务 -->
+<div class="row g-3 mb-3">
+    <!-- 快速入口 -->
+    <div class="col-xl-2 col-md-4">
+        <div class="content-card h-100">
+            <div class="content-card-header"><h6><i class="bi bi-lightning me-2 text-warning"></i>快速入口</h6></div>
+            <div class="content-card-body">
+                <div class="d-grid gap-2">
+                    <a href="/Port/IncomingVessel" class="btn btn-outline-primary btn-sm text-start"><i class="bi bi-ship me-2"></i>来港登记</a>
+                    <a href="/Event/Intake"        class="btn btn-outline-danger  btn-sm text-start"><i class="bi bi-exclamation me-2"></i>事件上报</a>
+                    <a href="/TaskMgmt/TaskCreate" class="btn btn-outline-success btn-sm text-start"><i class="bi bi-plus-circle me-2"></i>任务立项</a>
+                    <a href="/Safety/Patrol"       class="btn btn-outline-warning btn-sm text-start"><i class="bi bi-person-walking me-2"></i>巡检记录</a>
+                    <a href="/Monitor/PortMonitor" class="btn btn-outline-info    btn-sm text-start"><i class="bi bi-display me-2"></i>港口监管</a>
+                    <a href="/Emergency/Incident"  class="btn btn-outline-secondary btn-sm text-start"><i class="bi bi-shield me-2"></i>应急事件</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 最新事件 -->
+    <div class="col-xl-5 col-md-8">
+        <div class="content-card h-100">
+            <div class="content-card-header">
+                <h6><i class="bi bi-bell me-2 text-danger"></i>最新事件动态</h6>
+                <a href="/Event/Intake" class="btn btn-sm btn-link p-0" style="font-size:.78rem">查看全部 →</a>
+            </div>
+            <div class="content-card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead><tr><th>事件编号</th><th>事件名称</th><th>类型</th><th>状态</th><th>上报时间</th></tr></thead>
+                    <tbody>
+                        <tr><td>EVT-20240608-001</td><td>东方渔港3号泊位船只碰撞</td><td>安全事故</td><td><span class="badge-status status-warning">待分拨</span></td><td>08:23</td></tr>
+                        <tr><td>EVT-20240608-002</td><td>海丰港区燃油泄漏预警</td><td>环境污染</td><td><span class="badge-status status-process">处置中</span></td><td>09:15</td></tr>
+                        <tr><td>EVT-20240608-003</td><td>龙门港渔民纠纷投诉</td><td>投诉举报</td><td><span class="badge-status status-pending">待处置</span></td><td>10:02</td></tr>
+                        <tr><td>EVT-20240608-004</td><td>南湾港设施设备故障</td><td>设施故障</td><td><span class="badge-status status-process">处置中</span></td><td>10:45</td></tr>
+                        <tr><td>EVT-20240608-005</td><td>三都港渔船越界作业</td><td>违规行为</td><td><span class="badge-status status-done">已办结</span></td><td>11:30</td></tr>
+                        <tr><td>EVT-20240607-031</td><td>洞头港台风预警响应</td><td>自然灾害</td><td><span class="badge-status status-done">已办结</span></td><td>昨日</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 待办任务 -->
+    <div class="col-xl-5 col-md-12">
+        <div class="content-card h-100">
+            <div class="content-card-header">
+                <h6><i class="bi bi-check2-square me-2 text-success"></i>我的待办任务</h6>
+                <a href="/TaskMgmt/Handle" class="btn btn-sm btn-link p-0" style="font-size:.78rem">查看全部 →</a>
+            </div>
+            <div class="content-card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead><tr><th>任务编号</th><th>任务名称</th><th>优先级</th><th>截止时间</th><th>状态</th></tr></thead>
+                    <tbody>
+                        <tr><td>TSK-2024-0089</td><td>渔港安全隐患整改</td><td><span class="badge bg-danger" style="font-size:.7rem">紧急</span></td><td>2024-06-10</td><td><span class="badge-status status-process">办理中</span></td></tr>
+                        <tr><td>TSK-2024-0091</td><td>船员证书年审通知</td><td><span class="badge bg-warning text-dark" style="font-size:.7rem">重要</span></td><td>2024-06-12</td><td><span class="badge-status status-pending">待办</span></td></tr>
+                        <tr><td>TSK-2024-0093</td><td>港区环境卫生检查</td><td><span class="badge bg-secondary" style="font-size:.7rem">一般</span></td><td>2024-06-15</td><td><span class="badge-status status-pending">待办</span></td></tr>
+                        <tr><td>TSK-2024-0085</td><td>消防设备年度检验</td><td><span class="badge bg-danger" style="font-size:.7rem">紧急</span></td><td>2024-06-08</td><td><span class="badge-status status-warning">已逾期</span></td></tr>
+                        <tr><td>TSK-2024-0079</td><td>渔船AIS设备更新</td><td><span class="badge bg-warning text-dark" style="font-size:.7rem">重要</span></td><td>2024-06-20</td><td><span class="badge-status status-process">办理中</span></td></tr>
+                        <tr><td>TSK-2024-0072</td><td>港务信息系统季度报告</td><td><span class="badge bg-secondary" style="font-size:.7rem">一般</span></td><td>2024-06-30</td><td><span class="badge-status status-pending">待办</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 第三行：月度事件统计 + 船舶状态 + 系统公告 -->
+<div class="row g-3">
+    <div class="col-xl-5">
+        <div class="content-card">
+            <div class="content-card-header">
+                <h6><i class="bi bi-bar-chart-line me-2 text-primary"></i>近6个月事件处置统计</h6>
+            </div>
+            <div class="content-card-body">
+                <div class="chart-container" style="height:200px">
+                    <canvas id="monthlyEventChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="content-card">
+            <div class="content-card-header"><h6><i class="bi bi-water me-2 text-cyan"></i>当前船舶状态分布</h6></div>
+            <div class="content-card-body">
+                <div class="chart-container" style="height:200px">
+                    <canvas id="vesselStatusChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="content-card h-100">
+            <div class="content-card-header"><h6><i class="bi bi-megaphone me-2 text-warning"></i>系统公告</h6></div>
+            <div class="content-card-body p-0">
+                <ul class="list-group list-group-flush" style="font-size:.8rem">
+                    <li class="list-group-item px-3 py-2">
+                        <span class="badge bg-danger me-1" style="font-size:.65rem">紧急</span>
+                        <span>台风"海葵"橙色预警，各港口做好防台准备</span>
+                        <div class="text-muted" style="font-size:.72rem">2024-06-08</div>
+                    </li>
+                    <li class="list-group-item px-3 py-2">
+                        <span class="badge bg-primary me-1" style="font-size:.65rem">通知</span>
+                        <span>第二季度渔船安全检查工作部署</span>
+                        <div class="text-muted" style="font-size:.72rem">2024-06-06</div>
+                    </li>
+                    <li class="list-group-item px-3 py-2">
+                        <span class="badge bg-success me-1" style="font-size:.65rem">公示</span>
+                        <span>优秀渔港管理员表彰名单公示</span>
+                        <div class="text-muted" style="font-size:.72rem">2024-06-05</div>
+                    </li>
+                    <li class="list-group-item px-3 py-2">
+                        <span class="badge bg-warning text-dark me-1" style="font-size:.65rem">提醒</span>
+                        <span>伏季休渔期相关规定宣传周启动</span>
+                        <div class="text-muted" style="font-size:.72rem">2024-06-03</div>
+                    </li>
+                    <li class="list-group-item px-3 py-2">
+                        <span class="badge bg-info me-1" style="font-size:.65rem">更新</span>
+                        <span>渔港信息管理系统v3.2已上线</span>
+                        <div class="text-muted" style="font-size:.72rem">2024-06-01</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+// Chart defaults
+Chart.defaults.font.size = 11;
+Chart.defaults.plugins.legend.labels.boxWidth = 12;
+
+// 1. 船舶进出港折线图
+new Chart(document.getElementById('vesselTrendChart'), {
+    type: 'line',
+    data: {
+        labels: ['6/2', '6/3', '6/4', '6/5', '6/6', '6/7', '6/8'],
+        datasets: [
+            { label: '进港', data: [42, 55, 48, 63, 51, 59, 44], borderColor: '#1565c0', backgroundColor: 'rgba(21,101,192,.1)', tension: .4, fill: true },
+            { label: '出港', data: [38, 49, 52, 57, 46, 54, 47], borderColor: '#2e7d32', backgroundColor: 'rgba(46,125,50,.1)', tension: .4, fill: true }
+        ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: false, min: 20 } } }
+});
+
+// 2. 事件类型饼图
+new Chart(document.getElementById('eventPieChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['安全事故', '环境污染', '投诉举报', '违规行为', '设施故障', '其他'],
+        datasets: [{ data: [28, 15, 22, 18, 10, 7], backgroundColor: ['#ef5350','#ff7043','#ffa726','#26c6da','#66bb6a','#ab47bc'], borderWidth: 0 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 10 } } } }, cutout: '60%' }
+});
+
+// 3. 各港口柱状图
+new Chart(document.getElementById('harborBarChart'), {
+    type: 'bar',
+    data: {
+        labels: ['东方', '海丰', '南湾', '龙门', '三都', '石浦', '舟山', '宁德'],
+        datasets: [{ label: '在港船数', data: [18, 12, 15, 9, 11, 7, 8, 7], backgroundColor: '#1e88e5', borderRadius: 4 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+});
+
+// 4. 近6个月事件统计
+new Chart(document.getElementById('monthlyEventChart'), {
+    type: 'bar',
+    data: {
+        labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+        datasets: [
+            { label: '已办结', data: [45, 38, 52, 61, 55, 67], backgroundColor: '#43a047', borderRadius: 4 },
+            { label: '处置中', data: [8, 5, 10, 7, 9, 11], backgroundColor: '#1e88e5', borderRadius: 4 },
+            { label: '待处理', data: [3, 2, 5, 4, 3, 5], backgroundColor: '#ef5350', borderRadius: 4 }
+        ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } } }
+});
+
+// 5. 船舶状态分布
+new Chart(document.getElementById('vesselStatusChart'), {
+    type: 'pie',
+    data: {
+        labels: ['在港', '出海作业', '维修保养', '暂停营运'],
+        datasets: [{ data: [87, 612, 48, 116], backgroundColor: ['#1e88e5', '#43a047', '#ffa726', '#bdbdbd'], borderWidth: 0 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } } }
+});
+</script>
+}

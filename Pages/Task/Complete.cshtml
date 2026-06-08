@@ -1,0 +1,64 @@
+@page
+@{ ViewData["Title"] = "任务完结"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-check2-all me-2 text-primary"></i>任务完结</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">任务管理</li><li class="breadcrumb-item active">任务完结</li></ol></nav>
+    </div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">任务编号/标题</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">完结日期</label><input type="date" class="form-control form-control-sm"></div>
+        <div class="col-md-2"><label class="form-label mb-1">任务类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>安全检查</option><option>设施维护</option><option>应急处置</option><option>日常巡查</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6><i class="bi bi-check2-all me-2 text-success"></i>已完结任务列表 <span class="badge bg-success ms-1">本月48件</span></h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>任务编号</th><th>任务标题</th><th>任务类型</th><th>执行人</th><th>完结时间</th><th>用时</th><th>完结结果</th><th>评价</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>RW-20240608-001</td><td>3号泊位安全隐患整改</td><td>安全检查</td><td>陈安全</td><td>2024-06-08 10:30</td><td>2.5小时</td><td><span class="badge-status status-done">按时完结</span></td><td><span class="text-warning">★★★★★</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('viewCompleteModal')">查看</button></td></tr>
+                <tr><td>2</td><td>RW-20240608-002</td><td>起重机例行维保作业</td><td>设施维护</td><td>王机械</td><td>2024-06-08 14:00</td><td>6小时</td><td><span class="badge-status status-done">按时完结</span></td><td><span class="text-warning">★★★★☆</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('viewCompleteModal')">查看</button></td></tr>
+                <tr><td>3</td><td>RW-20240607-015</td><td>油污清理应急处置</td><td>应急处置</td><td>环保队</td><td>2024-06-07 20:15</td><td>4小时</td><td><span class="badge-status status-done">按时完结</span></td><td><span class="text-warning">★★★★★</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('viewCompleteModal')">查看</button></td></tr>
+                <tr><td>4</td><td>RW-20240607-008</td><td>港区东区安全巡查</td><td>日常巡查</td><td>李巡查</td><td>2024-06-07 17:30</td><td>3小时</td><td><span class="badge-status status-done">按时完结</span></td><td><span class="text-warning">★★★★☆</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('viewCompleteModal')">查看</button></td></tr>
+                <tr><td>5</td><td>RW-20240606-022</td><td>消防设施年度检查</td><td>安全检查</td><td>消防专员</td><td>2024-06-07 09:00</td><td>1天</td><td><span class="badge bg-warning text-dark">超时完结</span></td><td><span class="text-warning">★★★☆☆</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('viewCompleteModal')">查看</button></td></tr>
+                <tr><td>6</td><td>RW-20240606-010</td><td>船员证件抽查核验</td><td>日常巡查</td><td>张执法</td><td>2024-06-06 16:00</td><td>2小时</td><td><span class="badge-status status-done">按时完结</span></td><td><span class="text-warning">★★★★★</span></td><td><button class="btn btn-primary btn-action" onclick="openModal('viewCompleteModal')">查看</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 48 条记录</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link">2</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="viewCompleteModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-check2-all me-2"></i>任务完结详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6"><span class="text-muted">任务编号：</span><strong>RW-20240608-001</strong></div>
+                    <div class="col-md-6"><span class="text-muted">完结状态：</span><span class="badge-status status-done">按时完结</span></div>
+                    <div class="col-md-6"><span class="text-muted">任务标题：</span>3号泊位安全隐患整改</div>
+                    <div class="col-md-6"><span class="text-muted">执行人：</span>陈安全</div>
+                    <div class="col-md-6"><span class="text-muted">开始时间：</span>2024-06-08 08:00</div>
+                    <div class="col-md-6"><span class="text-muted">完结时间：</span>2024-06-08 10:30</div>
+                    <div class="col-12 mt-2"><span class="text-muted">完结说明：</span>
+                        <div class="p-2 bg-light rounded mt-1">已完成3号泊位全部安全隐患整改工作，包括：1.更换老化缆绳4根；2.修复损坏护舷2处；3.补充安全警示标志6处。经现场验收合格。</div>
+                    </div>
+                    <div class="col-12 mt-2"><span class="text-muted">综合评价：</span><span class="text-warning ms-2">★★★★★</span><span class="text-muted ms-2">（优秀）</span></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

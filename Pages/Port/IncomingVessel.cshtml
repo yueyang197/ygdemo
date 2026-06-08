@@ -1,0 +1,110 @@
+@page
+@{ ViewData["Title"] = "来港船舶"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-ship me-2 text-primary"></i>来港船舶登记</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">港务管理</li><li class="breadcrumb-item active">来港船舶</li></ol></nav>
+    </div>
+    <div class="d-flex gap-2">
+        <button class="btn btn-success btn-sm" onclick="exportData()"><i class="bi bi-file-excel me-1"></i>导出</button>
+        <button class="btn btn-primary btn-sm" onclick="openModal('addIncomingModal')"><i class="bi bi-plus-circle me-1"></i>来港登记</button>
+    </div>
+</div>
+
+<!-- 实时概览 -->
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="stat-card blue"><div class="stat-card-icon"><i class="bi bi-ship"></i></div><div class="stat-card-info"><div class="stat-value">87</div><div class="stat-label">今日在港</div></div></div></div>
+    <div class="col-md-3"><div class="stat-card green"><div class="stat-card-icon"><i class="bi bi-arrow-down-circle"></i></div><div class="stat-card-info"><div class="stat-value">24</div><div class="stat-label">今日进港</div></div></div></div>
+    <div class="col-md-3"><div class="stat-card orange"><div class="stat-card-icon"><i class="bi bi-arrow-up-circle"></i></div><div class="stat-card-info"><div class="stat-value">19</div><div class="stat-label">今日出港</div></div></div></div>
+    <div class="col-md-3"><div class="stat-card cyan"><div class="stat-card-icon"><i class="bi bi-clock-history"></i></div><div class="stat-card-info"><div class="stat-value">8</div><div class="stat-label">预计今日来港</div></div></div></div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">船名/船号</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">所属渔港</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>东方渔港</option><option>海丰渔港</option><option>三都渔港</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">来港目的</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>卸货</option><option>补给</option><option>维修</option><option>避风</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">登记日期</label><input type="date" class="form-control form-control-sm"></div>
+        <div class="col-md-2"><label class="form-label mb-1">状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>在港</option><option>已离港</option><option>预报</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>来港船舶记录 <span class="badge bg-primary ms-1">今日87艘在港</span></h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>登记流水号</th><th>船名</th><th>船号</th><th>所属港口</th><th>来港时间</th><th>来港目的</th><th>靠泊泊位</th><th>船长姓名</th><th>预计离港</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>IN-20240608-001</td><td>海阔天空号</td><td>闽泉渔00123</td><td>东方渔港</td><td>2024-06-08 06:30</td><td>卸货</td><td>DF-A-01</td><td>王大海</td><td>2024-06-10</td><td><span class="badge-status status-normal">在港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncomingModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="showToast('离港登记已完成','success')">离港</button></td></tr>
+                <tr><td>2</td><td>IN-20240608-002</td><td>鱼跃龙门号</td><td>浙温渔02365</td><td>海丰渔港</td><td>2024-06-08 07:15</td><td>补给</td><td>HF-02</td><td>张海华</td><td>2024-06-09</td><td><span class="badge-status status-normal">在港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncomingModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="showToast('离港登记已完成','success')">离港</button></td></tr>
+                <tr><td>3</td><td>IN-20240608-003</td><td>蓬莱仙境号</td><td>闽连渔00456</td><td>三都渔港</td><td>2024-06-08 08:00</td><td>卸货</td><td>SD-01</td><td>林福星</td><td>2024-06-11</td><td><span class="badge-status status-normal">在港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncomingModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="showToast('离港登记已完成','success')">离港</button></td></tr>
+                <tr><td>4</td><td>IN-20240608-004</td><td>碧海蓝天号</td><td>闽宁渔00891</td><td>宁德渔港</td><td>2024-06-08 09:20</td><td>维修</td><td>ND-01</td><td>蔡志国</td><td>2024-06-15</td><td><span class="badge-status status-pending">在港维修</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncomingModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="showToast('离港登记已完成','success')">离港</button></td></tr>
+                <tr><td>5</td><td>IN-20240608-005</td><td>渔歌唱晚号</td><td>闽霞渔00234</td><td>霞浦渔港</td><td>2024-06-08 10:05</td><td>避风</td><td>XP-01</td><td>黄国强</td><td>2024-06-09</td><td><span class="badge-status status-normal">在港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncomingModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="showToast('离港登记已完成','success')">离港</button></td></tr>
+                <tr><td>6</td><td>IN-20240608-006</td><td>顺风顺水号</td><td>闽泉渔00456</td><td>东方渔港</td><td>——</td><td>卸货</td><td>待分配</td><td>陈建平</td><td>——</td><td><span class="badge-status status-dispatch">预报</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncomingModal')">查看</button><button class="btn btn-success btn-action" onclick="showToast('泊位已分配','success')">分配泊位</button></td></tr>
+                <tr><td>7</td><td>IN-20240607-089</td><td>东海捕鱼王号</td><td>浙舟渔01023</td><td>石浦渔港</td><td>2024-06-07 14:30</td><td>卸货</td><td>SP-A-01</td><td>吴建军</td><td>2024-06-08</td><td><span class="badge-status status-offline">已离港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncomingModal')">查看</button></td></tr>
+                <tr><td>8</td><td>IN-20240607-088</td><td>万里碧波号</td><td>浙温渔03421</td><td>温岭渔港</td><td>2024-06-07 16:00</td><td>补给</td><td>WL-01</td><td>叶海龙</td><td>2024-06-08</td><td><span class="badge-status status-offline">已离港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewIncomingModal')">查看</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 127 条记录，显示第 1-8 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">2</a></li><li class="page-item"><a class="page-link">…</a></li><li class="page-item"><a class="page-link">13</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<!-- 来港登记弹窗 -->
+<div class="modal fade" id="addIncomingModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>来港登记</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">船名 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="选择或输入船名"></div>
+                    <div class="col-md-6"><label class="form-label">船号 <span class="text-danger">*</span></label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">所属渔港</label><select class="form-select form-select-sm"><option>东方渔港</option><option>海丰渔港</option><option>三都渔港</option><option>石浦渔港</option></select></div>
+                    <div class="col-md-6"><label class="form-label">来港目的</label><select class="form-select form-select-sm"><option>卸货</option><option>补给</option><option>维修</option><option>避风</option><option>检验</option></select></div>
+                    <div class="col-md-6"><label class="form-label">进港时间</label><input type="datetime-local" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">预计离港时间</label><input type="datetime-local" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">靠泊泊位</label><select class="form-select form-select-sm"><option>DF-A-01 (空闲)</option><option>DF-A-02 (空闲)</option><option>HF-02 (空闲)</option></select></div>
+                    <div class="col-md-6"><label class="form-label">船长姓名</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">船员人数</label><input type="number" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">预报渔获量（kg）</label><input type="number" class="form-control form-control-sm"></div>
+                    <div class="col-12"><label class="form-label">备注</label><textarea class="form-control form-control-sm" rows="2"></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addIncomingModal')">提 交</button></div>
+        </div>
+    </div>
+</div>
+
+<!-- 查看弹窗 -->
+<div class="modal fade" id="viewIncomingModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>来港记录详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2">
+                    <div class="col-md-6"><span class="text-muted">登记流水号：</span><strong>IN-20240608-001</strong></div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-normal">在港</span></div>
+                    <div class="col-md-6"><span class="text-muted">船名：</span>海阔天空号</div>
+                    <div class="col-md-6"><span class="text-muted">船号：</span>闽泉渔00123</div>
+                    <div class="col-md-6"><span class="text-muted">来港目的：</span>卸货</div>
+                    <div class="col-md-6"><span class="text-muted">靠泊泊位：</span>DF-A-01</div>
+                    <div class="col-md-6"><span class="text-muted">进港时间：</span>2024-06-08 06:30</div>
+                    <div class="col-md-6"><span class="text-muted">预计离港：</span>2024-06-10</div>
+                    <div class="col-md-6"><span class="text-muted">船长：</span>王大海</div>
+                    <div class="col-md-6"><span class="text-muted">船员人数：</span>12人</div>
+                    <div class="col-md-6"><span class="text-muted">渔获物总量：</span>8,520 kg</div>
+                    <div class="col-md-6"><span class="text-muted">登记人员：</span>港务员李平</div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button><button class="btn btn-primary btn-sm" onclick="printRecord()"><i class="bi bi-printer me-1"></i>打印单据</button></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+@page
+@{ ViewData["Title"] = "应急资源"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-box-seam me-2 text-primary"></i>应急资源管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">应急管理</li><li class="breadcrumb-item active">应急资源</li></ol></nav>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('addResourceModal')"><i class="bi bi-plus-circle me-1"></i>新增资源</button>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">资源总类</div><div class="fw-bold fs-4 text-primary">12</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">充足</div><div class="fw-bold fs-4 text-success">8</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">需补充</div><div class="fw-bold fs-4 text-warning">3</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">不足/缺失</div><div class="fw-bold fs-4 text-danger">1</div></div></div></div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">资源名称</label><input type="text" class="form-control form-control-sm" placeholder="关键词搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">资源类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>消防器材</option><option>救生设备</option><option>医疗物资</option><option>通讯设备</option><option>防护用品</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">库存状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>充足</option><option>需补充</option><option>不足</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">存放位置</label><input type="text" class="form-control form-control-sm" placeholder="位置搜索"></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>应急资源清单</h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>资源编号</th><th>资源名称</th><th>资源类型</th><th>规格型号</th><th>库存数量</th><th>最低需求</th><th>库存状态</th><th>存放位置</th><th>负责人</th><th>上次盘点</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>ZY-001</td><td>干粉灭火器</td><td>消防器材</td><td>4kg ABC型</td><td>86个</td><td>60个</td><td><span class="badge-status status-done">充足</span></td><td>消防器材室</td><td>陈消防</td><td>2024-06-01</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewResourceModal')">查看</button><button class="btn btn-warning btn-action" onclick="showToast('已发起盘点')">盘点</button></td></tr>
+                <tr><td>2</td><td>ZY-002</td><td>救生圈</td><td>救生设备</td><td>标准型Ø710mm</td><td>42个</td><td>50个</td><td><span class="badge-status status-pending">需补充</span></td><td>各泊位救生箱</td><td>李港务</td><td>2024-06-01</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewResourceModal')">查看</button><button class="btn btn-success btn-action" onclick="showToast('已申请补充')">申请补充</button></td></tr>
+                <tr><td>3</td><td>ZY-003</td><td>急救医疗箱</td><td>医疗物资</td><td>标准急救箱</td><td>8套</td><td>10套</td><td><span class="badge-status status-pending">需补充</span></td><td>港区医疗室</td><td>王医务</td><td>2024-05-28</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewResourceModal')">查看</button><button class="btn btn-success btn-action" onclick="showToast('已申请补充')">申请补充</button></td></tr>
+                <tr><td>4</td><td>ZY-004</td><td>防毒面罩</td><td>防护用品</td><td>全面型防毒面罩</td><td>15套</td><td>20套</td><td><span class="badge-status status-pending">需补充</span></td><td>危化品仓库旁</td><td>赵安全</td><td>2024-06-03</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewResourceModal')">查看</button><button class="btn btn-success btn-action" onclick="showToast('已申请补充')">申请补充</button></td></tr>
+                <tr><td>5</td><td>ZY-005</td><td>应急对讲机</td><td>通讯设备</td><td>防爆型对讲机</td><td>28台</td><td>20台</td><td><span class="badge-status status-done">充足</span></td><td>通讯设备室</td><td>孙通讯</td><td>2024-06-05</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewResourceModal')">查看</button><button class="btn btn-warning btn-action" onclick="showToast('已发起盘点')">盘点</button></td></tr>
+                <tr><td>6</td><td>ZY-006</td><td>海上救援艇</td><td>救生设备</td><td>充气式救援艇</td><td>0艘</td><td>2艘</td><td><span class="badge bg-danger text-white px-2 py-1 rounded">不足</span></td><td>—</td><td>刘港长</td><td>2024-05-15</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewResourceModal')">查看</button><button class="btn btn-danger btn-action" onclick="showToast('已紧急申请采购')">紧急采购</button></td></tr>
+                <tr><td>7</td><td>ZY-007</td><td>消防水带</td><td>消防器材</td><td>Ø65mm×20m</td><td>24条</td><td>16条</td><td><span class="badge-status status-done">充足</span></td><td>消防器材室</td><td>陈消防</td><td>2024-06-01</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewResourceModal')">查看</button><button class="btn btn-warning btn-action" onclick="showToast('已发起盘点')">盘点</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 12 条记录，显示第 1-7 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link">2</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="addResourceModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新增应急资源</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">资源名称 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="请输入资源名称"></div>
+                    <div class="col-md-6"><label class="form-label">资源类型</label><select class="form-select form-select-sm"><option>消防器材</option><option>救生设备</option><option>医疗物资</option><option>通讯设备</option><option>防护用品</option></select></div>
+                    <div class="col-md-6"><label class="form-label">规格型号</label><input class="form-control form-control-sm" placeholder="如：4kg ABC型"></div>
+                    <div class="col-md-6"><label class="form-label">计量单位</label><input class="form-control form-control-sm" placeholder="如：个、套、台"></div>
+                    <div class="col-md-6"><label class="form-label">当前库存数量</label><input type="number" class="form-control form-control-sm" placeholder="0"></div>
+                    <div class="col-md-6"><label class="form-label">最低需求数量</label><input type="number" class="form-control form-control-sm" placeholder="0"></div>
+                    <div class="col-md-6"><label class="form-label">存放位置</label><input class="form-control form-control-sm" placeholder="请输入存放位置"></div>
+                    <div class="col-md-6"><label class="form-label">负责人</label><input class="form-control form-control-sm"></div>
+                    <div class="col-12"><label class="form-label">备注说明</label><textarea class="form-control form-control-sm" rows="2"></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addResourceModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewResourceModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>资源详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2 mb-3">
+                    <div class="col-6"><span class="text-muted">资源编号：</span><strong>ZY-001</strong></div>
+                    <div class="col-6"><span class="text-muted">库存状态：</span><span class="badge-status status-done">充足</span></div>
+                    <div class="col-6"><span class="text-muted">资源名称：</span>干粉灭火器</div>
+                    <div class="col-6"><span class="text-muted">资源类型：</span>消防器材</div>
+                    <div class="col-6"><span class="text-muted">规格型号：</span>4kg ABC型</div>
+                    <div class="col-6"><span class="text-muted">存放位置：</span>消防器材室</div>
+                    <div class="col-6"><span class="text-muted">当前库存：</span><strong class="text-success">86个</strong></div>
+                    <div class="col-6"><span class="text-muted">最低需求：</span>60个</div>
+                    <div class="col-6"><span class="text-muted">负责人：</span>陈消防</div>
+                    <div class="col-6"><span class="text-muted">上次盘点：</span>2024-06-01</div>
+                </div>
+                <hr>
+                <h6>盘点记录</h6>
+                <table class="table table-sm">
+                    <thead><tr><th>盘点时间</th><th>盘点人</th><th>盘点数量</th><th>备注</th></tr></thead>
+                    <tbody>
+                        <tr><td>2024-06-01</td><td>陈消防</td><td>86个</td><td>正常</td></tr>
+                        <tr><td>2024-05-01</td><td>陈消防</td><td>88个</td><td>使用2个（演练）</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

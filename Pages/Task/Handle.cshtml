@@ -1,0 +1,199 @@
+@page
+@{ ViewData["Title"] = "任务处理"; ViewData["ActiveMenu"] = "TaskHandle"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-tools me-2 text-primary"></i>任务处理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">任务管理</li><li class="breadcrumb-item active">任务处理</li></ol></nav>
+    </div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">任务编号</label><input type="text" class="form-control form-control-sm" placeholder="请输入任务编号"></div>
+        <div class="col-md-2"><label class="form-label mb-1">任务类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>安全检查</option><option>设备维修</option><option>环境整治</option><option>应急处置</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">处理状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>处理中</option><option>待反馈</option><option>已完成</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>我的处理任务 <span class="badge bg-warning ms-1">处理中: 4</span></h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>任务编号</th><th>任务标题</th><th>类型</th><th>关联事件</th><th>分配时间</th><th>截止时间</th><th>处理进度</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><span class="text-primary fw-semibold">RW2024060801</span></td>
+                    <td>3号泊位安全隐患排查</td>
+                    <td><span class="badge bg-danger">安全检查</span></td>
+                    <td>SJ2024060801</td>
+                    <td>08:30</td>
+                    <td><span class="text-danger fw-bold">12:00 (紧急)</span></td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress flex-grow-1" style="height:6px;width:80px"><div class="progress-bar bg-warning" style="width:60%"></div></div><small>60%</small></div></td>
+                    <td><span class="badge-status status-process">处理中</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-action me-1" onclick="openModal('handleModal')"><i class="bi bi-tools me-1"></i>处理</button>
+                        <button class="btn btn-info btn-action" onclick="openModal('viewTaskModal')">详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">RW2024060802</span></td>
+                    <td>港区油污清理处置</td>
+                    <td><span class="badge bg-success">环境整治</span></td>
+                    <td>SJ2024060802</td>
+                    <td>09:45</td>
+                    <td>17:00</td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress flex-grow-1" style="height:6px;width:80px"><div class="progress-bar bg-info" style="width:30%"></div></div><small>30%</small></div></td>
+                    <td><span class="badge-status status-process">处理中</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-action me-1" onclick="openModal('handleModal')"><i class="bi bi-tools me-1"></i>处理</button>
+                        <button class="btn btn-info btn-action" onclick="openModal('viewTaskModal')">详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">RW2024060803</span></td>
+                    <td>起重机液压系统抢修</td>
+                    <td><span class="badge bg-warning text-dark">设备维修</span></td>
+                    <td>SJ2024060803</td>
+                    <td>11:00</td>
+                    <td>明日09:00</td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress flex-grow-1" style="height:6px;width:80px"><div class="progress-bar bg-info" style="width:15%"></div></div><small>15%</small></div></td>
+                    <td><span class="badge-status status-process">处理中</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-action me-1" onclick="openModal('handleModal')"><i class="bi bi-tools me-1"></i>处理</button>
+                        <button class="btn btn-info btn-action" onclick="openModal('viewTaskModal')">详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">RW2024060804</span></td>
+                    <td>船员伤亡医疗救护协调</td>
+                    <td><span class="badge bg-danger">应急处置</span></td>
+                    <td>SJ2024060805</td>
+                    <td>13:20</td>
+                    <td><span class="text-danger fw-bold">16:00 (紧急)</span></td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress flex-grow-1" style="height:6px;width:80px"><div class="progress-bar bg-danger" style="width:80%"></div></div><small>80%</small></div></td>
+                    <td><span class="badge-status status-pending">待反馈</span></td>
+                    <td>
+                        <button class="btn btn-success btn-action me-1" onclick="openModal('feedbackModal')"><i class="bi bi-chat-dots me-1"></i>反馈</button>
+                        <button class="btn btn-info btn-action" onclick="openModal('viewTaskModal')">详情</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 处理任务弹窗 -->
+<div class="modal fade" id="handleModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-tools me-2"></i>任务处理</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="alert alert-warning py-2 mb-3"><strong>任务：</strong>3号泊位安全隐患排查 &nbsp;|&nbsp; <strong>截止：</strong><span class="text-danger">12:00 (紧急)</span></div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">当前进度 (%)</label>
+                        <input type="range" class="form-range" min="0" max="100" value="60" oninput="document.getElementById('progressVal').textContent=this.value+'%'">
+                        <small class="text-muted" id="progressVal">60%</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">处理状态</label>
+                        <select class="form-select form-select-sm">
+                            <option>处理中</option>
+                            <option>待反馈</option>
+                            <option>已完成</option>
+                            <option>需协助</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">处理记录 <span class="text-danger">*</span></label>
+                        <textarea class="form-control" rows="3" placeholder="请详细描述本次处理情况、采取的措施及结果..."></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">处理人员</label>
+                        <input class="form-control form-control-sm" value="陈科长">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">现场照片</label>
+                        <input type="file" class="form-control form-control-sm" accept="image/*">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button>
+                <button class="btn btn-primary btn-sm" onclick="saveForm('handleModal')"><i class="bi bi-save me-1"></i>保存进度</button>
+                <button class="btn btn-success btn-sm" onclick="completeTask()"><i class="bi bi-check2-circle me-1"></i>标记完成</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 反馈弹窗 -->
+<div class="modal fade" id="feedbackModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-chat-dots me-2"></i>处理反馈</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label">处理结果</label>
+                        <select class="form-select">
+                            <option>已完成处置</option>
+                            <option>部分完成，需跟进</option>
+                            <option>需上级支持</option>
+                            <option>转交其他部门</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">反馈内容 <span class="text-danger">*</span></label>
+                        <textarea class="form-control" rows="4" placeholder="请输入处理结果反馈..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button>
+                <button class="btn btn-success btn-sm" onclick="saveForm('feedbackModal')"><i class="bi bi-send me-1"></i>提交反馈</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 查看详情弹窗 -->
+<div class="modal fade" id="viewTaskModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>任务详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2">
+                    <div class="col-6"><span class="text-muted">任务编号：</span><strong>RW2024060801</strong></div>
+                    <div class="col-6"><span class="text-muted">状态：</span><span class="badge-status status-process">处理中</span></div>
+                    <div class="col-12"><span class="text-muted">任务标题：</span>3号泊位安全隐患排查</div>
+                    <div class="col-6"><span class="text-muted">任务类型：</span>安全检查</div>
+                    <div class="col-6"><span class="text-muted">关联事件：</span><span class="text-primary">SJ2024060801</span></div>
+                    <div class="col-6"><span class="text-muted">分配人：</span>港务安全科</div>
+                    <div class="col-6"><span class="text-muted">负责人：</span>陈科长</div>
+                    <div class="col-6"><span class="text-muted">分配时间：</span>08:30</div>
+                    <div class="col-6"><span class="text-muted">截止时间：</span><span class="text-danger">12:00</span></div>
+                    <div class="col-12 mt-2">
+                        <div class="d-flex justify-content-between mb-1"><span>处理进度</span><strong>60%</strong></div>
+                        <div class="progress"><div class="progress-bar bg-warning" style="width:60%"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function completeTask() {
+    bootstrap.Modal.getInstance(document.getElementById('handleModal')).hide();
+    showToast('任务已标记完成，等待上级审核', 'success');
+}
+</script>
+}

@@ -1,0 +1,125 @@
+@page
+@{ ViewData["Title"] = "渔船管理"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-water me-2 text-primary"></i>渔船管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">基础信息管理</li><li class="breadcrumb-item active">渔船管理</li></ol></nav>
+    </div>
+    <div class="d-flex gap-2">
+        <button class="btn btn-success btn-sm" onclick="exportData()"><i class="bi bi-file-excel me-1"></i>导出</button>
+        <button class="btn btn-primary btn-sm" onclick="openModal('addVesselModal')"><i class="bi bi-plus-circle me-1"></i>新增渔船</button>
+    </div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">船名/船号</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">船型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>拖网渔船</option><option>围网渔船</option><option>钓具渔船</option><option>刺网渔船</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">作业类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>近海捕捞</option><option>远洋捕捞</option><option>养殖辅助</option><option>港区服务</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">船籍港</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>东方渔港</option><option>海丰渔港</option><option>三都渔港</option><option>石浦渔港</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>正常</option><option>出海作业</option><option>维修中</option><option>扣押</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-counterclockwise me-1"></i>重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header">
+        <h6>渔船列表 <span class="badge bg-primary ms-1">共863条</span></h6>
+        <div class="d-flex gap-2">
+            <span class="badge-status status-normal">正常 612</span>
+            <span class="badge-status status-process">出海 201</span>
+            <span class="badge-status status-pending">维修 48</span>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>船舶编号</th><th>船名</th><th>船型</th><th>作业类型</th><th>总吨位</th><th>船籍港</th><th>船主姓名</th><th>联系电话</th><th>登记日期</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>闽泉渔00123</td><td>海阔天空号</td><td>拖网渔船</td><td>近海捕捞</td><td>85.5t</td><td>东方渔港</td><td>王大海</td><td>13805960001</td><td>2019-03-15</td><td><span class="badge-status status-normal">在港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(1)">删除</button></td></tr>
+                <tr><td>2</td><td>闽泉渔00456</td><td>顺风顺水号</td><td>围网渔船</td><td>近海捕捞</td><td>120.0t</td><td>东方渔港</td><td>陈建平</td><td>13805960002</td><td>2020-06-20</td><td><span class="badge-status status-process">出海</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(2)">删除</button></td></tr>
+                <tr><td>3</td><td>浙温渔02365</td><td>鱼跃龙门号</td><td>刺网渔船</td><td>近海捕捞</td><td>65.0t</td><td>海丰渔港</td><td>张海华</td><td>13857600003</td><td>2018-11-08</td><td><span class="badge-status status-normal">在港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(3)">删除</button></td></tr>
+                <tr><td>4</td><td>粤湛渔03089</td><td>南海丰收号</td><td>钓具渔船</td><td>远洋捕捞</td><td>350.0t</td><td>南湾渔港</td><td>刘志远</td><td>13902080004</td><td>2021-02-14</td><td><span class="badge-status status-process">出海</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(4)">删除</button></td></tr>
+                <tr><td>5</td><td>鲁荣渔03189</td><td>凤翔海洋号</td><td>拖网渔船</td><td>近海捕捞</td><td>98.5t</td><td>龙门渔港</td><td>郑海清</td><td>15153240005</td><td>2017-07-30</td><td><span class="badge-status status-pending">维修</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(5)">删除</button></td></tr>
+                <tr><td>6</td><td>闽连渔00456</td><td>蓬莱仙境号</td><td>围网渔船</td><td>近海捕捞</td><td>145.0t</td><td>三都渔港</td><td>林福星</td><td>13859300006</td><td>2022-01-05</td><td><span class="badge-status status-normal">在港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(6)">删除</button></td></tr>
+                <tr><td>7</td><td>浙舟渔01023</td><td>东海捕鱼王号</td><td>拖网渔船</td><td>近海捕捞</td><td>112.0t</td><td>石浦渔港</td><td>吴建军</td><td>13957400007</td><td>2019-09-18</td><td><span class="badge-status status-process">出海</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(7)">删除</button></td></tr>
+                <tr><td>8</td><td>闽宁渔00891</td><td>碧海蓝天号</td><td>钓具渔船</td><td>近海捕捞</td><td>72.5t</td><td>宁德渔港</td><td>蔡志国</td><td>13859300008</td><td>2020-04-22</td><td><span class="badge-status status-warning">扣押</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(8)">删除</button></td></tr>
+                <tr><td>9</td><td>浙温渔03421</td><td>万里碧波号</td><td>刺网渔船</td><td>近海捕捞</td><td>55.0t</td><td>温岭渔港</td><td>叶海龙</td><td>13806040009</td><td>2021-08-10</td><td><span class="badge-status status-normal">在港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(9)">删除</button></td></tr>
+                <tr><td>10</td><td>闽霞渔00234</td><td>渔歌唱晚号</td><td>围网渔船</td><td>近海捕捞</td><td>88.0t</td><td>霞浦渔港</td><td>黄国强</td><td>13859300010</td><td>2018-05-16</td><td><span class="badge-status status-normal">在港</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewVesselModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addVesselModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(10)">删除</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 863 条记录，显示第 1-10 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item"><a class="page-link">«</a></li><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">2</a></li><li class="page-item"><a class="page-link" onclick="changePage(3)">3</a></li><li class="page-item"><a class="page-link">…</a></li><li class="page-item"><a class="page-link" onclick="changePage(87)">87</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<!-- 新增/编辑弹窗 -->
+<div class="modal fade" id="addVesselModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新增渔船</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">船名 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="请输入船名"></div>
+                    <div class="col-md-6"><label class="form-label">船舶编号 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="如：闽泉渔00001"></div>
+                    <div class="col-md-4"><label class="form-label">船型</label><select class="form-select form-select-sm"><option>拖网渔船</option><option>围网渔船</option><option>钓具渔船</option><option>刺网渔船</option><option>养殖辅助船</option></select></div>
+                    <div class="col-md-4"><label class="form-label">作业类型</label><select class="form-select form-select-sm"><option>近海捕捞</option><option>远洋捕捞</option><option>养殖辅助</option><option>港区服务</option></select></div>
+                    <div class="col-md-4"><label class="form-label">总吨位（t）</label><input type="number" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">船籍港</label><select class="form-select form-select-sm"><option>东方渔港</option><option>海丰渔港</option><option>南湾渔港</option><option>龙门渔港</option><option>三都渔港</option></select></div>
+                    <div class="col-md-6"><label class="form-label">主机功率（kW）</label><input type="number" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">船主姓名</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">联系电话</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">登记日期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">证书有效期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">AIS编号</label><input class="form-control form-control-sm" placeholder="自动识别系统编号"></div>
+                    <div class="col-md-6"><label class="form-label">状态</label><select class="form-select form-select-sm"><option>正常</option><option>出海作业</option><option>维修中</option></select></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addVesselModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<!-- 查看弹窗 -->
+<div class="modal fade" id="viewVesselModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>渔船详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6"><span class="text-muted">船名：</span><strong>海阔天空号</strong></div>
+                    <div class="col-md-6"><span class="text-muted">船舶编号：</span><strong>闽泉渔00123</strong></div>
+                    <div class="col-md-4"><span class="text-muted">船型：</span>拖网渔船</div>
+                    <div class="col-md-4"><span class="text-muted">作业类型：</span>近海捕捞</div>
+                    <div class="col-md-4"><span class="text-muted">总吨位：</span>85.5t</div>
+                    <div class="col-md-6"><span class="text-muted">船籍港：</span>东方渔港</div>
+                    <div class="col-md-6"><span class="text-muted">主机功率：</span>265kW</div>
+                    <div class="col-md-6"><span class="text-muted">船主：</span>王大海</div>
+                    <div class="col-md-6"><span class="text-muted">联系电话：</span>13805960001</div>
+                    <div class="col-md-6"><span class="text-muted">登记日期：</span>2019-03-15</div>
+                    <div class="col-md-6"><span class="text-muted">证书有效期：</span>2025-03-14</div>
+                    <div class="col-md-6"><span class="text-muted">AIS编号：</span>412000001</div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-normal">在港</span></div>
+                </div>
+                <hr>
+                <h6 class="mb-2">最近进出港记录</h6>
+                <table class="table table-sm" style="font-size:.8rem">
+                    <thead><tr><th>时间</th><th>操作</th><th>泊位</th><th>登记人</th></tr></thead>
+                    <tbody>
+                        <tr><td>2024-06-05 14:22</td><td><span class="badge-status status-normal">进港</span></td><td>A-12</td><td>李港务</td></tr>
+                        <tr><td>2024-06-02 06:30</td><td><span class="badge-status status-process">出港</span></td><td>A-12</td><td>张港务</td></tr>
+                        <tr><td>2024-05-28 16:10</td><td><span class="badge-status status-normal">进港</span></td><td>A-08</td><td>李港务</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

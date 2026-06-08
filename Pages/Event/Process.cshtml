@@ -1,0 +1,205 @@
+@page
+@{ ViewData["Title"] = "过程管理"; ViewData["ActiveMenu"] = "EventProcess"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-arrow-repeat me-2 text-primary"></i>事件过程管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">事件管理</li><li class="breadcrumb-item active">过程管理</li></ol></nav>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body py-2">
+        <div class="row g-2 align-items-center">
+            <div class="col-md-2"><input type="text" class="form-control form-control-sm" placeholder="事件编号/标题"></div>
+            <div class="col-md-2"><select class="form-select form-select-sm"><option value="">-- 事件类型 --</option><option>安全事故</option><option>环境污染</option><option>设备故障</option></select></div>
+            <div class="col-md-2"><select class="form-select form-select-sm"><option value="">-- 处置状态 --</option><option>处置中</option><option>已超时</option><option>已办结</option></select></div>
+            <div class="col-md-2"><input type="text" class="form-control form-control-sm" placeholder="处置部门"></div>
+            <div class="col-auto">
+                <button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button>
+                <button class="btn btn-outline-secondary btn-sm ms-1">重置</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-list-check me-2"></i>处置中事件列表</span>
+        <div>
+            <span class="badge bg-danger me-1">超时预警: 2</span>
+            <span class="badge bg-info">处置中: 8</span>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>事件编号</th>
+                    <th>事件标题</th>
+                    <th>处置部门</th>
+                    <th>责任人</th>
+                    <th>分拨时间</th>
+                    <th>处置期限</th>
+                    <th>超时状态</th>
+                    <th>最新进展</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060801</span></td>
+                    <td>3号泊位渔船碰撞事故</td>
+                    <td>港务安全科</td>
+                    <td>陈科长</td>
+                    <td>2024-06-08 08:30</td>
+                    <td>2024-06-08 18:00</td>
+                    <td><span class="badge bg-success">正常</span></td>
+                    <td>现场已封锁，正在评估损失</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showProcessModal('SJ2024060801')"><i class="bi bi-eye me-1"></i>跟进</button>
+                        <button class="btn btn-sm btn-warning ms-1" onclick="showToast('已发送催办通知', 'warning')"><i class="bi bi-bell me-1"></i>催办</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060802</span></td>
+                    <td>港区水域油污染报告</td>
+                    <td>环保监察组</td>
+                    <td>赵主任</td>
+                    <td>2024-06-08 10:00</td>
+                    <td>2024-06-08 16:00</td>
+                    <td><span class="badge bg-danger">已超时</span></td>
+                    <td>正在等待专业清污设备</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showProcessModal('SJ2024060802')"><i class="bi bi-eye me-1"></i>跟进</button>
+                        <button class="btn btn-sm btn-danger ms-1" onclick="showToast('已上报超时预警', 'danger')"><i class="bi bi-exclamation-triangle me-1"></i>预警</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060803</span></td>
+                    <td>起重机液压系统故障</td>
+                    <td>设施维修部</td>
+                    <td>刘队长</td>
+                    <td>2024-06-08 11:00</td>
+                    <td>2024-06-09 11:00</td>
+                    <td><span class="badge bg-success">正常</span></td>
+                    <td>维修人员已到场，备件到货中</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showProcessModal('SJ2024060803')"><i class="bi bi-eye me-1"></i>跟进</button>
+                        <button class="btn btn-sm btn-warning ms-1" onclick="showToast('已发送催办通知', 'warning')"><i class="bi bi-bell me-1"></i>催办</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060805</span></td>
+                    <td>船员作业中受伤</td>
+                    <td>港务安全科</td>
+                    <td>陈科长</td>
+                    <td>2024-06-08 13:15</td>
+                    <td>2024-06-08 15:00</td>
+                    <td><span class="badge bg-danger">已超时</span></td>
+                    <td>伤员已送医，正在调查原因</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showProcessModal('SJ2024060805')"><i class="bi bi-eye me-1"></i>跟进</button>
+                        <button class="btn btn-sm btn-danger ms-1" onclick="showToast('已上报超时预警', 'danger')"><i class="bi bi-exclamation-triangle me-1"></i>预警</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav><ul class="pagination pagination-sm mb-0">
+            <li class="page-item active"><a class="page-link">1</a></li>
+            <li class="page-item"><a class="page-link">2</a></li>
+            <li class="page-item"><a class="page-link">下一页</a></li>
+        </ul></nav>
+    </div>
+</div>
+
+<!-- 跟进详情弹窗 -->
+<div class="modal fade" id="processModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-arrow-repeat me-2"></i>事件处置跟进 - <span id="processEventId"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs mb-3" id="processTabs">
+                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-timeline">处置记录</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-update">添加进展</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab-timeline">
+                        <div class="timeline">
+                            <div class="d-flex mb-3">
+                                <div class="me-3 text-center" style="min-width:80px">
+                                    <small class="text-muted">08:30</small><br>
+                                    <span class="badge bg-primary rounded-pill mt-1">分拨</span>
+                                </div>
+                                <div class="flex-grow-1 border-start ps-3 pb-3">
+                                    <div class="fw-semibold">港务安全科 · 陈科长</div>
+                                    <div class="text-muted small">事件已分拨，安排处置人员赴现场</div>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <div class="me-3 text-center" style="min-width:80px">
+                                    <small class="text-muted">09:15</small><br>
+                                    <span class="badge bg-info rounded-pill mt-1">处置</span>
+                                </div>
+                                <div class="flex-grow-1 border-start ps-3 pb-3">
+                                    <div class="fw-semibold">陈科长 - 现场处置</div>
+                                    <div class="text-muted small">现场已封锁，两艘船只正在脱离，安全员就位</div>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <div class="me-3 text-center" style="min-width:80px">
+                                    <small class="text-muted">10:40</small><br>
+                                    <span class="badge bg-warning text-dark rounded-pill mt-1">进展</span>
+                                </div>
+                                <div class="flex-grow-1 border-start ps-3 pb-3">
+                                    <div class="fw-semibold">陈科长 - 进展更新</div>
+                                    <div class="text-muted small">现场已封锁，正在评估船只损失，预计16:00前完成处置</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab-update">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label">处置进展说明 <span class="text-danger">*</span></label>
+                                <textarea class="form-control" rows="4" placeholder="请描述最新处置进展..."></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">完成百分比</label>
+                                <select class="form-select">
+                                    <option>20%</option><option>40%</option><option>60%</option><option>80%</option><option>100% (申请办结)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">附件上传</label>
+                                <input type="file" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="saveProgress()"><i class="bi bi-check-circle me-1"></i>提交进展</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function showProcessModal(id) {
+    document.getElementById('processEventId').textContent = id;
+    new bootstrap.Modal(document.getElementById('processModal')).show();
+}
+function saveProgress() {
+    bootstrap.Modal.getInstance(document.getElementById('processModal')).hide();
+    showToast('处置进展已提交', 'success');
+}
+</script>
+}

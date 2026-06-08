@@ -1,0 +1,228 @@
+@page
+@model FishingPortDemo.Pages.Event.DispatchModel
+@{
+    ViewData["Title"] = "事件分拨";
+    ViewData["ActiveMenu"] = "EventDispatch";
+}
+
+<div class="page-header">
+    <h4 class="page-title"><i class="bi bi-share me-2"></i>事件分拨</h4>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">事件管理</li>
+            <li class="breadcrumb-item active">事件分拨</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body py-2">
+        <div class="row g-2 align-items-center">
+            <div class="col-md-2"><input type="text" class="form-control form-control-sm" placeholder="事件编号"></div>
+            <div class="col-md-2"><input type="text" class="form-control form-control-sm" placeholder="事件类型"></div>
+            <div class="col-md-2">
+                <select class="form-select form-select-sm">
+                    <option value="">-- 紧急程度 --</option>
+                    <option>紧急</option>
+                    <option>一般</option>
+                    <option>低级</option>
+                </select>
+            </div>
+            <div class="col-md-2"><input type="date" class="form-control form-control-sm"></div>
+            <div class="col-auto">
+                <button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button>
+                <button class="btn btn-outline-secondary btn-sm ms-1"><i class="bi bi-arrow-counterclockwise me-1"></i>重置</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-list-ul me-2"></i>待分拨事件列表</span>
+        <span class="badge bg-warning">待分拨: 6</span>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>事件编号</th>
+                    <th>事件类型</th>
+                    <th>事件标题</th>
+                    <th>来源渠道</th>
+                    <th>紧急程度</th>
+                    <th>上报时间</th>
+                    <th>上报人</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060801</span></td>
+                    <td>安全事故</td>
+                    <td>3号泊位渔船碰撞事故</td>
+                    <td>现场上报</td>
+                    <td><span class="badge bg-danger">紧急</span></td>
+                    <td>2024-06-08 08:15</td>
+                    <td>张港务</td>
+                    <td><span class="status-badge status-warning">待分拨</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-success" onclick="showDispatchModal('SJ2024060801','3号泊位渔船碰撞事故')"><i class="bi bi-send me-1"></i>分拨</button>
+                        <button class="btn btn-sm btn-info" onclick="showToast('查看详情')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060802</span></td>
+                    <td>环境污染</td>
+                    <td>港区水域油污染报告</td>
+                    <td>巡检上报</td>
+                    <td><span class="badge bg-warning text-dark">一般</span></td>
+                    <td>2024-06-08 09:30</td>
+                    <td>李巡检</td>
+                    <td><span class="status-badge status-warning">待分拨</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-success" onclick="showDispatchModal('SJ2024060802','港区水域油污染报告')"><i class="bi bi-send me-1"></i>分拨</button>
+                        <button class="btn btn-sm btn-info" onclick="showToast('查看详情')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060803</span></td>
+                    <td>设施故障</td>
+                    <td>起重机液压系统故障</td>
+                    <td>设备告警</td>
+                    <td><span class="badge bg-warning text-dark">一般</span></td>
+                    <td>2024-06-08 10:45</td>
+                    <td>系统自动</td>
+                    <td><span class="status-badge status-warning">待分拨</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-success" onclick="showDispatchModal('SJ2024060803','起重机液压系统故障')"><i class="bi bi-send me-1"></i>分拨</button>
+                        <button class="btn btn-sm btn-info" onclick="showToast('查看详情')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060804</span></td>
+                    <td>秩序违规</td>
+                    <td>未登记船只进港</td>
+                    <td>视频监控</td>
+                    <td><span class="badge bg-info">低级</span></td>
+                    <td>2024-06-08 11:20</td>
+                    <td>监控系统</td>
+                    <td><span class="status-badge status-warning">待分拨</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-success" onclick="showDispatchModal('SJ2024060804','未登记船只进港')"><i class="bi bi-send me-1"></i>分拨</button>
+                        <button class="btn btn-sm btn-info" onclick="showToast('查看详情')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060805</span></td>
+                    <td>人员伤亡</td>
+                    <td>船员作业中受伤</td>
+                    <td>电话报告</td>
+                    <td><span class="badge bg-danger">紧急</span></td>
+                    <td>2024-06-08 13:10</td>
+                    <td>王船长</td>
+                    <td><span class="status-badge status-warning">待分拨</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-success" onclick="showDispatchModal('SJ2024060805','船员作业中受伤')"><i class="bi bi-send me-1"></i>分拨</button>
+                        <button class="btn btn-sm btn-info" onclick="showToast('查看详情')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060806</span></td>
+                    <td>火灾险情</td>
+                    <td>仓库区域异常烟雾告警</td>
+                    <td>消防系统</td>
+                    <td><span class="badge bg-danger">紧急</span></td>
+                    <td>2024-06-08 14:55</td>
+                    <td>消防系统</td>
+                    <td><span class="status-badge status-warning">待分拨</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-success" onclick="showDispatchModal('SJ2024060806','仓库区域异常烟雾告警')"><i class="bi bi-send me-1"></i>分拨</button>
+                        <button class="btn btn-sm btn-info" onclick="showToast('查看详情')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav><ul class="pagination pagination-sm mb-0">
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+        </ul></nav>
+    </div>
+</div>
+
+<!-- 分拨弹窗 -->
+<div class="modal fade" id="dispatchModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-send me-2"></i>事件分拨</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info py-2">
+                    <strong>事件：</strong><span id="dispatchEventTitle"></span>
+                    <span class="ms-3"><strong>编号：</strong><span id="dispatchEventId"></span></span>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">分拨部门 <span class="text-danger">*</span></label>
+                        <select class="form-select">
+                            <option>港务安全科</option>
+                            <option>设施维修部</option>
+                            <option>环保监察组</option>
+                            <option>海事执法队</option>
+                            <option>应急救援队</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">责任人 <span class="text-danger">*</span></label>
+                        <select class="form-select">
+                            <option>陈科长</option>
+                            <option>刘队长</option>
+                            <option>赵主任</option>
+                            <option>孙班长</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">处置期限</label>
+                        <input type="datetime-local" class="form-control" value="2024-06-08T18:00">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">优先级</label>
+                        <select class="form-select">
+                            <option>立即处理</option>
+                            <option>今日处理</option>
+                            <option>本周处理</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">分拨说明</label>
+                        <textarea class="form-control" rows="3" placeholder="请输入分拨说明及注意事项..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" onclick="confirmDispatch()"><i class="bi bi-send me-1"></i>确认分拨</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function showDispatchModal(id, title) {
+    document.getElementById('dispatchEventId').textContent = id;
+    document.getElementById('dispatchEventTitle').textContent = title;
+    new bootstrap.Modal(document.getElementById('dispatchModal')).show();
+}
+function confirmDispatch() {
+    bootstrap.Modal.getInstance(document.getElementById('dispatchModal')).hide();
+    showToast('分拨成功，已通知相关部门处理', 'success');
+}
+</script>
+}
