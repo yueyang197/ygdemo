@@ -83,7 +83,7 @@
         <a href="/Port/Duty"           class="sidebar-sublink">值班值守</a>
     </div>
 
-    <!-- 事件管理（智慧管理下） -->
+    <!-- 事件管理 -->
     <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuEventSub" href="#">
         <i class="bi bi-exclamation-circle"></i><span>事件管理</span><i class="bi bi-chevron-down arrow"></i>
     </a>
@@ -91,7 +91,7 @@
         <a href="/Event/Intake"     class="sidebar-sublink">事件接入</a>
         <a href="/Event/Dispatch"   class="sidebar-sublink">事件分拨</a>
         <a href="/Event/Receive"    class="sidebar-sublink">事件接收</a>
-        <a href="/Event/Handle"     class="sidebar-sublink">事件处置</a>
+        <a href="/Event/Dispose"    class="sidebar-sublink">事件处置</a>
         <a href="/Event/Process"    class="sidebar-sublink">过程管理</a>
         <a href="/Event/Close"      class="sidebar-sublink">事件办结</a>
         <a href="/Event/Evaluate"   class="sidebar-sublink">事件评价</a>
@@ -104,13 +104,13 @@
         <i class="bi bi-list-task"></i><span>任务管理</span><i class="bi bi-chevron-down arrow"></i>
     </a>
     <div class="collapse" id="menuTask">
-        <a href="/TaskMgmt/TaskCreate" class="sidebar-sublink">任务立项</a>
-        <a href="/TaskMgmt/Assign"     class="sidebar-sublink">任务分派</a>
-        <a href="/TaskMgmt/Handle"     class="sidebar-sublink">任务办理</a>
-        <a href="/TaskMgmt/Summary"    class="sidebar-sublink">任务总结</a>
-        <a href="/TaskMgmt/Close"      class="sidebar-sublink">任务办结</a>
-        <a href="/TaskMgmt/Remind"     class="sidebar-sublink">任务催办</a>
-        <a href="/TaskMgmt/Delay"      class="sidebar-sublink">任务延期</a>
+        <a href="/Task/Initiate" class="sidebar-sublink">任务立项</a>
+        <a href="/Task/Assign"   class="sidebar-sublink">任务分派</a>
+        <a href="/Task/Handle"   class="sidebar-sublink">任务办理</a>
+        <a href="/Task/Summary"  class="sidebar-sublink">任务总结</a>
+        <a href="/Task/Complete" class="sidebar-sublink">任务办结</a>
+        <a href="/Task/Urge"     class="sidebar-sublink">任务催办</a>
+        <a href="/Task/Delay"    class="sidebar-sublink">任务延期</a>
     </div>
 
     <!-- 应急管理 -->
@@ -129,38 +129,20 @@
         <i class="bi bi-clipboard-check"></i><span>督查督办管理</span><i class="bi bi-chevron-down arrow"></i>
     </a>
     <div class="collapse" id="menuSuper">
-        <a href="/Supervision/List"       class="sidebar-sublink">督办列表</a>
-        <a href="/Supervision/Remind"     class="sidebar-sublink">催办记录</a>
-        <a href="/Supervision/Statistics" class="sidebar-sublink">督办统计</a>
+        <a href="/Supervision/SupervisionList"  class="sidebar-sublink">督办列表</a>
+        <a href="/Supervision/UrgeRecord"       class="sidebar-sublink">催办记录</a>
+        <a href="/Supervision/SupervisionStats" class="sidebar-sublink">督办统计</a>
     </div>
 
     <!-- 智慧监管 -->
-    <a href="/Monitor/PortMonitor"    class="sidebar-link"><i class="bi bi-display"></i><span>智慧港口监管</span></a>
-    <a href="/Monitor/VesselMonitor"  class="sidebar-link"><i class="bi bi-geo-alt"></i><span>船舶实时动态监管</span></a>
-    <a href="/Monitor/WorkMonitor"    class="sidebar-link"><i class="bi bi-kanban"></i><span>调度作业监管</span></a>
+    <a href="/Monitor/PortMonitor"     class="sidebar-link"><i class="bi bi-display"></i><span>智慧港口监管</span></a>
+    <a href="/Monitor/VesselDynamic"   class="sidebar-link"><i class="bi bi-geo-alt"></i><span>船舶实时动态监管</span></a>
+    <a href="/Monitor/DispatchMonitor" class="sidebar-link"><i class="bi bi-kanban"></i><span>调度作业监管</span></a>
 
     <!-- 安防/巡检/设施 -->
-    <a href="/Safety/SmartSafety"     class="sidebar-link"><i class="bi bi-camera-video"></i><span>智慧安防</span></a>
-    <a href="/Safety/Patrol"          class="sidebar-link"><i class="bi bi-person-walking"></i><span>智慧巡检</span></a>
-    <a href="/Safety/Facility"        class="sidebar-link"><i class="bi bi-tools"></i><span>设施设备管理</span></a>
-
-    <hr class="sidebar-divider">
-    <div class="sidebar-section-title">事件管理（独立）</div>
-
-    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuEventTop" href="#">
-        <i class="bi bi-exclamation-triangle"></i><span>事件管理</span><i class="bi bi-chevron-down arrow"></i>
-    </a>
-    <div class="collapse" id="menuEventTop">
-        <a href="/Event/Intake"     class="sidebar-sublink">事件接入</a>
-        <a href="/Event/Dispatch"   class="sidebar-sublink">事件分拨</a>
-        <a href="/Event/Receive"    class="sidebar-sublink">事件接收</a>
-        <a href="/Event/Handle"     class="sidebar-sublink">事件处置</a>
-        <a href="/Event/Process"    class="sidebar-sublink">过程管理</a>
-        <a href="/Event/Close"      class="sidebar-sublink">事件办结</a>
-        <a href="/Event/Evaluate"   class="sidebar-sublink">事件评价</a>
-        <a href="/Event/Statistics" class="sidebar-sublink">事件统计</a>
-        <a href="/Event/Detail"     class="sidebar-sublink">事件明细</a>
-    </div>
+    <a href="/Security/Security"   class="sidebar-link"><i class="bi bi-camera-video"></i><span>智慧安防</span></a>
+    <a href="/Security/Inspection" class="sidebar-link"><i class="bi bi-person-walking"></i><span>智慧巡检</span></a>
+    <a href="/Security/Equipment"  class="sidebar-link"><i class="bi bi-tools"></i><span>设施设备管理</span></a>
 
     <div class="pb-4"></div>
 </nav><!-- /#sidebar -->
