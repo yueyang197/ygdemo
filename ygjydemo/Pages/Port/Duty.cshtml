@@ -1,0 +1,120 @@
+@page
+@{ ViewData["Title"] = "值班值守"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-person-badge me-2 text-primary"></i>值班值守管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">港务管理</li><li class="breadcrumb-item active">值班值守</li></ol></nav>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('addDutyModal')"><i class="bi bi-plus-circle me-1"></i>新增值班安排</button>
+</div>
+
+<!-- 今日值班概览 -->
+<div class="content-card mb-3">
+    <div class="content-card-header"><h6><i class="bi bi-clock me-2 text-warning"></i>今日值班情况（2024-06-08）</h6></div>
+    <div class="content-card-body">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="p-3 rounded" style="background:#f0f9ff;border-left:4px solid #0ea5e9">
+                    <div class="fw-semibold" style="font-size:.85rem;color:#0c4a6e">日班（06:00 - 18:00）</div>
+                    <div class="mt-1" style="font-size:.82rem">
+                        <div>值班长：<strong>李港务</strong></div>
+                        <div>成员：张明、陈海、王丽</div>
+                        <div class="text-success mt-1"><i class="bi bi-check-circle me-1"></i>已到岗（4/4人）</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 rounded" style="background:#fff7ed;border-left:4px solid #f97316">
+                    <div class="fw-semibold" style="font-size:.85rem;color:#7c2d12">夜班（18:00 - 次日06:00）</div>
+                    <div class="mt-1" style="font-size:.82rem">
+                        <div>值班长：<strong>刘志强</strong></div>
+                        <div>成员：郑海、林菊</div>
+                        <div class="text-warning mt-1"><i class="bi bi-clock me-1"></i>待到岗</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 rounded" style="background:#f0fdf4;border-left:4px solid #22c55e">
+                    <div class="fw-semibold" style="font-size:.85rem;color:#14532d">应急值守</div>
+                    <div class="mt-1" style="font-size:.82rem">
+                        <div>值守人员：<strong>王建国（港长）</strong></div>
+                        <div>联系方式：138****0001</div>
+                        <div class="text-success mt-1"><i class="bi bi-telephone me-1"></i>待命中</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">值班日期</label><input type="date" class="form-control form-control-sm"></div>
+        <div class="col-md-2"><label class="form-label mb-1">值班人员</label><input type="text" class="form-control form-control-sm" placeholder="姓名搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">班次</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>日班</option><option>夜班</option><option>应急值守</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>值班记录列表 <span class="badge bg-primary ms-1">近30天</span></h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>值班日期</th><th>班次</th><th>值班长</th><th>值班成员</th><th>值班类型</th><th>到岗状态</th><th>值班备注</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>2024-06-08</td><td>日班</td><td>李港务</td><td>张明、陈海、王丽</td><td>正常值班</td><td><span class="badge-status status-normal">已到岗</span></td><td>—</td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewDutyModal')">查看</button><button class="btn btn-warning btn-action" onclick="openModal('addDutyModal')">编辑</button></td></tr>
+                <tr><td>2</td><td>2024-06-08</td><td>夜班</td><td>刘志强</td><td>郑海、林菊</td><td>正常值班</td><td><span class="badge-status status-pending">待到岗</span></td><td>—</td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewDutyModal')">查看</button><button class="btn btn-warning btn-action" onclick="openModal('addDutyModal')">编辑</button></td></tr>
+                <tr><td>3</td><td>2024-06-07</td><td>日班</td><td>陈海丽</td><td>李明、张建、赵刚</td><td>正常值班</td><td><span class="badge-status status-done">已完成</span></td><td>—</td><td><button class="btn btn-primary btn-action" onclick="openModal('viewDutyModal')">查看</button></td></tr>
+                <tr><td>4</td><td>2024-06-07</td><td>夜班</td><td>吴建国</td><td>林海、蔡明</td><td>正常值班</td><td><span class="badge-status status-done">已完成</span></td><td>22:30记录1次安全巡查</td><td><button class="btn btn-primary btn-action" onclick="openModal('viewDutyModal')">查看</button></td></tr>
+                <tr><td>5</td><td>2024-06-06</td><td>日班</td><td>郑海清</td><td>王丽、赵刚、陈亮</td><td>正常值班</td><td><span class="badge-status status-done">已完成</span></td><td>台风预警加强巡查</td><td><button class="btn btn-primary btn-action" onclick="openModal('viewDutyModal')">查看</button></td></tr>
+                <tr><td>6</td><td>2024-06-06</td><td>夜班</td><td>刘志强</td><td>张明、林菊</td><td>节假日加班</td><td><span class="badge-status status-done">已完成</span></td><td>—</td><td><button class="btn btn-primary btn-action" onclick="openModal('viewDutyModal')">查看</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 62 条记录，显示第 1-6 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">2</a></li><li class="page-item"><a class="page-link">…</a></li><li class="page-item"><a class="page-link">7</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="addDutyModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>值班安排</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">值班日期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">班次</label><select class="form-select form-select-sm"><option>日班（06:00-18:00）</option><option>夜班（18:00-06:00）</option><option>应急值守</option></select></div>
+                    <div class="col-md-6"><label class="form-label">值班长</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">值班类型</label><select class="form-select form-select-sm"><option>正常值班</option><option>节假日加班</option><option>台风应急</option></select></div>
+                    <div class="col-12"><label class="form-label">值班成员</label><input class="form-control form-control-sm" placeholder="多人用逗号分隔"></div>
+                    <div class="col-12"><label class="form-label">值班备注</label><textarea class="form-control form-control-sm" rows="2"></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addDutyModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewDutyModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>值班详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2">
+                    <div class="col-6"><span class="text-muted">值班日期：</span><strong>2024-06-08</strong></div>
+                    <div class="col-6"><span class="text-muted">班次：</span>日班（06:00-18:00）</div>
+                    <div class="col-6"><span class="text-muted">值班长：</span>李港务</div>
+                    <div class="col-6"><span class="text-muted">类型：</span>正常值班</div>
+                    <div class="col-12"><span class="text-muted">值班成员：</span>张明、陈海、王丽</div>
+                    <div class="col-6"><span class="text-muted">到岗状态：</span><span class="badge-status status-normal">已到岗</span></div>
+                    <div class="col-12"><span class="text-muted">值班记录：</span>06:30完成港区巡查一次，10:15处理来港船只1艘，14:00完成安全检查</div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

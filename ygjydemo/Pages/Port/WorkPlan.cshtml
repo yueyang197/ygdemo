@@ -1,0 +1,133 @@
+@page
+@{ ViewData["Title"] = "作业计划调度"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-kanban me-2 text-primary"></i>作业计划调度</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">港务管理</li><li class="breadcrumb-item active">作业计划调度</li></ol></nav>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('addWorkPlanModal')"><i class="bi bi-plus-circle me-1"></i>新建作业单</button>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">作业单号/船名</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">作业日期</label><input type="date" class="form-control form-control-sm"></div>
+        <div class="col-md-2"><label class="form-label mb-1">作业类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>卸货作业</option><option>补给作业</option><option>修船作业</option><option>检验作业</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">作业状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>待开始</option><option>进行中</option><option>已完成</option><option>已中止</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+        <div class="col-md-auto ms-auto"><button class="btn btn-outline-success btn-sm" onclick="exportData()"><i class="bi bi-file-excel me-1"></i>导出</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>作业单列表 <span class="badge bg-primary ms-1">今日52单</span></h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>作业单号</th><th>船名</th><th>靠泊泊位</th><th>作业类型</th><th>计划开始</th><th>计划结束</th><th>负责人</th><th>作业进度</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>1</td><td>WO-20240608-001</td><td>海阔天空号</td><td>DF-A-01</td><td>卸货作业</td>
+                    <td>06:30</td><td>14:00</td><td>港务员赵明</td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress progress-sm flex-grow-1" style="width:80px"><div class="progress-bar bg-success" style="width:75%"></div></div><small>75%</small></div></td>
+                    <td><span class="badge-status status-process">进行中</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewWorkModal')">查看</button><button class="btn btn-warning btn-action" onclick="showToast('作业进度已更新')">更新进度</button></td>
+                </tr>
+                <tr>
+                    <td>2</td><td>WO-20240608-002</td><td>鱼跃龙门号</td><td>HF-02</td><td>补给作业</td>
+                    <td>07:15</td><td>10:00</td><td>港务员陈丽</td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress progress-sm flex-grow-1" style="width:80px"><div class="progress-bar bg-success" style="width:100%"></div></div><small>100%</small></div></td>
+                    <td><span class="badge-status status-done">已完成</span></td>
+                    <td><button class="btn btn-primary btn-action" onclick="openModal('viewWorkModal')">查看</button></td>
+                </tr>
+                <tr>
+                    <td>3</td><td>WO-20240608-003</td><td>蓬莱仙境号</td><td>SD-01</td><td>卸货作业</td>
+                    <td>08:00</td><td>18:00</td><td>港务员王刚</td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress progress-sm flex-grow-1" style="width:80px"><div class="progress-bar bg-warning" style="width:40%"></div></div><small>40%</small></div></td>
+                    <td><span class="badge-status status-process">进行中</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewWorkModal')">查看</button><button class="btn btn-warning btn-action" onclick="showToast('作业进度已更新')">更新进度</button></td>
+                </tr>
+                <tr>
+                    <td>4</td><td>WO-20240608-004</td><td>凤翔海洋号</td><td>DF-B-01</td><td>修船作业</td>
+                    <td>09:00</td><td>2024-06-15 17:00</td><td>港务员李海</td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress progress-sm flex-grow-1" style="width:80px"><div class="progress-bar bg-info" style="width:15%"></div></div><small>15%</small></div></td>
+                    <td><span class="badge-status status-process">进行中</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewWorkModal')">查看</button><button class="btn btn-warning btn-action" onclick="showToast('作业进度已更新')">更新进度</button></td>
+                </tr>
+                <tr>
+                    <td>5</td><td>WO-20240608-005</td><td>渔歌唱晚号</td><td>XP-01</td><td>补给作业</td>
+                    <td>10:30</td><td>13:00</td><td>港务员林菊</td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress progress-sm flex-grow-1" style="width:80px"><div class="progress-bar bg-secondary" style="width:0%"></div></div><small>0%</small></div></td>
+                    <td><span class="badge-status status-pending">待开始</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewWorkModal')">查看</button><button class="btn btn-success btn-action" onclick="showToast('作业已开始')">开始作业</button></td>
+                </tr>
+                <tr>
+                    <td>6</td><td>WO-20240607-048</td><td>东海捕鱼王号</td><td>SP-A-01</td><td>卸货作业</td>
+                    <td>昨日14:30</td><td>昨日22:00</td><td>港务员张波</td>
+                    <td><div class="d-flex align-items-center gap-2"><div class="progress progress-sm flex-grow-1" style="width:80px"><div class="progress-bar bg-success" style="width:100%"></div></div><small>100%</small></div></td>
+                    <td><span class="badge-status status-done">已完成</span></td>
+                    <td><button class="btn btn-primary btn-action" onclick="openModal('viewWorkModal')">查看</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 52 条记录，显示第 1-6 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">2</a></li><li class="page-item"><a class="page-link">…</a></li><li class="page-item"><a class="page-link">6</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="addWorkPlanModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新建作业单</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">船名 <span class="text-danger">*</span></label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">靠泊泊位</label><select class="form-select form-select-sm"><option>DF-A-02 (空闲)</option><option>HF-01 (空闲)</option><option>SP-A-01 (空闲)</option></select></div>
+                    <div class="col-md-6"><label class="form-label">作业类型</label><select class="form-select form-select-sm"><option>卸货作业</option><option>补给作业</option><option>修船作业</option><option>检验作业</option></select></div>
+                    <div class="col-md-6"><label class="form-label">负责人</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">计划开始时间</label><input type="datetime-local" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">计划结束时间</label><input type="datetime-local" class="form-control form-control-sm"></div>
+                    <div class="col-12"><label class="form-label">作业内容说明</label><textarea class="form-control form-control-sm" rows="2"></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addWorkPlanModal')">提 交</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewWorkModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>作业单详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6"><span class="text-muted">作业单号：</span><strong>WO-20240608-001</strong></div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-process">进行中</span></div>
+                    <div class="col-md-6"><span class="text-muted">船名：</span>海阔天空号</div>
+                    <div class="col-md-6"><span class="text-muted">泊位：</span>DF-A-01</div>
+                    <div class="col-md-6"><span class="text-muted">作业类型：</span>卸货作业</div>
+                    <div class="col-md-6"><span class="text-muted">负责人：</span>港务员赵明</div>
+                    <div class="col-md-6"><span class="text-muted">开始时间：</span>2024-06-08 06:30</div>
+                    <div class="col-md-6"><span class="text-muted">预计完成：</span>2024-06-08 14:00</div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1"><span>总进度</span><span><strong>75%</strong></span></div>
+                    <div class="progress"><div class="progress-bar bg-success" style="width:75%"></div></div>
+                </div>
+                <hr>
+                <h6>作业记录</h6>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-time">06:30</div><div class="timeline-user">赵明</div><div class="timeline-content">作业开始，船只靠泊完成，安全带缆</div></div>
+                    <div class="timeline-item"><div class="timeline-time">07:15</div><div class="timeline-user">赵明</div><div class="timeline-content">卸货作业启动，已卸渔获 2,100 kg</div></div>
+                    <div class="timeline-item"><div class="timeline-time">09:00</div><div class="timeline-user">赵明</div><div class="timeline-content">进度更新：已完成75%，共卸货 6,390 kg</div></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

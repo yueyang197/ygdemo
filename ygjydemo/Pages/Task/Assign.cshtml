@@ -1,0 +1,158 @@
+@page
+@{ ViewData["Title"] = "任务派遣"; ViewData["ActiveMenu"] = "TaskAssign"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-person-check me-2 text-primary"></i>任务派遣</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">任务管理</li><li class="breadcrumb-item active">任务派遣</li></ol></nav>
+    </div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">任务编号/标题</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">任务类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>安全检查</option><option>巡逻巡查</option><option>事件处置</option><option>应急响应</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">优先级</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>紧急</option><option>高</option><option>中</option><option>低</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6><i class="bi bi-list-task me-2"></i>待派遣任务列表 <span class="badge bg-warning ms-1">待派遣: 8</span></h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>任务编号</th><th>任务标题</th><th>任务类型</th><th>来源事件</th><th>优先级</th><th>要求完成时间</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><span class="text-primary fw-semibold">RW-20240608-001</span></td>
+                    <td>3号泊位碰撞事故现场处置</td>
+                    <td><span class="badge bg-secondary">事件处置</span></td>
+                    <td><span class="text-muted">SJ2024060801</span></td>
+                    <td><span class="badge bg-danger">紧急</span></td>
+                    <td>2024-06-08 12:00</td>
+                    <td><span class="badge-status status-pending">待派遣</span></td>
+                    <td>
+                        <button class="btn btn-success btn-action me-1" onclick="openModal('assignModal')"><i class="bi bi-person-check me-1"></i>派遣</button>
+                        <button class="btn btn-primary btn-action" onclick="openModal('viewTaskModal')">查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">RW-20240608-002</span></td>
+                    <td>港区水域油污染应急处理</td>
+                    <td><span class="badge bg-secondary">应急响应</span></td>
+                    <td><span class="text-muted">SJ2024060802</span></td>
+                    <td><span class="badge bg-warning text-dark">高</span></td>
+                    <td>2024-06-08 18:00</td>
+                    <td><span class="badge-status status-pending">待派遣</span></td>
+                    <td>
+                        <button class="btn btn-success btn-action me-1" onclick="openModal('assignModal')"><i class="bi bi-person-check me-1"></i>派遣</button>
+                        <button class="btn btn-primary btn-action" onclick="openModal('viewTaskModal')">查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">RW-20240608-003</span></td>
+                    <td>起重机液压故障维修</td>
+                    <td><span class="badge bg-secondary">设施维修</span></td>
+                    <td><span class="text-muted">SJ2024060803</span></td>
+                    <td><span class="badge bg-warning text-dark">中</span></td>
+                    <td>2024-06-09 12:00</td>
+                    <td><span class="badge-status status-pending">待派遣</span></td>
+                    <td>
+                        <button class="btn btn-success btn-action me-1" onclick="openModal('assignModal')"><i class="bi bi-person-check me-1"></i>派遣</button>
+                        <button class="btn btn-primary btn-action" onclick="openModal('viewTaskModal')">查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">RW-20240608-004</span></td>
+                    <td>未登记船只查处</td>
+                    <td><span class="badge bg-secondary">执法检查</span></td>
+                    <td><span class="text-muted">SJ2024060804</span></td>
+                    <td><span class="badge bg-info">低</span></td>
+                    <td>2024-06-08 17:00</td>
+                    <td><span class="badge-status status-pending">待派遣</span></td>
+                    <td>
+                        <button class="btn btn-success btn-action me-1" onclick="openModal('assignModal')"><i class="bi bi-person-check me-1"></i>派遣</button>
+                        <button class="btn btn-primary btn-action" onclick="openModal('viewTaskModal')">查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-semibold">RW-20240608-005</span></td>
+                    <td>船员受伤医疗救援协调</td>
+                    <td><span class="badge bg-secondary">应急响应</span></td>
+                    <td><span class="text-muted">SJ2024060805</span></td>
+                    <td><span class="badge bg-danger">紧急</span></td>
+                    <td>2024-06-08 14:00</td>
+                    <td><span class="badge-status status-process">已派遣</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-action" onclick="openModal('viewTaskModal')">查看</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 派遣弹窗 -->
+<div class="modal fade" id="assignModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-person-check me-2"></i>任务派遣</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="alert alert-info py-2 mb-3">
+                    <strong>任务：</strong>3号泊位碰撞事故现场处置 &nbsp; <strong>优先级：</strong><span class="badge bg-danger">紧急</span>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">派遣部门 <span class="text-danger">*</span></label>
+                        <select class="form-select form-select-sm"><option>港务安全科</option><option>应急救援队</option><option>设施维修部</option><option>海事执法队</option></select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">执行人员 <span class="text-danger">*</span></label>
+                        <select class="form-select form-select-sm"><option>陈科长</option><option>刘队长</option><option>赵主任</option><option>孙班长</option></select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">协同人员</label>
+                        <input class="form-control form-control-sm" placeholder="多人用逗号分隔">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">要求完成时间</label>
+                        <input type="datetime-local" class="form-control form-control-sm" value="2024-06-08T12:00">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">派遣说明</label>
+                        <textarea class="form-control form-control-sm" rows="3" placeholder="请输入任务要求及注意事项..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button>
+                <button class="btn btn-success btn-sm" onclick="saveForm('assignModal')"><i class="bi bi-send me-1"></i>确认派遣</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 查看弹窗 -->
+<div class="modal fade" id="viewTaskModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>任务详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2">
+                    <div class="col-6"><span class="text-muted">任务编号：</span><strong>RW-20240608-001</strong></div>
+                    <div class="col-6"><span class="text-muted">状态：</span><span class="badge-status status-pending">待派遣</span></div>
+                    <div class="col-12"><span class="text-muted">任务标题：</span>3号泊位碰撞事故现场处置</div>
+                    <div class="col-6"><span class="text-muted">任务类型：</span>事件处置</div>
+                    <div class="col-6"><span class="text-muted">优先级：</span><span class="badge bg-danger">紧急</span></div>
+                    <div class="col-6"><span class="text-muted">来源事件：</span>SJ2024060801</div>
+                    <div class="col-6"><span class="text-muted">要求完成：</span>2024-06-08 12:00</div>
+                    <div class="col-12"><span class="text-muted">任务描述：</span>立即赶赴3号泊位，对渔船碰撞事故进行现场处置，保护现场，疏散人员，防止二次事故发生。</div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

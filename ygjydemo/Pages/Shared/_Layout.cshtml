@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - 智慧渔港运营系统</title>
+    <title>@ViewData["Title"] - 智慧渔港平台</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -13,51 +13,135 @@
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-brand">
-                <i class="bi bi-water me-2"></i>智慧渔港
+                <i class="bi bi-water me-2"></i><span>智慧渔港平台</span>
             </div>
             <nav class="sidebar-nav">
-                <div class="nav-section">综合管理</div>
-                <a href="/Dashboard" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Dashboard" ? "active" : "")">
-                    <i class="bi bi-speedometer2"></i><span>运营驾驶舱</span>
-                </a>
-                <a href="/Harbor" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Harbor" ? "active" : "")">
-                    <i class="bi bi-building"></i><span>港口基础管理</span>
-                </a>
-                <a href="/Vessel" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Vessel" ? "active" : "")">
-                    <i class="bi bi-tsunami"></i><span>船舶进出港管理</span>
-                </a>
 
-                <div class="nav-section">智能运营</div>
-                <a href="/IceSales" class="nav-link @(ViewData["ActivePage"]?.ToString() == "IceSales" ? "active" : "")">
-                    <i class="bi bi-snow"></i><span>智能售冰管理</span>
-                </a>
-                <a href="/ColdStorage" class="nav-link @(ViewData["ActivePage"]?.ToString() == "ColdStorage" ? "active" : "")">
-                    <i class="bi bi-thermometer-snow"></i><span>冷链冷库管理</span>
-                </a>
-                <a href="/Trading" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Trading" ? "active" : "")">
-                    <i class="bi bi-cart3"></i><span>水产品交易管理</span>
-                </a>
+                <!-- ===== 系统一：智慧渔港运营 ===== -->
+                <div class="nav-group-header" data-bs-toggle="collapse" data-bs-target="#menuOps" aria-expanded="true">
+                    <span class="nav-group-dot" style="background:#00c9ff"></span>
+                    <span>智慧渔港运营系统</span>
+                    <i class="bi bi-chevron-down nav-group-arrow ms-auto"></i>
+                </div>
+                <div class="collapse show" id="menuOps">
+                    <div class="nav-section">智能运营</div>
+                    <a href="/Dashboard" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Dashboard" ? "active" : "")">
+                        <i class="bi bi-speedometer2"></i><span>运营驾驶舱</span>
+                    </a>
+                    <a href="/IceSales" class="nav-link @(ViewData["ActivePage"]?.ToString() == "IceSales" ? "active" : "")">
+                        <i class="bi bi-snow"></i><span>智能售冰管理</span>
+                    </a>
+                    <a href="/ColdStorage" class="nav-link @(ViewData["ActivePage"]?.ToString() == "ColdStorage" ? "active" : "")">
+                        <i class="bi bi-thermometer-snow"></i><span>冷链冷库管理</span>
+                    </a>
+                    <a href="/Trading" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Trading" ? "active" : "")">
+                        <i class="bi bi-cart3"></i><span>水产品交易管理</span>
+                    </a>
 
-                <div class="nav-section">质检溯源</div>
-                <a href="/Testing" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Testing" ? "active" : "")">
-                    <i class="bi bi-clipboard2-pulse"></i><span>水产品安全检测</span>
-                </a>
-                <a href="/Blockchain" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Blockchain" ? "active" : "")">
-                    <i class="bi bi-link-45deg"></i><span>区块链溯源系统</span>
-                </a>
+                    <div class="nav-section">质检溯源</div>
+                    <a href="/Testing" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Testing" ? "active" : "")">
+                        <i class="bi bi-clipboard2-pulse"></i><span>水产品安全检测</span>
+                    </a>
+                    <a href="/Blockchain" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Blockchain" ? "active" : "")">
+                        <i class="bi bi-link-45deg"></i><span>区块链溯源系统</span>
+                    </a>
 
-                <div class="nav-section">安全监管</div>
-                <a href="/Monitor" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Monitor" ? "active" : "")">
-                    <i class="bi bi-camera-video"></i><span>智能港区监控</span>
-                </a>
-                <a href="/Safety" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Safety" ? "active" : "")">
-                    <i class="bi bi-shield-check"></i><span>安全生产管理</span>
-                </a>
+                    <div class="nav-section">移动应用</div>
+                    <a href="/MobileApp" class="nav-link @(ViewData["ActivePage"]?.ToString() == "MobileApp" ? "active" : "")">
+                        <i class="bi bi-phone"></i><span>小程序展示</span>
+                    </a>
+                </div>
 
-                <div class="nav-section">移动应用</div>
-                <a href="/MobileApp" class="nav-link @(ViewData["ActivePage"]?.ToString() == "MobileApp" ? "active" : "")">
-                    <i class="bi bi-phone"></i><span>移动应用展示</span>
-                </a>
+                <!-- ===== 系统二：综合管理系统 ===== -->
+                <div class="nav-group-header" data-bs-toggle="collapse" data-bs-target="#menuMgmt" aria-expanded="true">
+                    <span class="nav-group-dot" style="background:#f7931e"></span>
+                    <span>综合管理系统</span>
+                    <i class="bi bi-chevron-down nav-group-arrow ms-auto"></i>
+                </div>
+                <div class="collapse show" id="menuMgmt">
+                    <div class="nav-section">基础信息</div>
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuBasic" href="#">
+                        <i class="bi bi-database"></i><span>基础信息管理</span><i class="bi bi-chevron-down nav-sub-arrow ms-auto"></i>
+                    </a>
+                    <div class="collapse nav-sub-group" id="menuBasic">
+                        <a href="/Basic/Harbor"     class="nav-link nav-sub-link">渔港管理</a>
+                        <a href="/Basic/Vessel"     class="nav-link nav-sub-link">渔船管理</a>
+                        <a href="/Basic/Crew"       class="nav-link nav-sub-link">船员管理</a>
+                        <a href="/Basic/Berth"      class="nav-link nav-sub-link">码头/泊位/设施</a>
+                        <a href="/Basic/Catch"      class="nav-link nav-sub-link">渔获物管理</a>
+                        <a href="/Basic/Enterprise" class="nav-link nav-sub-link">企业货主管理</a>
+                    </div>
+
+                    <div class="nav-section">港务运营</div>
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuPort" href="#">
+                        <i class="bi bi-anchor"></i><span>港务管理</span><i class="bi bi-chevron-down nav-sub-arrow ms-auto"></i>
+                    </a>
+                    <div class="collapse nav-sub-group" id="menuPort">
+                        <a href="/Port/IncomingVessel" class="nav-link nav-sub-link">来港船舶</a>
+                        <a href="/Port/PrePlan"        class="nav-link nav-sub-link">预计划</a>
+                        <a href="/Port/WorkPlan"       class="nav-link nav-sub-link">作业计划调度</a>
+                        <a href="/Port/Duty"           class="nav-link nav-sub-link">值班值守</a>
+                    </div>
+
+                    <div class="nav-section">事件与任务</div>
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuEvent" href="#">
+                        <i class="bi bi-exclamation-circle"></i><span>事件管理</span><i class="bi bi-chevron-down nav-sub-arrow ms-auto"></i>
+                    </a>
+                    <div class="collapse nav-sub-group" id="menuEvent">
+                        <a href="/Event/Intake"     class="nav-link nav-sub-link">事件接入</a>
+                        <a href="/Event/Dispatch"   class="nav-link nav-sub-link">事件分拨</a>
+                        <a href="/Event/Receive"    class="nav-link nav-sub-link">事件接收</a>
+                        <a href="/Event/Dispose"    class="nav-link nav-sub-link">事件处置</a>
+                        <a href="/Event/Process"    class="nav-link nav-sub-link">过程管理</a>
+                        <a href="/Event/Close"      class="nav-link nav-sub-link">事件办结</a>
+                        <a href="/Event/Evaluate"   class="nav-link nav-sub-link">事件评价</a>
+                        <a href="/Event/Statistics" class="nav-link nav-sub-link">事件统计</a>
+                        <a href="/Event/Detail"     class="nav-link nav-sub-link">事件明细</a>
+                    </div>
+
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuTask" href="#">
+                        <i class="bi bi-list-task"></i><span>任务管理</span><i class="bi bi-chevron-down nav-sub-arrow ms-auto"></i>
+                    </a>
+                    <div class="collapse nav-sub-group" id="menuTask">
+                        <a href="/Task/Initiate" class="nav-link nav-sub-link">任务立项</a>
+                        <a href="/Task/Assign"   class="nav-link nav-sub-link">任务分派</a>
+                        <a href="/Task/Handle"   class="nav-link nav-sub-link">任务办理</a>
+                        <a href="/Task/Summary"  class="nav-link nav-sub-link">任务总结</a>
+                        <a href="/Task/Complete" class="nav-link nav-sub-link">任务办结</a>
+                        <a href="/Task/Urge"     class="nav-link nav-sub-link">任务催办</a>
+                        <a href="/Task/Delay"    class="nav-link nav-sub-link">任务延期</a>
+                    </div>
+
+                    <div class="nav-section">应急与督查</div>
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuEmerg" href="#">
+                        <i class="bi bi-shield-exclamation"></i><span>应急管理</span><i class="bi bi-chevron-down nav-sub-arrow ms-auto"></i>
+                    </a>
+                    <div class="collapse nav-sub-group" id="menuEmerg">
+                        <a href="/Emergency/Plan"     class="nav-link nav-sub-link">应急预案</a>
+                        <a href="/Emergency/Drill"    class="nav-link nav-sub-link">应急演练</a>
+                        <a href="/Emergency/Resource" class="nav-link nav-sub-link">应急资源</a>
+                        <a href="/Emergency/Incident" class="nav-link nav-sub-link">应急事件</a>
+                    </div>
+
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#menuSuper" href="#">
+                        <i class="bi bi-clipboard-check"></i><span>督查督办</span><i class="bi bi-chevron-down nav-sub-arrow ms-auto"></i>
+                    </a>
+                    <div class="collapse nav-sub-group" id="menuSuper">
+                        <a href="/Supervision/SupervisionList"  class="nav-link nav-sub-link">督办列表</a>
+                        <a href="/Supervision/UrgeRecord"       class="nav-link nav-sub-link">催办记录</a>
+                        <a href="/Supervision/SupervisionStats" class="nav-link nav-sub-link">督办统计</a>
+                    </div>
+
+                    <div class="nav-section">智慧监管</div>
+                    <a href="/Monitor/PortMonitor"     class="nav-link"><i class="bi bi-display"></i><span>港口监管</span></a>
+                    <a href="/Monitor/VesselDynamic"   class="nav-link"><i class="bi bi-geo-alt"></i><span>船舶动态监管</span></a>
+                    <a href="/Monitor/DispatchMonitor" class="nav-link"><i class="bi bi-kanban"></i><span>调度作业监管</span></a>
+                    <a href="/Safety"                  class="nav-link @(ViewData["ActivePage"]?.ToString() == "Safety" ? "active" : "")"><i class="bi bi-shield-check"></i><span>安全生产管理</span></a>
+                    <a href="/Security/Security"       class="nav-link"><i class="bi bi-camera-video"></i><span>智慧安防</span></a>
+                    <a href="/Security/Inspection"     class="nav-link"><i class="bi bi-person-walking"></i><span>智慧巡检</span></a>
+                    <a href="/Security/Equipment"      class="nav-link"><i class="bi bi-tools"></i><span>设施设备管理</span></a>
+                </div>
+
             </nav>
         </div>
 
@@ -68,7 +152,7 @@
                     <i class="bi bi-list fs-5"></i>
                 </button>
                 <div class="ms-3">
-                    <span class="text-muted">智慧渔港运营系统</span>
+                    <span class="text-muted small">智慧渔港平台</span>
                     <span class="text-muted mx-2">|</span>
                     <span class="fw-semibold">@ViewData["Title"]</span>
                 </div>
@@ -107,7 +191,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>Chart.register(ChartDataLabels);</script>
     <script>
         // Sidebar toggle
         document.getElementById('sidebarToggle').addEventListener('click', function () {
@@ -128,6 +214,57 @@
             var toast = new bootstrap.Toast(document.getElementById('demoToast'));
             toast.show();
         }
+
+        // Keep all nav groups always expanded, highlight active link and open relevant sub-menu
+        (function () {
+            var path = window.location.pathname.toLowerCase();
+
+            // Always expand both system groups
+            ['menuOps', 'menuMgmt'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) {
+                    el.classList.add('show');
+                    var hdr = el.previousElementSibling;
+                    if (hdr) hdr.setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            // Prevent group headers from toggling collapse on click
+            document.querySelectorAll('.nav-group-header').forEach(function(hdr) {
+                hdr.removeAttribute('data-bs-toggle');
+                hdr.removeAttribute('data-bs-target');
+                hdr.style.cursor = 'default';
+                hdr.querySelector('.nav-group-arrow') && (hdr.querySelector('.nav-group-arrow').style.display = 'none');
+            });
+
+            // Within menuMgmt, open the relevant sub-collapse
+            var subMap = {
+                '/basic':       'menuBasic',
+                '/port':        'menuPort',
+                '/event':       'menuEvent',
+                '/task':        'menuTask',
+                '/emergency':   'menuEmerg',
+                '/supervision': 'menuSuper'
+            };
+            Object.keys(subMap).forEach(function(prefix) {
+                if (path.startsWith(prefix)) {
+                    var sub = document.getElementById(subMap[prefix]);
+                    if (sub) {
+                        sub.classList.add('show');
+                        var btn = sub.previousElementSibling;
+                        if (btn) btn.classList.remove('collapsed');
+                    }
+                }
+            });
+
+            // Highlight the exact active link
+            document.querySelectorAll('.sidebar-nav a.nav-link, .sidebar-nav a.nav-sub-link').forEach(function(a) {
+                var href = a.getAttribute('href');
+                if (href && href.toLowerCase() === path) {
+                    a.classList.add('active');
+                }
+            });
+        })();
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

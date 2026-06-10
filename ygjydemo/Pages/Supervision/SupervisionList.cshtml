@@ -1,0 +1,106 @@
+@page
+@{ ViewData["Title"] = "督查任务"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-clipboard2-check me-2 text-primary"></i>督查任务管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">督查督办</li><li class="breadcrumb-item active">督查任务</li></ol></nav>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('addSupModal')"><i class="bi bi-plus-circle me-1"></i>新建督查</button>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">本月督查任务</div><div class="fw-bold fs-4 text-primary">32</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">进行中</div><div class="fw-bold fs-4 text-warning">8</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">已完成</div><div class="fw-bold fs-4 text-success">21</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">超期未结</div><div class="fw-bold fs-4 text-danger">3</div></div></div></div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">督查标题</label><input type="text" class="form-control form-control-sm" placeholder="关键词搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">督查类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>安全专项</option><option>环保督查</option><option>港务检查</option><option>设备检查</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>待督查</option><option>督查中</option><option>已完成</option><option>超期</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">督查日期</label><input type="date" class="form-control form-control-sm"></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>督查任务列表</h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>督查编号</th><th>督查标题</th><th>督查类型</th><th>督查对象</th><th>督查人</th><th>计划日期</th><th>状态</th><th>整改情况</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>DC-2024-032</td><td>港区消防安全专项督查</td><td>安全专项</td><td>全港区各部门</td><td>安全科陈主任</td><td>2024-06-10</td><td><span class="badge-status status-pending">待督查</span></td><td>—</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewSupModal')">查看</button><button class="btn btn-warning btn-action" onclick="openModal('addSupModal')">编辑</button></td></tr>
+                <tr><td>2</td><td>DC-2024-031</td><td>渔船证件及年检合规督查</td><td>港务检查</td><td>港区渔船</td><td>港务科刘科长</td><td>2024-06-08</td><td><span class="badge-status status-process">督查中</span></td><td>发现问题3项</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewSupModal')">查看</button><button class="btn btn-success btn-action" onclick="showToast('督查结束')">结束督查</button></td></tr>
+                <tr><td>3</td><td>DC-2024-030</td><td>港区污水处理设施检查</td><td>环保督查</td><td>排污监测点</td><td>环保科赵主任</td><td>2024-06-05</td><td><span class="badge-status status-done">已完成</span></td><td>整改完成</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewSupModal')">查看</button><button class="btn btn-info btn-action" onclick="showToast('报告下载中')">下载报告</button></td></tr>
+                <tr><td>4</td><td>DC-2024-029</td><td>起重设备安全运行专检</td><td>设备检查</td><td>装卸设备区</td><td>设备科王工</td><td>2024-06-01</td><td><span class="badge-status status-done">已完成</span></td><td>整改完成</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewSupModal')">查看</button><button class="btn btn-info btn-action" onclick="showToast('报告下载中')">下载报告</button></td></tr>
+                <tr><td>5</td><td>DC-2024-028</td><td>港区夜间安保巡查督查</td><td>安全专项</td><td>安保队</td><td>安全科陈主任</td><td>2024-05-28</td><td><span class="badge bg-danger text-white" style="font-size:.75rem;padding:3px 8px;border-radius:10px;">超期未结</span></td><td>整改中</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewSupModal')">查看</button><button class="btn btn-warning btn-action" onclick="showToast('已发送催办')">催办</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 32 条记录</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link">2</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="addSupModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新建督查任务</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">督查标题 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="请输入督查标题"></div>
+                    <div class="col-md-6"><label class="form-label">督查类型</label><select class="form-select form-select-sm"><option>安全专项</option><option>环保督查</option><option>港务检查</option><option>设备检查</option></select></div>
+                    <div class="col-md-6"><label class="form-label">督查对象</label><input class="form-control form-control-sm" placeholder="请输入督查对象"></div>
+                    <div class="col-md-6"><label class="form-label">督查人</label><input class="form-control form-control-sm" placeholder="请输入督查人"></div>
+                    <div class="col-md-6"><label class="form-label">计划日期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">截止日期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-12"><label class="form-label">督查说明</label><textarea class="form-control form-control-sm" rows="3" placeholder="请描述督查内容及目标..."></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addSupModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewSupModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>督查详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6"><span class="text-muted">督查编号：</span><strong>DC-2024-031</strong></div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-process">督查中</span></div>
+                    <div class="col-md-6"><span class="text-muted">督查标题：</span>渔船证件及年检合规督查</div>
+                    <div class="col-md-6"><span class="text-muted">督查类型：</span>港务检查</div>
+                    <div class="col-md-6"><span class="text-muted">督查对象：</span>港区渔船</div>
+                    <div class="col-md-6"><span class="text-muted">督查人：</span>港务科刘科长</div>
+                    <div class="col-md-6"><span class="text-muted">计划日期：</span>2024-06-08</div>
+                    <div class="col-md-6"><span class="text-muted">发现问题：</span><span class="text-danger fw-bold">3项</span></div>
+                </div>
+                <hr>
+                <h6>发现问题列表</h6>
+                <table class="table table-sm">
+                    <thead><tr><th>问题描述</th><th>严重程度</th><th>整改期限</th><th>整改状态</th></tr></thead>
+                    <tbody>
+                        <tr><td>闽渔0023号捕捞许可证已过期</td><td><span class="badge bg-danger">严重</span></td><td>2024-06-10</td><td><span class="badge-status status-pending">待整改</span></td></tr>
+                        <tr><td>闽渔0156号安全设备检验未年检</td><td><span class="badge bg-warning text-dark">一般</span></td><td>2024-06-15</td><td><span class="badge-status status-pending">待整改</span></td></tr>
+                        <tr><td>闽渔0089号船员证件不齐全</td><td><span class="badge bg-warning text-dark">一般</span></td><td>2024-06-12</td><td><span class="badge-status status-process">整改中</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

@@ -214,7 +214,7 @@ new Chart(document.getElementById('tempChart'), {
     },
     options: {
         responsive: true,
-        plugins: { legend: { position: 'bottom' } },
+        plugins: { legend: { position: 'bottom' }, datalabels: { display: true, align: 'top', anchor: 'end', font: { size: 10 }, formatter: function(v){ return v+'°C'; } } },
         scales: { y: { reverse: true } }
     }
 });

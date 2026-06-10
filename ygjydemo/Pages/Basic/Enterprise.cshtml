@@ -1,0 +1,93 @@
+@page
+@{ ViewData["Title"] = "企业货主管理"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-building-fill me-2 text-primary"></i>企业货主管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">基础信息管理</li><li class="breadcrumb-item active">企业货主管理</li></ol></nav>
+    </div>
+    <div class="d-flex gap-2">
+        <button class="btn btn-success btn-sm" onclick="exportData()"><i class="bi bi-file-excel me-1"></i>导出</button>
+        <button class="btn btn-primary btn-sm" onclick="openModal('addEnterpriseModal')"><i class="bi bi-plus-circle me-1"></i>新增企业</button>
+    </div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-3"><label class="form-label mb-1">企业名称</label><input type="text" class="form-control form-control-sm" placeholder="输入企业名称"></div>
+        <div class="col-md-2"><label class="form-label mb-1">企业类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>渔业企业</option><option>水产加工企业</option><option>冷链物流</option><option>渔具供应商</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>正常</option><option>注销</option><option>停业</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>企业货主列表 <span class="badge bg-primary ms-1">共156条</span></h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>企业名称</th><th>统一社会信用代码</th><th>企业类型</th><th>法定代表人</th><th>联系电话</th><th>注册地址</th><th>注册日期</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>东方海洋渔业有限公司</td><td>91350526XXXX0001XX</td><td>渔业企业</td><td>王海洋</td><td>0596-8230001</td><td>福建省漳州市东方镇</td><td>2010-03-15</td><td><span class="badge-status status-normal">正常</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEnterpriseModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addEnterpriseModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(1)">删除</button></td></tr>
+                <tr><td>2</td><td>海丰水产品加工有限公司</td><td>91350527XXXX0002XX</td><td>水产加工企业</td><td>李明远</td><td>0596-8236002</td><td>福建省漳州市南靖县</td><td>2012-07-20</td><td><span class="badge-status status-normal">正常</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEnterpriseModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addEnterpriseModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(2)">删除</button></td></tr>
+                <tr><td>3</td><td>三都澳冷链物流有限公司</td><td>91350921XXXX0003XX</td><td>冷链物流</td><td>林志强</td><td>0593-7812003</td><td>福建省宁德市蕉城区</td><td>2015-11-08</td><td><span class="badge-status status-normal">正常</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEnterpriseModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addEnterpriseModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(3)">删除</button></td></tr>
+                <tr><td>4</td><td>石浦渔具装备有限公司</td><td>91330224XXXX0004XX</td><td>渔具供应商</td><td>郑建国</td><td>0574-6534004</td><td>浙江省象山县石浦镇</td><td>2008-05-30</td><td><span class="badge-status status-normal">正常</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEnterpriseModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addEnterpriseModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(4)">删除</button></td></tr>
+                <tr><td>5</td><td>温岭海产品贸易有限公司</td><td>91330121XXXX0005XX</td><td>渔业企业</td><td>陈海丽</td><td>0576-8934005</td><td>浙江省台州市温岭市</td><td>2014-09-12</td><td><span class="badge-status status-normal">正常</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEnterpriseModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addEnterpriseModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(5)">删除</button></td></tr>
+                <tr><td>6</td><td>宁德锦达水产有限公司</td><td>91350922XXXX0006XX</td><td>水产加工企业</td><td>吴国光</td><td>0593-2837006</td><td>福建省宁德市蕉城区</td><td>2013-04-18</td><td><span class="badge-status status-normal">正常</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEnterpriseModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addEnterpriseModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(6)">删除</button></td></tr>
+                <tr><td>7</td><td>洞头岛海洋渔业合作社</td><td>91330382XXXX0007XX</td><td>渔业企业</td><td>许国华</td><td>0577-6523007</td><td>浙江省温州市洞头区</td><td>2011-12-25</td><td><span class="badge-status status-offline">停业</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEnterpriseModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addEnterpriseModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(7)">删除</button></td></tr>
+                <tr><td>8</td><td>霞浦翔宇海鲜有限公司</td><td>91350921XXXX0008XX</td><td>渔业企业</td><td>蔡建华</td><td>0593-5612008</td><td>福建省宁德市霞浦县</td><td>2016-08-06</td><td><span class="badge-status status-normal">正常</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEnterpriseModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addEnterpriseModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(8)">删除</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 156 条记录，显示第 1-8 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">2</a></li><li class="page-item"><a class="page-link">…</a></li><li class="page-item"><a class="page-link">16</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<!-- 新增/编辑弹窗 -->
+<div class="modal fade" id="addEnterpriseModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-building me-2"></i>新增企业</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-12"><label class="form-label">企业名称 <span class="text-danger">*</span></label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">统一社会信用代码 <span class="text-danger">*</span></label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">企业类型</label><select class="form-select form-select-sm"><option>渔业企业</option><option>水产加工企业</option><option>冷链物流</option><option>渔具供应商</option></select></div>
+                    <div class="col-md-6"><label class="form-label">法定代表人</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">联系电话</label><input class="form-control form-control-sm"></div>
+                    <div class="col-12"><label class="form-label">注册地址</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">注册日期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">状态</label><select class="form-select form-select-sm"><option>正常</option><option>停业</option><option>注销</option></select></div>
+                    <div class="col-12"><label class="form-label">经营范围</label><textarea class="form-control form-control-sm" rows="2"></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addEnterpriseModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewEnterpriseModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>企业详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2">
+                    <div class="col-12"><span class="text-muted">企业名称：</span><strong>东方海洋渔业有限公司</strong></div>
+                    <div class="col-md-6"><span class="text-muted">信用代码：</span>91350526XXXX0001XX</div>
+                    <div class="col-md-6"><span class="text-muted">企业类型：</span>渔业企业</div>
+                    <div class="col-md-6"><span class="text-muted">法定代表人：</span>王海洋</div>
+                    <div class="col-md-6"><span class="text-muted">联系电话：</span>0596-8230001</div>
+                    <div class="col-12"><span class="text-muted">注册地址：</span>福建省漳州市东方镇临海路88号</div>
+                    <div class="col-md-6"><span class="text-muted">注册日期：</span>2010-03-15</div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-normal">正常</span></div>
+                    <div class="col-12"><span class="text-muted">经营范围：</span>海洋捕捞、水产品销售、渔业技术服务</div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

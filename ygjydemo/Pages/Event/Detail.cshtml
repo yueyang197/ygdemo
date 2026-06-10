@@ -1,0 +1,163 @@
+@page
+@{ ViewData["Title"] = "事件详情"; ViewData["ActiveMenu"] = "EventDetail"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-file-text me-2 text-primary"></i>事件详情</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">事件管理</li><li class="breadcrumb-item active">事件详情</li></ol></nav>
+    </div>
+    <div>
+        <button class="btn btn-outline-secondary btn-sm me-1" onclick="window.history.back()"><i class="bi bi-arrow-left me-1"></i>返回</button>
+        <button class="btn btn-primary btn-sm" onclick="showToast('打印功能演示')"><i class="bi bi-printer me-1"></i>打印</button>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-8">
+        <!-- 基本信息 -->
+        <div class="content-card mb-3">
+            <div class="content-card-header"><h6><i class="bi bi-info-circle me-2 text-primary"></i>事件基本信息</h6></div>
+            <div class="content-card-body">
+                <div class="row g-2" style="font-size:.85rem">
+                    <div class="col-md-6"><span class="text-muted">事件编号：</span><strong class="text-primary">SJ2024060801</strong></div>
+                    <div class="col-md-6"><span class="text-muted">当前状态：</span><span class="badge-status status-process">处理中</span></div>
+                    <div class="col-md-6"><span class="text-muted">事件标题：</span><strong>3号泊位渔船碰撞事故</strong></div>
+                    <div class="col-md-6"><span class="text-muted">事件类型：</span><span class="badge bg-secondary">安全事故</span></div>
+                    <div class="col-md-6"><span class="text-muted">紧急程度：</span><span class="badge bg-danger">紧急</span></div>
+                    <div class="col-md-6"><span class="text-muted">来源渠道：</span>现场上报</div>
+                    <div class="col-md-6"><span class="text-muted">发生地点：</span>3号泊位区域</div>
+                    <div class="col-md-6"><span class="text-muted">上报人：</span>张港务</div>
+                    <div class="col-md-6"><span class="text-muted">接入时间：</span>2024-06-08 08:15</div>
+                    <div class="col-md-6"><span class="text-muted">联系电话：</span>138****0023</div>
+                    <div class="col-12 mt-1"><span class="text-muted">事件描述：</span><br>
+                        <div class="p-2 bg-light rounded mt-1">3号泊位停靠的"海阔天空号"渔船在卸货作业过程中，因缆绳松脱导致船体移位，与相邻泊位的"顺风顺水号"发生轻微碰撞。初步检查两船船体均有轻微刮擦，无人员受伤，港口设施基本完好。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 处置记录 -->
+        <div class="content-card mb-3">
+            <div class="content-card-header"><h6><i class="bi bi-clock-history me-2 text-info"></i>处置跟踪记录</h6></div>
+            <div class="content-card-body">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:15</div>
+                        <div class="timeline-user">张港务</div>
+                        <div class="timeline-content"><strong>事件上报</strong>：通过现场上报方式接入系统，事件编号自动生成 SJ2024060801</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:22</div>
+                        <div class="timeline-user">值班调度李明</div>
+                        <div class="timeline-content"><strong>事件接收</strong>：已接收并确认事件信息，定级为紧急，启动应急响应预案</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:35</div>
+                        <div class="timeline-user">调度长王志</div>
+                        <div class="timeline-content"><strong>事件分拨</strong>：分拨至港务安全科，责任人陈科长，要求2小时内完成初步处置</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">09:10</div>
+                        <div class="timeline-user">陈科长</div>
+                        <div class="timeline-content"><strong>开始处置</strong>：安全科已派员到达现场，正在对两船进行损伤评估，同时疏散无关人员</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:30</div>
+                        <div class="timeline-user">陈科长</div>
+                        <div class="timeline-content"><strong>进度更新</strong>：船体损伤评估完成，无严重结构损坏。已联系双方船主进行协商，保险公司已介入</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 相关图片 -->
+        <div class="content-card">
+            <div class="content-card-header"><h6><i class="bi bi-images me-2 text-success"></i>现场图片</h6></div>
+            <div class="content-card-body">
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height:120px;cursor:pointer" onclick="showToast('查看图片')">
+                            <div class="text-center text-muted"><i class="bi bi-image fs-2"></i><div style="font-size:.75rem">现场图片1.jpg</div></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height:120px;cursor:pointer" onclick="showToast('查看图片')">
+                            <div class="text-center text-muted"><i class="bi bi-image fs-2"></i><div style="font-size:.75rem">现场图片2.jpg</div></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height:120px;cursor:pointer" onclick="showToast('查看图片')">
+                            <div class="text-center text-muted"><i class="bi bi-image fs-2"></i><div style="font-size:.75rem">损伤评估报告.pdf</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <!-- 事件流程 -->
+        <div class="content-card mb-3">
+            <div class="content-card-header"><h6><i class="bi bi-diagram-3 me-2 text-warning"></i>事件处理流程</h6></div>
+            <div class="content-card-body">
+                <div class="d-flex flex-column gap-2" style="font-size:.82rem">
+                    <div class="d-flex align-items-center gap-2 p-2 rounded" style="background:#d1fae5">
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                        <div><div class="fw-semibold">事件接入</div><div class="text-muted">08:15 完成</div></div>
+                    </div>
+                    <div class="text-center text-muted">↓</div>
+                    <div class="d-flex align-items-center gap-2 p-2 rounded" style="background:#d1fae5">
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                        <div><div class="fw-semibold">事件接收</div><div class="text-muted">08:22 完成</div></div>
+                    </div>
+                    <div class="text-center text-muted">↓</div>
+                    <div class="d-flex align-items-center gap-2 p-2 rounded" style="background:#d1fae5">
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                        <div><div class="fw-semibold">事件分拨</div><div class="text-muted">08:35 完成</div></div>
+                    </div>
+                    <div class="text-center text-muted">↓</div>
+                    <div class="d-flex align-items-center gap-2 p-2 rounded" style="background:#fef3c7;border:1px solid #f59e0b">
+                        <i class="bi bi-hourglass-split text-warning"></i>
+                        <div><div class="fw-semibold">事件处置</div><div class="text-muted">进行中...</div></div>
+                    </div>
+                    <div class="text-center text-muted">↓</div>
+                    <div class="d-flex align-items-center gap-2 p-2 rounded bg-light">
+                        <i class="bi bi-circle text-muted"></i>
+                        <div><div class="fw-semibold text-muted">事件关闭</div><div class="text-muted">待处理</div></div>
+                    </div>
+                    <div class="text-center text-muted">↓</div>
+                    <div class="d-flex align-items-center gap-2 p-2 rounded bg-light">
+                        <i class="bi bi-circle text-muted"></i>
+                        <div><div class="fw-semibold text-muted">满意度评价</div><div class="text-muted">待处理</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分拨信息 -->
+        <div class="content-card mb-3">
+            <div class="content-card-header"><h6><i class="bi bi-send me-2 text-primary"></i>分拨信息</h6></div>
+            <div class="content-card-body" style="font-size:.83rem">
+                <div class="row g-1">
+                    <div class="col-6 text-muted">责任部门：</div><div class="col-6"><strong>港务安全科</strong></div>
+                    <div class="col-6 text-muted">责任人：</div><div class="col-6">陈科长</div>
+                    <div class="col-6 text-muted">优先级：</div><div class="col-6"><span class="badge bg-danger">立即处理</span></div>
+                    <div class="col-6 text-muted">处置期限：</div><div class="col-6">2024-06-08 18:00</div>
+                    <div class="col-12 text-muted mt-1">分拨说明：</div>
+                    <div class="col-12">立即赶赴现场处置，确保无人员伤亡，记录损失情况，联系保险公司</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="content-card">
+            <div class="content-card-header"><h6><i class="bi bi-gear me-2"></i>操作</h6></div>
+            <div class="content-card-body d-grid gap-2">
+                <button class="btn btn-success btn-sm" onclick="showToast('已提交处置报告', 'success')"><i class="bi bi-file-check me-1"></i>提交处置报告</button>
+                <button class="btn btn-warning btn-sm" onclick="showToast('已请求协调支援')"><i class="bi bi-people me-1"></i>请求协调支援</button>
+                <button class="btn btn-info btn-sm text-white" onclick="showToast('已发送通知')"><i class="bi bi-bell me-1"></i>发送处置通知</button>
+                <button class="btn btn-outline-secondary btn-sm" onclick="showToast('已导出事件报告')"><i class="bi bi-download me-1"></i>导出事件报告</button>
+            </div>
+        </div>
+    </div>
+</div>

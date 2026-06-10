@@ -148,7 +148,7 @@ new Chart(document.getElementById('testChart'), {
     },
     options: {
         responsive: true,
-        plugins: { legend: { display: false } },
+        plugins: { legend: { display: false }, datalabels: { display: true, align: 'top', anchor: 'end', font: { size: 10 }, color: '#198754', formatter: function(v){ return v+'%'; } } },
         scales: { y: { min: 90, max: 100 } }
     }
 });

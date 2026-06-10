@@ -202,6 +202,46 @@ body {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+/* ===== Nav group header (system switcher) ===== */
+.nav-group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem 0.6rem 1.25rem;
+  margin: 0.4rem 0.5rem 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  user-select: none;
+  transition: background 0.2s;
+  letter-spacing: 0.02em;
+}
+.nav-group-header:hover { background: rgba(255,255,255,0.1); }
+.nav-group-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.nav-group-arrow { font-size: 0.75rem; transition: transform 0.25s; }
+.nav-group-header[aria-expanded="true"] .nav-group-arrow { transform: rotate(180deg); }
+
+/* ===== Sub-menu ===== */
+.nav-sub-arrow { font-size: 0.7rem; transition: transform 0.2s; color: rgba(255,255,255,0.4); }
+.nav-link:not(.collapsed) .nav-sub-arrow { transform: rotate(180deg); }
+.nav-sub-group { background: rgba(0,0,0,0.15); }
+.nav-sub-link { padding-left: 2.8rem !important; font-size: 0.82rem !important; color: rgba(255,255,255,0.6) !important; }
+.nav-sub-link:hover { color: #fff !important; background: rgba(255,255,255,0.05) !important; }
+
+/* ===== Collapsed sidebar — hide group labels ===== */
+#wrapper.sidebar-collapsed .nav-group-header span,
+#wrapper.sidebar-collapsed .nav-group-dot { display: none; }
+#wrapper.sidebar-collapsed .nav-group-header {
+  justify-content: center;
+  padding: 0.6rem 0;
+  margin: 0.4rem 0 0;
+  border-radius: 0;
+}
+
 /* ===== Index/Login page ===== */
 .login-wrapper {
   min-height: 100vh;

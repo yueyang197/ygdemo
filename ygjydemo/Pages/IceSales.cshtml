@@ -145,7 +145,7 @@ new Chart(document.getElementById('iceChart'), {
             tension: 0.4
         }]
     },
-    options: { responsive: true, plugins: { legend: { display: false } } }
+    options: { responsive: true, plugins: { legend: { display: false }, datalabels: { display: true, align: 'top', anchor: 'end', font: { size: 10 }, color: '#0d6efd', formatter: function(v){ return v; } } } }
 });
 </script>
 }

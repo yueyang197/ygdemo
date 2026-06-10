@@ -1,0 +1,104 @@
+@page
+@{ ViewData["Title"] = "应急演练"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-shield-check me-2 text-primary"></i>应急演练管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">应急管理</li><li class="breadcrumb-item active">应急演练</li></ol></nav>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('addDrillModal')"><i class="bi bi-plus-circle me-1"></i>新建演练计划</button>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">本年演练次数</div><div class="fw-bold fs-4 text-primary">18</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">参与人次</div><div class="fw-bold fs-4 text-success">1,240</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">计划中</div><div class="fw-bold fs-4 text-warning">3</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">已完成</div><div class="fw-bold fs-4 text-info">15</div></div></div></div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">演练名称</label><input type="text" class="form-control form-control-sm" placeholder="关键词搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">演练类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>消防演练</option><option>海上救援</option><option>防台风</option><option>油污应急</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">演练状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>计划中</option><option>进行中</option><option>已完成</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">演练日期</label><input type="date" class="form-control form-control-sm"></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>演练计划列表</h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>演练编号</th><th>演练名称</th><th>演练类型</th><th>计划日期</th><th>演练地点</th><th>负责人</th><th>参与人数</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>YL-2024-018</td><td>港区消防综合演练</td><td>消防演练</td><td>2024-06-15</td><td>东方渔港仓储区</td><td>安全科长陈明</td><td>80人</td><td><span class="badge-status status-pending">计划中</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewDrillModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addDrillModal')">编辑</button><button class="btn btn-success btn-action" onclick="showToast('演练已开始')">启动</button></td></tr>
+                <tr><td>2</td><td>YL-2024-017</td><td>海上人员落水救援演练</td><td>海上救援</td><td>2024-06-20</td><td>港口外海区域</td><td>救援队长刘志</td><td>45人</td><td><span class="badge-status status-pending">计划中</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewDrillModal')">查看</button><button class="btn btn-warning btn-action" onclick="openModal('addDrillModal')">编辑</button></td></tr>
+                <tr><td>3</td><td>YL-2024-016</td><td>防台风紧急疏散演练</td><td>防台风</td><td>2024-05-30</td><td>全港区</td><td>港长王建国</td><td>200人</td><td><span class="badge-status status-done">已完成</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewDrillModal')">查看</button><button class="btn btn-info btn-action" onclick="showToast('报告下载中')">下载报告</button></td></tr>
+                <tr><td>4</td><td>YL-2024-015</td><td>港区油污泄漏应急演练</td><td>油污应急</td><td>2024-05-18</td><td>3号泊位区域</td><td>环保监察赵主任</td><td>60人</td><td><span class="badge-status status-done">已完成</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewDrillModal')">查看</button><button class="btn btn-info btn-action" onclick="showToast('报告下载中')">下载报告</button></td></tr>
+                <tr><td>5</td><td>YL-2024-014</td><td>危险品泄漏应急响应演练</td><td>化学品应急</td><td>2024-04-25</td><td>仓储危险品区</td><td>安全科长陈明</td><td>35人</td><td><span class="badge-status status-done">已完成</span></td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewDrillModal')">查看</button><button class="btn btn-info btn-action" onclick="showToast('报告下载中')">下载报告</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 18 条记录</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link">2</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="addDrillModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新建演练计划</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">演练名称 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="请输入演练名称"></div>
+                    <div class="col-md-6"><label class="form-label">演练类型</label><select class="form-select form-select-sm"><option>消防演练</option><option>海上救援</option><option>防台风</option><option>油污应急</option><option>化学品应急</option></select></div>
+                    <div class="col-md-6"><label class="form-label">计划日期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">演练地点</label><input class="form-control form-control-sm" placeholder="请输入演练地点"></div>
+                    <div class="col-md-6"><label class="form-label">负责人</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">预计参与人数</label><input type="number" class="form-control form-control-sm" placeholder="人数"></div>
+                    <div class="col-12"><label class="form-label">演练方案说明</label><textarea class="form-control form-control-sm" rows="3" placeholder="请描述演练方案及目标..."></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addDrillModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewDrillModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>演练详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6"><span class="text-muted">演练编号：</span><strong>YL-2024-016</strong></div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-done">已完成</span></div>
+                    <div class="col-md-6"><span class="text-muted">演练名称：</span>防台风紧急疏散演练</div>
+                    <div class="col-md-6"><span class="text-muted">演练类型：</span>防台风</div>
+                    <div class="col-md-6"><span class="text-muted">演练日期：</span>2024-05-30</div>
+                    <div class="col-md-6"><span class="text-muted">演练地点：</span>全港区</div>
+                    <div class="col-md-6"><span class="text-muted">负责人：</span>港长王建国</div>
+                    <div class="col-md-6"><span class="text-muted">参与人数：</span>200人</div>
+                </div>
+                <hr>
+                <h6>演练评估</h6>
+                <div class="row g-2">
+                    <div class="col-md-4"><span class="text-muted">响应时效：</span><span class="text-success fw-bold">优秀（3分30秒）</span></div>
+                    <div class="col-md-4"><span class="text-muted">疏散效率：</span><span class="text-success fw-bold">良好</span></div>
+                    <div class="col-md-4"><span class="text-muted">综合评分：</span><span class="text-primary fw-bold">92分</span></div>
+                </div>
+                <div class="mt-2"><span class="text-muted">演练总结：</span>本次演练组织有序，各部门配合良好，响应时间达标。建议加强对老旧泊位区域的疏散标识建设。</div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

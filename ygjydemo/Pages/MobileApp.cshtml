@@ -1,24 +1,16 @@
 @page
 @model FishingPortDemo.Pages.MobileAppModel
 @{
-    ViewData["Title"] = "移动应用展示";
+    ViewData["Title"] = "小程序展示";
     ViewData["ActivePage"] = "MobileApp";
     Layout = "_Layout";
 }
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="mb-0"><i class="bi bi-phone me-2 text-primary"></i>移动应用展示</h4>
-    <div class="d-flex gap-2">
-        <button class="btn btn-primary btn-sm" onclick="showToast('下载iOS版演示中')">
-            <i class="bi bi-apple me-1"></i>iOS 下载
-        </button>
-        <button class="btn btn-success btn-sm" onclick="showToast('下载Android版演示中')">
-            <i class="bi bi-android2 me-1"></i>Android 下载
-        </button>
-    </div>
+    <h4 class="mb-0"><i class="bi bi-phone me-2 text-primary"></i>小程序展示</h4>
 </div>
 
-<!-- 应用概况 -->
+<!-- 小程序概况 -->
 <div class="row g-3 mb-4">
     <div class="col-md-3">
         <div class="card border-0 shadow-sm text-center p-3">
@@ -48,83 +40,220 @@
 </div>
 
 <div class="row g-3 mb-4">
-    <!-- 船长端功能 -->
+    <!-- 船员端小程序 -->
     <div class="col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-header bg-primary text-white border-0 fw-semibold">
-                <i class="bi bi-person-badge me-2"></i>船长端 App
+                <i class="bi bi-person-badge me-2"></i>船员端小程序
             </div>
-            <div class="card-body">
-                <div class="text-center mb-3">
-                    <div class="rounded-3 bg-light d-inline-block p-4">
-                        <i class="bi bi-phone fs-1 text-primary"></i>
+            <div class="card-body p-0 d-flex flex-column">
+                <!-- 小程序界面模拟 -->
+                <div class="mp-screen bg-light mx-3 mt-3 rounded-3 overflow-hidden" style="border:2px solid #dee2e6;">
+                    <!-- 顶部导航栏 -->
+                    <div class="d-flex align-items-center px-3 py-2" style="background:#1565c0;">
+                        <span class="text-white fw-semibold small">奉化莼湖渔港·船员端</span>
+                        <span class="ms-auto text-white-50" style="font-size:11px">9:41</span>
+                    </div>
+                    <!-- 欢迎横幅 -->
+                    <div class="px-3 py-2" style="background:linear-gradient(135deg,#1976d2,#42a5f5);">
+                        <div class="text-white small fw-semibold">您好，张船长</div>
+                        <div class="text-white-50" style="font-size:11px">浙岱渔01688 · 当前在港</div>
+                    </div>
+                    <!-- 快捷功能宫格 -->
+                    <div class="row g-0 text-center" style="border-bottom:1px solid #eee;">
+                        <div class="col-3 py-2 px-1" style="border-right:1px solid #eee;">
+                            <i class="bi bi-box-arrow-in-right text-primary" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">进港申报</div>
+                        </div>
+                        <div class="col-3 py-2 px-1" style="border-right:1px solid #eee;">
+                            <i class="bi bi-box-arrow-right text-success" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">出港申报</div>
+                        </div>
+                        <div class="col-3 py-2 px-1" style="border-right:1px solid #eee;">
+                            <i class="bi bi-geo-alt text-warning" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">泊位导航</div>
+                        </div>
+                        <div class="col-3 py-2 px-1">
+                            <i class="bi bi-snow text-info" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">购冰下单</div>
+                        </div>
+                    </div>
+                    <!-- 待办事项 -->
+                    <div class="px-3 py-2">
+                        <div class="fw-semibold mb-1" style="font-size:11px;color:#333">待办事项</div>
+                        <div class="d-flex align-items-center py-1" style="border-bottom:1px solid #f0f0f0;font-size:11px">
+                            <span class="badge bg-danger me-2" style="font-size:9px">待处理</span>
+                            <span class="text-truncate">出港申报待审批确认</span>
+                        </div>
+                        <div class="d-flex align-items-center py-1" style="font-size:11px">
+                            <span class="badge bg-warning text-dark me-2" style="font-size:9px">即将到期</span>
+                            <span class="text-truncate">捕捞许可证 7天后到期</span>
+                        </div>
                     </div>
                 </div>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>一键申请进出港</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>实时泊位导航</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>在线购冰下单</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>安全证书管理</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>交易记录查询</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>SOS紧急求救</li>
-                </ul>
-                <button class="btn btn-primary w-100" onclick="showToast('查看船长端演示中')">
-                    <i class="bi bi-eye me-1"></i>查看演示
-                </button>
+                <div class="px-3 pb-3 pt-2 d-flex flex-column flex-grow-1">
+                    <div class="fw-semibold small mb-2 text-muted">主要功能</div>
+                    <ul class="list-unstyled mb-2 flex-grow-1">
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>进出港一键申报</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>实时泊位导航引导</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>在线购冰及冷库预订</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>证件到期提醒管理</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>渔获物交易记录查询</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>SOS紧急求救上报</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>出海气象查询预报</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>技能培训在线教育</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>生活物资在线申请</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>用水用冰用油申请</li>
+                    </ul>
+                    <button class="btn btn-primary w-100 btn-sm" onclick="showToast('船员端小程序演示中')">
+                        <i class="bi bi-eye me-1"></i>查看演示
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 港务人员端 -->
+    <!-- 港务人员端小程序 -->
     <div class="col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-header bg-success text-white border-0 fw-semibold">
-                <i class="bi bi-building me-2"></i>港务人员端 App
+                <i class="bi bi-building me-2"></i>港务人员端小程序
             </div>
-            <div class="card-body">
-                <div class="text-center mb-3">
-                    <div class="rounded-3 bg-light d-inline-block p-4">
-                        <i class="bi bi-phone fs-1 text-success"></i>
+            <div class="card-body p-0 d-flex flex-column">
+                <!-- 小程序界面模拟 -->
+                <div class="mp-screen bg-light mx-3 mt-3 rounded-3 overflow-hidden" style="border:2px solid #dee2e6;">
+                    <!-- 顶部导航栏 -->
+                    <div class="d-flex align-items-center px-3 py-2" style="background:#2e7d32;">
+                        <span class="text-white fw-semibold small">奉化莼湖渔港·港务端</span>
+                        <span class="ms-auto text-white-50" style="font-size:11px">9:41</span>
+                    </div>
+                    <!-- 欢迎横幅 -->
+                    <div class="px-3 py-2" style="background:linear-gradient(135deg,#388e3c,#66bb6a);">
+                        <div class="text-white small fw-semibold">您好，李港务</div>
+                        <div class="text-white-50" style="font-size:11px">今日值班 · 待审批 3 件</div>
+                    </div>
+                    <!-- 快捷功能宫格 -->
+                    <div class="row g-0 text-center" style="border-bottom:1px solid #eee;">
+                        <div class="col-3 py-2 px-1" style="border-right:1px solid #eee;">
+                            <i class="bi bi-clipboard-check text-success" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">进出港审批</div>
+                        </div>
+                        <div class="col-3 py-2 px-1" style="border-right:1px solid #eee;">
+                            <i class="bi bi-person-walking text-primary" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">移动巡检</div>
+                        </div>
+                        <div class="col-3 py-2 px-1" style="border-right:1px solid #eee;">
+                            <i class="bi bi-display text-warning" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">监控查看</div>
+                        </div>
+                        <div class="col-3 py-2 px-1">
+                            <i class="bi bi-exclamation-triangle text-danger" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">隐患上报</div>
+                        </div>
+                    </div>
+                    <!-- 审批列表 -->
+                    <div class="px-3 py-2">
+                        <div class="fw-semibold mb-1" style="font-size:11px;color:#333">待审批列表</div>
+                        <div class="d-flex align-items-center py-1" style="border-bottom:1px solid #f0f0f0;font-size:11px">
+                            <span class="badge bg-primary me-2" style="font-size:9px">进港</span>
+                            <span class="text-truncate">浙岱渔02156 申请入港</span>
+                        </div>
+                        <div class="d-flex align-items-center py-1" style="font-size:11px">
+                            <span class="badge bg-success me-2" style="font-size:9px">出港</span>
+                            <span class="text-truncate">浙甬渔00893 申请离港</span>
+                        </div>
                     </div>
                 </div>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>进出港审批</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>移动巡查打卡</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>设施故障上报</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>实时监控查看</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>安全隐患记录</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>数据统计报表</li>
-                </ul>
-                <button class="btn btn-success w-100" onclick="showToast('查看港务端演示中')">
-                    <i class="bi bi-eye me-1"></i>查看演示
-                </button>
+                <div class="px-3 pb-3 pt-2 d-flex flex-column flex-grow-1">
+                    <div class="fw-semibold small mb-2 text-muted">主要功能</div>
+                    <ul class="list-unstyled mb-2 flex-grow-1">
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>进出港申请审批</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>移动巡检打卡记录</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>设施设备故障上报</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>港区实时监控查看</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>安全隐患拍照记录</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>日报周报在线填报</li>
+                    </ul>
+                    <button class="btn btn-success w-100 btn-sm" onclick="showToast('港务人员端小程序演示中')">
+                        <i class="bi bi-eye me-1"></i>查看演示
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 消费者端 -->
+    <!-- 消费者端小程序 -->
     <div class="col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-header bg-warning text-dark border-0 fw-semibold">
-                <i class="bi bi-people me-2"></i>消费者溯源端 App
+                <i class="bi bi-people me-2"></i>消费者端小程序
             </div>
-            <div class="card-body">
-                <div class="text-center mb-3">
-                    <div class="rounded-3 bg-light d-inline-block p-4">
-                        <i class="bi bi-phone fs-1 text-warning"></i>
+            <div class="card-body p-0 d-flex flex-column">
+                <!-- 小程序界面模拟 -->
+                <div class="mp-screen bg-light mx-3 mt-3 rounded-3 overflow-hidden" style="border:2px solid #dee2e6;">
+                    <!-- 顶部导航栏 -->
+                    <div class="d-flex align-items-center px-3 py-2" style="background:#e65100;">
+                        <span class="text-white fw-semibold small">奉化莼湖渔港·消费者端</span>
+                        <span class="ms-auto text-white-50" style="font-size:11px">9:41</span>
+                    </div>
+                    <!-- 搜索栏 -->
+                    <div class="px-3 py-2" style="background:linear-gradient(135deg,#f57c00,#ffb74d);">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-white border-0"><i class="bi bi-search text-muted"></i></span>
+                            <input type="text" class="form-control border-0" placeholder="输入品种/产地/批次号溯源" style="font-size:11px" readonly />
+                        </div>
+                    </div>
+                    <!-- 快捷功能宫格 -->
+                    <div class="row g-0 text-center" style="border-bottom:1px solid #eee;">
+                        <div class="col-3 py-2 px-1" style="border-right:1px solid #eee;">
+                            <i class="bi bi-qr-code-scan text-warning" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">扫码溯源</div>
+                        </div>
+                        <div class="col-3 py-2 px-1" style="border-right:1px solid #eee;">
+                            <i class="bi bi-clipboard2-pulse text-danger" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">质检报告</div>
+                        </div>
+                        <div class="col-3 py-2 px-1" style="border-right:1px solid #eee;">
+                            <i class="bi bi-cart3 text-primary" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">直购海鲜</div>
+                        </div>
+                        <div class="col-3 py-2 px-1">
+                            <i class="bi bi-link-45deg text-success" style="font-size:1.3rem"></i>
+                            <div style="font-size:10px;color:#555">链上存证</div>
+                        </div>
+                    </div>
+                    <!-- 最近溯源 -->
+                    <div class="px-3 py-2">
+                        <div class="fw-semibold mb-1" style="font-size:11px;color:#333">最近溯源记录</div>
+                        <div class="d-flex align-items-center py-1" style="border-bottom:1px solid #f0f0f0;font-size:11px">
+                            <i class="bi bi-fish text-primary me-2"></i>
+                            <span class="text-truncate">大黄鱼 · 浙岱渔01688 · 已认证</span>
+                        </div>
+                        <div class="d-flex align-items-center py-1" style="font-size:11px">
+                            <i class="bi bi-fish text-success me-2"></i>
+                            <span class="text-truncate">梭子蟹 · 浙甬渔00893 · 已认证</span>
+                        </div>
                     </div>
                 </div>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>扫码溯源查询</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>产品质检报告</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>产地信息核验</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>购买历史记录</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>投诉举报入口</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>优质商品推荐</li>
-                </ul>
-                <button class="btn btn-warning w-100" onclick="showToast('查看消费者端演示中')">
-                    <i class="bi bi-eye me-1"></i>查看演示
-                </button>
+                <div class="px-3 pb-3 pt-2 d-flex flex-column flex-grow-1">
+                    <div class="fw-semibold small mb-2 text-muted">主要功能</div>
+                    <ul class="list-unstyled mb-2 flex-grow-1">
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>扫码溯源全程查询</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>产品质检报告查看</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>产地捕捞信息核验</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>区块链存证可信验证</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>港口直购新鲜海产</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>质量投诉举报入口</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>停车服务（引导/寻车/缴费）</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>自助充电服务</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>港区导航服务</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>周边渔旅服务</li>
+                        <li class="mb-1" style="font-size:0.82rem"><i class="bi bi-check-circle-fill text-success me-2"></i>会员积分管理</li>
+                    </ul>
+                    <button class="btn btn-warning w-100 btn-sm" onclick="showToast('消费者端小程序演示中')">
+                        <i class="bi bi-eye me-1"></i>查看演示
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -161,7 +290,7 @@ new Chart(document.getElementById('appChart'), {
     data: {
         labels: ['1/9','1/10','1/11','1/12','1/13','1/14','1/15'],
         datasets: [{
-            label: '船长端',
+            label: '船员端',
             data: [156, 162, 148, 175, 168, 155, 172],
             borderColor: '#0d6efd',
             tension: 0.4
@@ -177,19 +306,19 @@ new Chart(document.getElementById('appChart'), {
             tension: 0.4
         }]
     },
-    options: { responsive: true, plugins: { legend: { position: 'top' } } }
+    options: { responsive: true, plugins: { legend: { position: 'top' }, datalabels: { display: true, align: 'top', anchor: 'end', font: { size: 10 }, formatter: function(v){ return v; } } } }
 });
 
 new Chart(document.getElementById('userTypeChart'), {
     type: 'doughnut',
     data: {
-        labels: ['船长/渔民','港务人员','消费者','管理员'],
+        labels: ['船员/渔民','港务人员','消费者','管理员'],
         datasets: [{
             data: [680, 320, 256, 30],
             backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545']
         }]
     },
-    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    options: { responsive: true, plugins: { legend: { position: 'bottom' }, datalabels: { display: true, color: '#fff', font: { size: 11, weight: 'bold' }, formatter: function(v, ctx){ var sum = ctx.dataset.data.reduce(function(a,b){return a+b;},0); return (v/sum*100).toFixed(1)+'%'; } } } }
 });
 </script>
 }

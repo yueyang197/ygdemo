@@ -1,0 +1,156 @@
+@page
+@{ ViewData["Title"] = "事件接收"; ViewData["ActiveMenu"] = "EventReceive"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-inbox me-2 text-primary"></i>事件接收</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">事件管理</li><li class="breadcrumb-item active">事件接收</li></ol></nav>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body py-2">
+        <div class="row g-2 align-items-center">
+            <div class="col-md-2"><input type="text" class="form-control form-control-sm" placeholder="事件编号/标题"></div>
+            <div class="col-md-2"><select class="form-select form-select-sm"><option value="">-- 事件类型 --</option><option>安全事故</option><option>环境污染</option><option>设施故障</option><option>秩序违规</option></select></div>
+            <div class="col-md-2"><select class="form-select form-select-sm"><option value="">-- 接收状态 --</option><option>待接收</option><option>已接收</option><option>已退回</option></select></div>
+            <div class="col-md-2"><input type="date" class="form-control form-control-sm"></div>
+            <div class="col-auto">
+                <button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button>
+                <button class="btn btn-outline-secondary btn-sm ms-1">重置</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">待接收</div><div class="fw-bold fs-4 text-warning">4</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">已接收</div><div class="fw-bold fs-4 text-success">18</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">已退回</div><div class="fw-bold fs-4 text-danger">2</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">我的待办</div><div class="fw-bold fs-4 text-primary">4</div></div></div></div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-list-ul me-2"></i>分拨到我的事件</span>
+        <span class="badge bg-warning">待接收: 4</span>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr><th>事件编号</th><th>事件类型</th><th>事件标题</th><th>紧急程度</th><th>分拨部门</th><th>分拨时间</th><th>处置期限</th><th>状态</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060801</span></td>
+                    <td>安全事故</td><td>3号泊位渔船碰撞事故</td>
+                    <td><span class="badge bg-danger">紧急</span></td>
+                    <td>港务安全科</td><td>2024-06-08 08:30</td><td>2024-06-08 18:00</td>
+                    <td><span class="status-badge status-warning">待接收</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-success" onclick="receiveEvent('SJ2024060801')"><i class="bi bi-check-circle me-1"></i>接收</button>
+                        <button class="btn btn-sm btn-warning" onclick="showReturnModal('SJ2024060801')"><i class="bi bi-arrow-return-left me-1"></i>退回</button>
+                        <button class="btn btn-sm btn-info" onclick="showEventDetail('SJ2024060801')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060802</span></td>
+                    <td>环境污染</td><td>港区水域油污染报告</td>
+                    <td><span class="badge bg-warning text-dark">一般</span></td>
+                    <td>环保监察组</td><td>2024-06-08 09:45</td><td>2024-06-09 12:00</td>
+                    <td><span class="status-badge status-warning">待接收</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-success" onclick="receiveEvent('SJ2024060802')"><i class="bi bi-check-circle me-1"></i>接收</button>
+                        <button class="btn btn-sm btn-warning" onclick="showReturnModal('SJ2024060802')"><i class="bi bi-arrow-return-left me-1"></i>退回</button>
+                        <button class="btn btn-sm btn-info" onclick="showEventDetail('SJ2024060802')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060805</span></td>
+                    <td>人员伤亡</td><td>船员作业中受伤</td>
+                    <td><span class="badge bg-danger">紧急</span></td>
+                    <td>应急救援队</td><td>2024-06-08 13:25</td><td>2024-06-08 16:00</td>
+                    <td><span class="status-badge status-info">已接收</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showToast('已接收，请前往处置', 'info')"><i class="bi bi-arrow-right me-1"></i>去处置</button>
+                        <button class="btn btn-sm btn-info" onclick="showEventDetail('SJ2024060805')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060803</span></td>
+                    <td>设施故障</td><td>起重机液压系统故障</td>
+                    <td><span class="badge bg-warning text-dark">一般</span></td>
+                    <td>设施维修部</td><td>2024-06-08 11:00</td><td>2024-06-09 08:00</td>
+                    <td><span class="status-badge status-info">已接收</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="showToast('已接收，请前往处置', 'info')"><i class="bi bi-arrow-right me-1"></i>去处置</button>
+                        <button class="btn btn-sm btn-info" onclick="showEventDetail('SJ2024060803')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="text-primary fw-bold">SJ2024060706</span></td>
+                    <td>秩序违规</td><td>非法捕鱼作业投诉</td>
+                    <td><span class="badge bg-info">低级</span></td>
+                    <td>海事执法队</td><td>2024-06-07 16:10</td><td>2024-06-10 17:00</td>
+                    <td><span class="status-badge status-danger">已退回</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-secondary" onclick="showToast('已退回原因：人员不足，需重新分拨', 'warning')"><i class="bi bi-info-circle me-1"></i>退回原因</button>
+                        <button class="btn btn-sm btn-info" onclick="showEventDetail('SJ2024060706')"><i class="bi bi-eye me-1"></i>详情</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav><ul class="pagination pagination-sm mb-0">
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+        </ul></nav>
+    </div>
+</div>
+
+<!-- 退回弹窗 -->
+<div class="modal fade" id="returnModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-arrow-return-left me-2"></i>退回事件</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="alert alert-warning py-2"><strong>事件编号：</strong><span id="returnEventId"></span></div>
+                <div class="mb-3">
+                    <label class="form-label">退回原因 <span class="text-danger">*</span></label>
+                    <select class="form-select mb-2">
+                        <option>非本部门职责范围</option>
+                        <option>人员不足暂无法处理</option>
+                        <option>事件描述不清晰</option>
+                        <option>其他</option>
+                    </select>
+                    <textarea class="form-control" rows="3" placeholder="请详细说明退回原因..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button class="btn btn-warning" onclick="confirmReturn()"><i class="bi bi-arrow-return-left me-1"></i>确认退回</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function receiveEvent(id) {
+    showToast('事件 ' + id + ' 已接收，请及时处置', 'success');
+}
+function showReturnModal(id) {
+    document.getElementById('returnEventId').textContent = id;
+    new bootstrap.Modal(document.getElementById('returnModal')).show();
+}
+function confirmReturn() {
+    bootstrap.Modal.getInstance(document.getElementById('returnModal')).hide();
+    showToast('已退回事件，系统将重新分拨', 'warning');
+}
+function showEventDetail(id) {
+    showToast('查看事件详情：' + id, 'info');
+}
+</script>
+}

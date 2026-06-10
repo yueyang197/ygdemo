@@ -120,7 +120,7 @@ new Chart(document.getElementById('tradingHourChart'), {
             borderWidth: 1
         }]
     },
-    options: { responsive: true, plugins: { legend: { display: false } } }
+    options: { responsive: true, plugins: { legend: { display: false }, datalabels: { display: true, align: 'top', anchor: 'end', font: { size: 10 }, formatter: function(v){ return v; } } } }
 });
 </script>
 }

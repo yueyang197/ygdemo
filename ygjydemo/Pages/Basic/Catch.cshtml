@@ -1,0 +1,91 @@
+@page
+@{ ViewData["Title"] = "渔获物管理"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-fish me-2 text-primary"></i>渔获物管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">基础信息管理</li><li class="breadcrumb-item active">渔获物管理</li></ol></nav>
+    </div>
+    <div class="d-flex gap-2">
+        <button class="btn btn-success btn-sm" onclick="exportData()"><i class="bi bi-file-excel me-1"></i>导出</button>
+        <button class="btn btn-primary btn-sm" onclick="openModal('addCatchModal')"><i class="bi bi-plus-circle me-1"></i>新增品类</button>
+    </div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-3"><label class="form-label mb-1">渔获物名称</label><input type="text" class="form-control form-control-sm" placeholder="输入名称关键字"></div>
+        <div class="col-md-2"><label class="form-label mb-1">品类</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>鱼类</option><option>虾类</option><option>蟹类</option><option>贝类</option><option>头足类</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">品质等级</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>特级</option><option>一级</option><option>二级</option><option>等外</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>渔获物品类列表 <span class="badge bg-primary ms-1">共128条</span></h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>品类编码</th><th>渔获物名称</th><th>品类大类</th><th>规格/说明</th><th>参考单价(元/kg)</th><th>计量单位</th><th>产地/来源</th><th>品质等级</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>FH-001</td><td>大黄鱼</td><td>鱼类</td><td>体重≥500g/条</td><td>120.00</td><td>kg</td><td>东海近海</td><td><span class="badge bg-warning text-dark" style="font-size:.7rem">特级</span></td><td><span class="badge-status status-normal">启用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(1)">删除</button></td></tr>
+                <tr><td>2</td><td>FH-002</td><td>小黄鱼</td><td>鱼类</td><td>体重100-500g/条</td><td>35.00</td><td>kg</td><td>东海近海</td><td><span class="badge bg-primary" style="font-size:.7rem">一级</span></td><td><span class="badge-status status-normal">启用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(2)">删除</button></td></tr>
+                <tr><td>3</td><td>FH-003</td><td>带鱼</td><td>鱼类</td><td>宽≥3cm</td><td>28.00</td><td>kg</td><td>东海</td><td><span class="badge bg-primary" style="font-size:.7rem">一级</span></td><td><span class="badge-status status-normal">启用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(3)">删除</button></td></tr>
+                <tr><td>4</td><td>FH-010</td><td>对虾</td><td>虾类</td><td>每斤≤40只</td><td>85.00</td><td>kg</td><td>南海</td><td><span class="badge bg-warning text-dark" style="font-size:.7rem">特级</span></td><td><span class="badge-status status-normal">启用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(4)">删除</button></td></tr>
+                <tr><td>5</td><td>FH-011</td><td>毛虾</td><td>虾类</td><td>新鲜无异味</td><td>12.00</td><td>kg</td><td>近海</td><td><span class="badge bg-secondary" style="font-size:.7rem">二级</span></td><td><span class="badge-status status-normal">启用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(5)">删除</button></td></tr>
+                <tr><td>6</td><td>FH-020</td><td>三疣梭子蟹</td><td>蟹类</td><td>重≥300g/只</td><td>65.00</td><td>kg</td><td>东海</td><td><span class="badge bg-warning text-dark" style="font-size:.7rem">特级</span></td><td><span class="badge-status status-normal">启用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(6)">删除</button></td></tr>
+                <tr><td>7</td><td>FH-030</td><td>文蛤</td><td>贝类</td><td>直径≥4cm</td><td>18.00</td><td>kg</td><td>近海滩涂</td><td><span class="badge bg-primary" style="font-size:.7rem">一级</span></td><td><span class="badge-status status-normal">启用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(7)">删除</button></td></tr>
+                <tr><td>8</td><td>FH-040</td><td>乌贼（墨鱼）</td><td>头足类</td><td>体重≥150g/只</td><td>45.00</td><td>kg</td><td>东海</td><td><span class="badge bg-primary" style="font-size:.7rem">一级</span></td><td><span class="badge-status status-normal">启用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(8)">删除</button></td></tr>
+                <tr><td>9</td><td>FH-004</td><td>马鲛鱼</td><td>鱼类</td><td>体重≥1kg/条</td><td>42.00</td><td>kg</td><td>南海</td><td><span class="badge bg-primary" style="font-size:.7rem">一级</span></td><td><span class="badge-status status-normal">启用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(9)">删除</button></td></tr>
+                <tr><td>10</td><td>FH-005</td><td>鳗鱼</td><td>鱼类</td><td>体重≥200g/条</td><td>38.00</td><td>kg</td><td>近海养殖</td><td><span class="badge bg-secondary" style="font-size:.7rem">二级</span></td><td><span class="badge-status status-offline">停用</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCatchModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCatchModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(10)">删除</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 128 条记录，显示第 1-10 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">2</a></li><li class="page-item"><a class="page-link" onclick="changePage(3)">3</a></li><li class="page-item"><a class="page-link">…</a></li><li class="page-item"><a class="page-link">13</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<!-- 新增/编辑弹窗 -->
+<div class="modal fade" id="addCatchModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新增渔获物品类</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">品类名称 <span class="text-danger">*</span></label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">品类大类</label><select class="form-select form-select-sm"><option>鱼类</option><option>虾类</option><option>蟹类</option><option>贝类</option><option>头足类</option><option>其他</option></select></div>
+                    <div class="col-md-6"><label class="form-label">参考单价（元/kg）</label><input type="number" class="form-control form-control-sm" step="0.01"></div>
+                    <div class="col-md-6"><label class="form-label">品质等级</label><select class="form-select form-select-sm"><option>特级</option><option>一级</option><option>二级</option><option>等外</option></select></div>
+                    <div class="col-12"><label class="form-label">规格/质量说明</label><textarea class="form-control form-control-sm" rows="2"></textarea></div>
+                    <div class="col-md-6"><label class="form-label">产地/来源</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">状态</label><select class="form-select form-select-sm"><option>启用</option><option>停用</option></select></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addCatchModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewCatchModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-eye me-2"></i>渔获物详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2">
+                    <div class="col-6"><span class="text-muted">名称：</span><strong>大黄鱼</strong></div>
+                    <div class="col-6"><span class="text-muted">品类编码：</span>FH-001</div>
+                    <div class="col-6"><span class="text-muted">大类：</span>鱼类</div>
+                    <div class="col-6"><span class="text-muted">品质等级：</span><span class="badge bg-warning text-dark" style="font-size:.7rem">特级</span></div>
+                    <div class="col-6"><span class="text-muted">参考单价：</span>120.00元/kg</div>
+                    <div class="col-6"><span class="text-muted">产地：</span>东海近海</div>
+                    <div class="col-12"><span class="text-muted">规格：</span>体重≥500g/条，色泽金黄，鳞片完整</div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

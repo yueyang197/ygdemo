@@ -1,0 +1,270 @@
+@page
+@* 删掉原来的 @model DispatchModel 或 @model IntakeModel 行 *@
+@{
+    ViewData["Title"] = "事件接入";
+    ViewData["ActiveMenu"] = "EventIntake";
+}
+
+<div class="page-header">
+    <h4><i class="fas fa-plus-circle me-2"></i>事件接入</h4>
+    <button class="btn btn-primary btn-sm" onclick="showModal('addModal')">
+        <i class="fas fa-plus me-1"></i>新建事件
+    </button>
+</div>
+
+<!-- 搜索筛选 -->
+<div class="filter-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2">
+            <label class="form-label">事件编号</label>
+            <input type="text" class="form-control form-control-sm" placeholder="请输入事件编号">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">事件类型</label>
+            <select class="form-select form-select-sm">
+                <option value="">全部</option>
+                <option>安全事故</option>
+                <option>环境污染</option>
+                <option>纠纷投诉</option>
+                <option>设备故障</option>
+                <option>气象灾害</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">事件来源</label>
+            <select class="form-select form-select-sm">
+                <option value="">全部</option>
+                <option>电话报警</option>
+                <option>现场上报</option>
+                <option>系统自动</option>
+                <option>网格员上报</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">紧急程度</label>
+            <select class="form-select form-select-sm">
+                <option value="">全部</option>
+                <option>特急</option>
+                <option>紧急</option>
+                <option>普通</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">接入时间</label>
+            <input type="date" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary btn-sm w-100" onclick="demoSearch()">
+                <i class="fas fa-search me-1"></i>查询
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 统计卡片 -->
+<div class="row g-3 mb-3">
+    <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="text-muted small mb-1">今日接入</div>
+                <div class="fw-bold fs-4 text-primary">12</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="text-muted small mb-1">待分拨</div>
+                <div class="fw-bold fs-4 text-warning">5</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="text-muted small mb-1">处理中</div>
+                <div class="fw-bold fs-4 text-info">4</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="text-muted small mb-1">已办结</div>
+                <div class="fw-bold fs-4 text-success">3</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 列表 -->
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>事件编号</th>
+                    <th>事件标题</th>
+                    <th>事件类型</th>
+                    <th>来源</th>
+                    <th>紧急程度</th>
+                    <th>上报人</th>
+                    <th>接入时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var events = new[]
+                    {
+                        new { Id="SJ2024060001", Title="#3泊位渔船碰撞事故", Type="安全事故", Source="电话报警", Level="特急", Reporter="张守卫", Time="2024-06-08 08:12", Status="待分拨" },
+                        new { Id="SJ2024060002", Title="码头油污泄漏污染", Type="环境污染", Source="现场上报", Level="紧急", Reporter="李巡检", Time="2024-06-08 09:35", Status="待分拨" },
+                        new { Id="SJ2024060003", Title="渔民劳务纠纷投诉", Type="纠纷投诉", Source="网格员上报", Level="普通", Reporter="王网格", Time="2024-06-08 10:20", Status="处理中" },
+                        new { Id="SJ2024060004", Title="吊机设备故障停运", Type="设备故障", Source="系统自动", Level="紧急", Reporter="系统", Time="2024-06-08 11:05", Status="待分拨" },
+                        new { Id="SJ2024060005", Title="强对流天气预警应对", Type="气象灾害", Source="系统自动", Level="特急", Reporter="系统", Time="2024-06-08 12:30", Status="处理中" },
+                        new { Id="SJ2024060006", Title="渔获物质量抽检异常", Type="质量安全", Source="现场上报", Level="紧急", Reporter="赵检查", Time="2024-06-08 13:15", Status="处理中" },
+                        new { Id="SJ2024060007", Title="船员证件过期提醒", Type="证件管理", Source="系统自动", Level="普通", Reporter="系统", Time="2024-06-08 14:00", Status="已办结" },
+                        new { Id="SJ2024060008", Title="外来人员非法进港", Type="安全事故", Source="现场上报", Level="紧急", Reporter="孙保安", Time="2024-06-08 15:22", Status="已办结" },
+                        new { Id="SJ2024060009", Title="消防设施检测不合格", Type="安全事故", Source="网格员上报", Level="普通", Reporter="钱巡查", Time="2024-06-08 16:10", Status="已办结" },
+                        new { Id="SJ2024060010", Title="渔船超载出港违规", Type="安全事故", Source="现场上报", Level="紧急", Reporter="周执法", Time="2024-06-08 17:00", Status="待分拨" },
+                    };
+                }
+                @foreach (var e in events)
+                {
+                    <tr>
+                        <td><span class="text-primary fw-semibold">@e.Id</span></td>
+                        <td>@e.Title</td>
+                        <td><span class="badge bg-secondary">@e.Type</span></td>
+                        <td>@e.Source</td>
+                        <td>
+                            @if (e.Level == "特急")
+                            {
+                                <span class="badge bg-danger">@e.Level</span>
+                            }
+                            else if (e.Level == "紧急")
+                            {
+                                <span class="badge bg-warning text-dark">@e.Level</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">@e.Level</span>
+                            }
+                        </td>
+                        <td>@e.Reporter</td>
+                        <td>@e.Time</td>
+                        <td>
+                            @if (e.Status == "待分拨")
+                            {
+                                <span class="status-badge status-warning">@e.Status</span>
+                            }
+                            else if (e.Status == "处理中")
+                            {
+                                <span class="status-badge status-info">@e.Status</span>
+                            }
+                            else
+                            {
+                                <span class="status-badge status-normal">@e.Status</span>
+                            }
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-outline-primary me-1" onclick="showDetail('@e.Id')"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-xs btn-outline-success me-1" onclick="demoAction('分拨')"><i class="fas fa-share"></i></button>
+                            <button class="btn btn-xs btn-outline-danger" onclick="demoDelete()"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav class="d-flex justify-content-between align-items-center">
+            <span class="text-muted small">共 10 条记录</span>
+            <ul class="pagination pagination-sm mb-0">
+                <li class="page-item disabled"><a class="page-link">上一页</a></li>
+                <li class="page-item active"><a class="page-link">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- 新建事件弹窗 -->
+<div class="modal fade" id="addModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="fas fa-plus-circle me-2"></i>新建事件</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">事件标题 <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="请输入事件标题">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">事件类型 <span class="text-danger">*</span></label>
+                        <select class="form-select">
+                            <option>安全事故</option>
+                            <option>环境污染</option>
+                            <option>纠纷投诉</option>
+                            <option>设备故障</option>
+                            <option>气象灾害</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">事件来源</label>
+                        <select class="form-select">
+                            <option>电话报警</option>
+                            <option>现场上报</option>
+                            <option>系统自动</option>
+                            <option>网格员上报</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">紧急程度</label>
+                        <select class="form-select">
+                            <option>普通</option>
+                            <option>紧急</option>
+                            <option>特急</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">发生地点</label>
+                        <input type="text" class="form-control" placeholder="请输入发生地点">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">上报人</label>
+                        <input type="text" class="form-control" placeholder="请输入上报人姓名">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">事件描述</label>
+                        <textarea class="form-control" rows="3" placeholder="请详细描述事件情况..."></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">联系电话</label>
+                        <input type="text" class="form-control" placeholder="请输入联系电话">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">附件上传</label>
+                        <input type="file" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="demoSave()">提交事件</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function showDetail(id) {
+    showToast('查看事件详情：' + id, 'info');
+}
+</script>
+}

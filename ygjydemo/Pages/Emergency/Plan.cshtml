@@ -1,0 +1,103 @@
+@page
+@{ ViewData["Title"] = "应急预案"; ViewData["ActiveMenu"] = "EmergencyPlan"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-journal-medical me-2 text-primary"></i>应急预案管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">应急管理</li><li class="breadcrumb-item active">应急预案</li></ol></nav>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('addPlanModal')"><i class="bi bi-plus-circle me-1"></i>新建预案</button>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">预案总数</div><div class="fw-bold fs-4 text-primary">24</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">已审批</div><div class="fw-bold fs-4 text-success">20</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">待审批</div><div class="fw-bold fs-4 text-warning">3</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small mb-1">本年演练次数</div><div class="fw-bold fs-4 text-info">8</div></div></div></div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-3"><label class="form-label mb-1">预案名称</label><input type="text" class="form-control form-control-sm" placeholder="关键词搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">预案类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>火灾应急</option><option>台风应急</option><option>溢油应急</option><option>人员伤亡</option><option>设备故障</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>已审批</option><option>待审批</option><option>已过期</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header"><h6>应急预案列表</h6></div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>预案编号</th><th>预案名称</th><th>预案类型</th><th>适用范围</th><th>版本号</th><th>编制人</th><th>审批状态</th><th>有效期</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>EP-2024-001</td><td>港区火灾应急处置预案</td><td><span class="badge bg-danger">火灾应急</span></td><td>全港区</td><td>V2.1</td><td>安全科</td><td><span class="badge-status status-done">已审批</span></td><td>2025-12-31</td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewPlanModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="showToast('开始演练')">演练</button><button class="btn btn-outline-secondary btn-action" onclick="showToast('已下载')">下载</button></td></tr>
+                <tr><td>2</td><td>EP-2024-002</td><td>台风防御应急预案</td><td><span class="badge bg-info">台风应急</span></td><td>全港区</td><td>V3.0</td><td>港务科</td><td><span class="badge-status status-done">已审批</span></td><td>2025-12-31</td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewPlanModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="showToast('开始演练')">演练</button><button class="btn btn-outline-secondary btn-action" onclick="showToast('已下载')">下载</button></td></tr>
+                <tr><td>3</td><td>EP-2024-003</td><td>水域溢油污染应急预案</td><td><span class="badge bg-warning text-dark">溢油应急</span></td><td>港区水域</td><td>V1.5</td><td>环保科</td><td><span class="badge-status status-done">已审批</span></td><td>2025-06-30</td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewPlanModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="showToast('开始演练')">演练</button><button class="btn btn-outline-secondary btn-action" onclick="showToast('已下载')">下载</button></td></tr>
+                <tr><td>4</td><td>EP-2024-004</td><td>船员落水救援应急预案</td><td><span class="badge bg-primary">人员伤亡</span></td><td>全港区</td><td>V2.0</td><td>应急办</td><td><span class="badge-status status-pending">待审批</span></td><td>—</td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewPlanModal')">查看</button><button class="btn btn-success btn-action" onclick="showToast('已提交审批')">提交审批</button></td></tr>
+                <tr><td>5</td><td>EP-2024-005</td><td>起重设备故障应急预案</td><td><span class="badge bg-secondary">设备故障</span></td><td>装卸区</td><td>V1.2</td><td>设备科</td><td><span class="badge-status status-done">已审批</span></td><td>2025-12-31</td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewPlanModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="showToast('开始演练')">演练</button><button class="btn btn-outline-secondary btn-action" onclick="showToast('已下载')">下载</button></td></tr>
+                <tr><td>6</td><td>EP-2023-006</td><td>危险品泄漏应急处置预案</td><td><span class="badge bg-danger">危险品</span></td><td>仓储区</td><td>V1.0</td><td>安全科</td><td><span class="badge-status status-reject">已过期</span></td><td>2024-01-01</td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewPlanModal')">查看</button><button class="btn btn-warning btn-action" onclick="showToast('已发起更新')">更新</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 24 条，显示第 1-6 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link">2</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="addPlanModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新建应急预案</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">预案名称 <span class="text-danger">*</span></label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">预案类型</label><select class="form-select form-select-sm"><option>火灾应急</option><option>台风应急</option><option>溢油应急</option><option>人员伤亡</option><option>设备故障</option></select></div>
+                    <div class="col-md-6"><label class="form-label">适用范围</label><input class="form-control form-control-sm" placeholder="如：全港区、装卸区"></div>
+                    <div class="col-md-6"><label class="form-label">版本号</label><input class="form-control form-control-sm" placeholder="如：V1.0"></div>
+                    <div class="col-md-6"><label class="form-label">编制部门</label><select class="form-select form-select-sm"><option>安全科</option><option>港务科</option><option>环保科</option><option>应急办</option><option>设备科</option></select></div>
+                    <div class="col-md-6"><label class="form-label">有效期至</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-12"><label class="form-label">预案说明</label><textarea class="form-control form-control-sm" rows="3" placeholder="请简要描述预案内容及启动条件..."></textarea></div>
+                    <div class="col-12"><label class="form-label">上传预案文件</label><input type="file" class="form-control form-control-sm"></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addPlanModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewPlanModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-journal-medical me-2"></i>预案详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6"><span class="text-muted">预案编号：</span><strong>EP-2024-001</strong></div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-done">已审批</span></div>
+                    <div class="col-md-6"><span class="text-muted">预案名称：</span>港区火灾应急处置预案</div>
+                    <div class="col-md-6"><span class="text-muted">预案类型：</span>火灾应急</div>
+                    <div class="col-md-6"><span class="text-muted">适用范围：</span>全港区</div>
+                    <div class="col-md-6"><span class="text-muted">版本号：</span>V2.1</div>
+                    <div class="col-md-6"><span class="text-muted">编制部门：</span>安全科</div>
+                    <div class="col-md-6"><span class="text-muted">审批人：</span>港务局长</div>
+                    <div class="col-md-6"><span class="text-muted">审批时间：</span>2024-01-15</div>
+                    <div class="col-md-6"><span class="text-muted">有效期：</span>2025-12-31</div>
+                </div>
+                <hr>
+                <h6>预案主要内容</h6>
+                <div class="p-3 bg-light rounded" style="font-size:.82rem">
+                    <p><strong>一、适用范围：</strong>本预案适用于港区内所有区域发生火灾事故的应急处置。</p>
+                    <p><strong>二、响应级别：</strong>按火灾规模分为一级（重大）、二级（较大）、三级（一般）响应。</p>
+                    <p><strong>三、处置流程：</strong>发现火情→立即报警→启动应急响应→疏散人员→扑灭火灾→事后评估。</p>
+                    <p><strong>四、应急队伍：</strong>消防应急队（12人）+ 港区安保队（8人）+ 医疗救护组（4人）。</p>
+                    <p class="mb-0"><strong>五、演练要求：</strong>每年至少组织1次全港区综合演练，每季度组织1次专项演练。</p>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-outline-secondary btn-sm" onclick="showToast('已下载')"><i class="bi bi-download me-1"></i>下载预案</button><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

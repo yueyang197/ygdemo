@@ -1,0 +1,138 @@
+@page
+@{ ViewData["Title"] = "安防设备"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-camera-video me-2 text-primary"></i>安防设备管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">安防巡检</li><li class="breadcrumb-item active">安防设备</li></ol></nav>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('addEquipModal')"><i class="bi bi-plus-circle me-1"></i>新增设备</button>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">设备总数</div><div class="fw-bold fs-4 text-primary">156</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">在线正常</div><div class="fw-bold fs-4 text-success">142</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">离线/故障</div><div class="fw-bold fs-4 text-danger">8</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center border-0 shadow-sm"><div class="card-body py-3"><div class="text-muted small">维护中</div><div class="fw-bold fs-4 text-warning">6</div></div></div></div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">设备名称/编号</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">设备类型</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>摄像头</option><option>门禁系统</option><option>报警器</option><option>广播设备</option><option>探测器</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">安装区域</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>码头区</option><option>仓储区</option><option>办公区</option><option>出入口</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">设备状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>在线</option><option>离线</option><option>故障</option><option>维护中</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm">重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header">
+        <h6>安防设备列表</h6>
+        <div>
+            <button class="btn btn-outline-secondary btn-sm me-1" onclick="showToast('设备状态已刷新')"><i class="bi bi-arrow-clockwise me-1"></i>刷新状态</button>
+            <button class="btn btn-outline-primary btn-sm" onclick="showToast('导出成功')"><i class="bi bi-download me-1"></i>导出</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>设备编号</th><th>设备名称</th><th>设备类型</th><th>安装区域</th><th>安装位置</th><th>IP地址</th><th>状态</th><th>最后在线</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>1</td><td>CAM-001</td><td>1号泊位全景摄像头</td><td><span class="badge bg-primary">摄像头</span></td><td>码头区</td><td>1号泊位北端</td><td>192.168.1.101</td>
+                    <td><span class="badge-status status-normal">在线</span></td><td>刚刚</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEquipModal')">查看</button><button class="btn btn-info btn-action me-1" onclick="showToast('正在连接实时画面')">预览</button><button class="btn btn-warning btn-action" onclick="openModal('addEquipModal')">编辑</button></td>
+                </tr>
+                <tr>
+                    <td>2</td><td>CAM-002</td><td>仓储区全景摄像头</td><td><span class="badge bg-primary">摄像头</span></td><td>仓储区</td><td>仓库A栋顶部</td><td>192.168.1.102</td>
+                    <td><span class="badge-status status-normal">在线</span></td><td>刚刚</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEquipModal')">查看</button><button class="btn btn-info btn-action me-1" onclick="showToast('正在连接实时画面')">预览</button><button class="btn btn-warning btn-action" onclick="openModal('addEquipModal')">编辑</button></td>
+                </tr>
+                <tr>
+                    <td>3</td><td>ACC-001</td><td>主入口门禁系统</td><td><span class="badge bg-success">门禁系统</span></td><td>出入口</td><td>港区主大门</td><td>192.168.1.201</td>
+                    <td><span class="badge-status status-normal">在线</span></td><td>2分钟前</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEquipModal')">查看</button><button class="btn btn-warning btn-action" onclick="openModal('addEquipModal')">编辑</button></td>
+                </tr>
+                <tr>
+                    <td>4</td><td>ALM-003</td><td>危险品仓库烟雾报警器</td><td><span class="badge bg-danger">报警器</span></td><td>仓储区</td><td>危险品仓库C区</td><td>192.168.1.301</td>
+                    <td><span class="badge bg-danger text-white" style="font-size:.78rem;padding:.3em .6em;border-radius:4px;">故障</span></td><td>2024-06-05 18:30</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEquipModal')">查看</button><button class="btn btn-danger btn-action" onclick="showToast('已提交维修工单')">报修</button></td>
+                </tr>
+                <tr>
+                    <td>5</td><td>SPK-002</td><td>码头应急广播设备</td><td><span class="badge bg-info">广播设备</span></td><td>码头区</td><td>2号泊位广场</td><td>192.168.1.401</td>
+                    <td><span class="badge bg-warning text-dark" style="font-size:.78rem;padding:.3em .6em;border-radius:4px;">维护中</span></td><td>2024-06-07 09:00</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEquipModal')">查看</button><button class="btn btn-outline-secondary btn-action" onclick="showToast('维护记录已查看')">维护记录</button></td>
+                </tr>
+                <tr>
+                    <td>6</td><td>DET-005</td><td>水域入侵探测器</td><td><span class="badge bg-secondary">探测器</span></td><td>码头区</td><td>港区水域围界</td><td>192.168.1.501</td>
+                    <td><span class="badge-status status-normal">在线</span></td><td>刚刚</td>
+                    <td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewEquipModal')">查看</button><button class="btn btn-warning btn-action" onclick="openModal('addEquipModal')">编辑</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 156 条记录</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link">2</a></li><li class="page-item"><a class="page-link">3</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<div class="modal fade" id="addEquipModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新增安防设备</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">设备编号 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="如：CAM-007"></div>
+                    <div class="col-md-6"><label class="form-label">设备名称 <span class="text-danger">*</span></label><input class="form-control form-control-sm" placeholder="请输入设备名称"></div>
+                    <div class="col-md-6"><label class="form-label">设备类型</label>
+                        <select class="form-select form-select-sm"><option>摄像头</option><option>门禁系统</option><option>报警器</option><option>广播设备</option><option>探测器</option></select></div>
+                    <div class="col-md-6"><label class="form-label">安装区域</label>
+                        <select class="form-select form-select-sm"><option>码头区</option><option>仓储区</option><option>办公区</option><option>出入口</option></select></div>
+                    <div class="col-md-6"><label class="form-label">安装位置</label><input class="form-control form-control-sm" placeholder="具体安装位置描述"></div>
+                    <div class="col-md-6"><label class="form-label">IP地址</label><input class="form-control form-control-sm" placeholder="如：192.168.1.xxx"></div>
+                    <div class="col-md-6"><label class="form-label">安装日期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">品牌型号</label><input class="form-control form-control-sm" placeholder="如：海康威视 DS-2CD3T47G2-L"></div>
+                    <div class="col-12"><label class="form-label">备注</label><textarea class="form-control form-control-sm" rows="2" placeholder="其他说明信息..."></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addEquipModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewEquipModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-camera-video me-2"></i>设备详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6"><span class="text-muted">设备编号：</span><strong>CAM-001</strong></div>
+                    <div class="col-md-6"><span class="text-muted">状态：</span><span class="badge-status status-normal">在线</span></div>
+                    <div class="col-md-6"><span class="text-muted">设备名称：</span>1号泊位全景摄像头</div>
+                    <div class="col-md-6"><span class="text-muted">设备类型：</span>摄像头</div>
+                    <div class="col-md-6"><span class="text-muted">安装区域：</span>码头区</div>
+                    <div class="col-md-6"><span class="text-muted">安装位置：</span>1号泊位北端</div>
+                    <div class="col-md-6"><span class="text-muted">IP地址：</span>192.168.1.101</div>
+                    <div class="col-md-6"><span class="text-muted">品牌型号：</span>海康威视 DS-2CD3T47G2-L</div>
+                    <div class="col-md-6"><span class="text-muted">安装日期：</span>2023-03-15</div>
+                    <div class="col-md-6"><span class="text-muted">最后维保：</span>2024-03-15</div>
+                </div>
+                <hr>
+                <h6>最近告警记录</h6>
+                <table class="table table-sm">
+                    <thead><tr><th>时间</th><th>告警类型</th><th>处理状态</th></tr></thead>
+                    <tbody>
+                        <tr><td>2024-06-05 23:41</td><td>视频遮挡告警</td><td><span class="badge-status status-done">已处理</span></td></tr>
+                        <tr><td>2024-05-28 02:15</td><td>移动侦测告警</td><td><span class="badge-status status-done">已处理</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer"><button class="btn btn-info btn-sm me-1" onclick="showToast('正在连接实时画面')"><i class="bi bi-camera-video me-1"></i>实时预览</button><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>

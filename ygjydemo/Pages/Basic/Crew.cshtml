@@ -1,0 +1,108 @@
+@page
+@{ ViewData["Title"] = "船员管理"; }
+
+<div class="page-header">
+    <div>
+        <h5 class="page-title"><i class="bi bi-people-fill me-2 text-primary"></i>船员管理</h5>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">基础信息管理</li><li class="breadcrumb-item active">船员管理</li></ol></nav>
+    </div>
+    <div class="d-flex gap-2">
+        <button class="btn btn-success btn-sm" onclick="exportData()"><i class="bi bi-file-excel me-1"></i>导出</button>
+        <button class="btn btn-primary btn-sm" onclick="openModal('addCrewModal')"><i class="bi bi-plus-circle me-1"></i>新增船员</button>
+    </div>
+</div>
+
+<div class="search-bar">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-2"><label class="form-label mb-1">姓名/证件号</label><input type="text" class="form-control form-control-sm" placeholder="模糊搜索"></div>
+        <div class="col-md-2"><label class="form-label mb-1">所属船只</label><input type="text" class="form-control form-control-sm" placeholder="船名/船号"></div>
+        <div class="col-md-2"><label class="form-label mb-1">职位</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>船长</option><option>大副</option><option>轮机长</option><option>普通船员</option></select></div>
+        <div class="col-md-2"><label class="form-label mb-1">证书状态</label>
+            <select class="form-select form-select-sm"><option value="">全部</option><option>有效</option><option>即将到期</option><option>已过期</option></select></div>
+        <div class="col-md-auto"><button class="btn btn-primary btn-sm"><i class="bi bi-search me-1"></i>查询</button></div>
+        <div class="col-md-auto"><button class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-counterclockwise me-1"></i>重置</button></div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header">
+        <h6>船员列表 <span class="badge bg-primary ms-1">共2341条</span></h6>
+        <div class="d-flex gap-2">
+            <span class="badge-status status-normal">证书有效 2186</span>
+            <span class="badge-status status-pending">即将到期 118</span>
+            <span class="badge-status status-warning">已过期 37</span>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead><tr><th>序号</th><th>姓名</th><th>身份证号</th><th>船员证号</th><th>职位</th><th>所属船只</th><th>联系方式</th><th>证书签发日</th><th>证书有效期</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>王大海</td><td>350583****012345</td><td>FCM20190001</td><td>船长</td><td>海阔天空号</td><td>138****0001</td><td>2019-03-10</td><td>2025-03-09</td><td><span class="badge-status status-normal">有效</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(1)">删除</button></td></tr>
+                <tr><td>2</td><td>陈建平</td><td>350583****023456</td><td>FCM20200015</td><td>大副</td><td>顺风顺水号</td><td>138****0002</td><td>2020-06-15</td><td>2026-06-14</td><td><span class="badge-status status-normal">有效</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(2)">删除</button></td></tr>
+                <tr><td>3</td><td>张海华</td><td>330382****034567</td><td>FCM20180032</td><td>船长</td><td>鱼跃龙门号</td><td>138****0003</td><td>2018-11-05</td><td>2024-07-10</td><td><span class="badge-status status-pending">即将到期</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(3)">删除</button></td></tr>
+                <tr><td>4</td><td>李志远</td><td>440881****045678</td><td>FCM20210048</td><td>轮机长</td><td>南海丰收号</td><td>139****0004</td><td>2021-02-10</td><td>2027-02-09</td><td><span class="badge-status status-normal">有效</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(4)">删除</button></td></tr>
+                <tr><td>5</td><td>郑海清</td><td>370623****056789</td><td>FCM20170062</td><td>普通船员</td><td>凤翔海洋号</td><td>151****0005</td><td>2017-07-25</td><td>2023-07-24</td><td><span class="badge-status status-warning">已过期</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(5)">删除</button></td></tr>
+                <tr><td>6</td><td>林福星</td><td>350927****067890</td><td>FCM20220078</td><td>船长</td><td>蓬莱仙境号</td><td>138****0006</td><td>2022-01-03</td><td>2028-01-02</td><td><span class="badge-status status-normal">有效</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(6)">删除</button></td></tr>
+                <tr><td>7</td><td>吴建军</td><td>330921****078901</td><td>FCM20190089</td><td>大副</td><td>东海捕鱼王号</td><td>139****0007</td><td>2019-09-15</td><td>2025-09-14</td><td><span class="badge-status status-normal">有效</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(7)">删除</button></td></tr>
+                <tr><td>8</td><td>蔡志国</td><td>350921****089012</td><td>FCM20200105</td><td>普通船员</td><td>碧海蓝天号</td><td>138****0008</td><td>2020-04-18</td><td>2026-04-17</td><td><span class="badge-status status-normal">有效</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(8)">删除</button></td></tr>
+                <tr><td>9</td><td>叶海龙</td><td>331081****090123</td><td>FCM20210118</td><td>轮机长</td><td>万里碧波号</td><td>138****0009</td><td>2021-08-08</td><td>2024-08-07</td><td><span class="badge-status status-pending">即将到期</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(9)">删除</button></td></tr>
+                <tr><td>10</td><td>黄国强</td><td>350921****101234</td><td>FCM20180125</td><td>船长</td><td>渔歌唱晚号</td><td>138****0010</td><td>2018-05-12</td><td>2024-05-11</td><td><span class="badge-status status-warning">已过期</span></td><td><button class="btn btn-primary btn-action me-1" onclick="openModal('viewCrewModal')">查看</button><button class="btn btn-warning btn-action me-1" onclick="openModal('addCrewModal')">编辑</button><button class="btn btn-danger btn-action" onclick="showDeleteConfirm(10)">删除</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 border-top">
+        <span class="page-info">共 2341 条，显示第 1-10 条</span>
+        <nav><ul class="pagination mb-0"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="page-link" onclick="changePage(2)">2</a></li><li class="page-item"><a class="page-link" onclick="changePage(3)">3</a></li><li class="page-item"><a class="page-link">…</a></li><li class="page-item"><a class="page-link">235</a></li><li class="page-item"><a class="page-link">»</a></li></ul></nav>
+    </div>
+</div>
+
+<!-- 新增/编辑弹窗 -->
+<div class="modal fade" id="addCrewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>新增船员</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">姓名 <span class="text-danger">*</span></label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">身份证号 <span class="text-danger">*</span></label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">船员证号</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">职位</label><select class="form-select form-select-sm"><option>船长</option><option>大副</option><option>轮机长</option><option>普通船员</option></select></div>
+                    <div class="col-md-6"><label class="form-label">所属船只</label><select class="form-select form-select-sm"><option>海阔天空号</option><option>顺风顺水号</option><option>鱼跃龙门号</option><option>南海丰收号</option></select></div>
+                    <div class="col-md-6"><label class="form-label">联系方式</label><input class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">证书签发日期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">证书有效期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-md-6"><label class="form-label">性别</label><select class="form-select form-select-sm"><option>男</option><option>女</option></select></div>
+                    <div class="col-md-6"><label class="form-label">出生日期</label><input type="date" class="form-control form-control-sm"></div>
+                    <div class="col-12"><label class="form-label">家庭住址</label><input class="form-control form-control-sm"></div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button><button class="btn btn-primary btn-sm" onclick="saveForm('addCrewModal')">保 存</button></div>
+        </div>
+    </div>
+</div>
+
+<!-- 查看弹窗 -->
+<div class="modal fade" id="viewCrewModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title"><i class="bi bi-person-badge me-2"></i>船员详情</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body" style="font-size:.85rem">
+                <div class="row g-2">
+                    <div class="col-6"><span class="text-muted">姓名：</span><strong>王大海</strong></div>
+                    <div class="col-6"><span class="text-muted">性别：</span>男</div>
+                    <div class="col-6"><span class="text-muted">身份证号：</span>350583****012345</div>
+                    <div class="col-6"><span class="text-muted">船员证号：</span>FCM20190001</div>
+                    <div class="col-6"><span class="text-muted">职位：</span><span class="badge bg-primary" style="font-size:.7rem">船长</span></div>
+                    <div class="col-6"><span class="text-muted">联系方式：</span>138****0001</div>
+                    <div class="col-6"><span class="text-muted">所属船只：</span>海阔天空号</div>
+                    <div class="col-6"><span class="text-muted">证书有效期：</span>2025-03-09</div>
+                    <div class="col-6"><span class="text-muted">状态：</span><span class="badge-status status-normal">有效</span></div>
+                    <div class="col-6"><span class="text-muted">出生日期：</span>1978-06-15</div>
+                    <div class="col-12"><span class="text-muted">家庭住址：</span>福建省泉州市丰泽区泉秀路123号</div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">关 闭</button></div>
+        </div>
+    </div>
+</div>
