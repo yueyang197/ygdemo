@@ -1,0 +1,222 @@
+@page
+@model FishingPortDemo.Pages.ColdStorageModel
+@{
+    ViewData["Title"] = "冷链冷库管理";
+    ViewData["ActivePage"] = "ColdStorage";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0"><i class="bi bi-thermometer-snow me-2 text-info"></i>冷链冷库管理</h4>
+    <button class="btn btn-primary btn-sm" onclick="showToast('办理入库功能演示中')">
+        <i class="bi bi-box-arrow-in-down me-1"></i>办理入库
+    </button>
+</div>
+
+<!-- 冷库概况 -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-info fs-2 fw-bold">6座</div>
+            <div class="text-muted small">冷库总数</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-success fs-2 fw-bold">2,450吨</div>
+            <div class="text-muted small">当前库存量</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-warning fs-2 fw-bold">3,000吨</div>
+            <div class="text-muted small">总库容</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-primary fs-2 fw-bold">81.7%</div>
+            <div class="text-muted small">库容使用率</div>
+        </div>
+    </div>
+</div>
+
+<!-- 冷库状态 -->
+<div class="row g-3 mb-4">
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-grid me-2 text-info"></i>冷库实时状态
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h6 class="mb-0">冷库 A区（冷冻）</h6>
+                                    <span class="badge bg-success">正常</span>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-info">-18°C</div>
+                                        <small class="text-muted">当前温度</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-primary">450吨</div>
+                                        <small class="text-muted">存储量</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-warning">90%</div>
+                                        <small class="text-muted">使用率</small>
+                                    </div>
+                                </div>
+                                <div class="progress mt-2" style="height:6px">
+                                    <div class="progress-bar bg-warning" style="width:90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h6 class="mb-0">冷库 B区（冷藏）</h6>
+                                    <span class="badge bg-success">正常</span>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-info">-4°C</div>
+                                        <small class="text-muted">当前温度</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-primary">380吨</div>
+                                        <small class="text-muted">存储量</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-success">76%</div>
+                                        <small class="text-muted">使用率</small>
+                                    </div>
+                                </div>
+                                <div class="progress mt-2" style="height:6px">
+                                    <div class="progress-bar bg-success" style="width:76%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h6 class="mb-0">冷库 C区（冷冻）</h6>
+                                    <span class="badge bg-warning text-dark">温度偏高</span>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-danger">-15°C</div>
+                                        <small class="text-muted">当前温度</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-primary">520吨</div>
+                                        <small class="text-muted">存储量</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-danger">86%</div>
+                                        <small class="text-muted">使用率</small>
+                                    </div>
+                                </div>
+                                <div class="progress mt-2" style="height:6px">
+                                    <div class="progress-bar bg-danger" style="width:86%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h6 class="mb-0">冷库 D区（速冻）</h6>
+                                    <span class="badge bg-success">正常</span>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-info">-35°C</div>
+                                        <small class="text-muted">当前温度</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-primary">300吨</div>
+                                        <small class="text-muted">存储量</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fs-5 fw-bold text-success">60%</div>
+                                        <small class="text-muted">使用率</small>
+                                    </div>
+                                </div>
+                                <div class="progress mt-2" style="height:6px">
+                                    <div class="progress-bar bg-info" style="width:60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-thermometer me-2 text-danger"></i>温度监控（24h）
+            </div>
+            <div class="card-body">
+                <canvas id="tempChart" height="260"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 入出库记录 -->
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-0 fw-semibold">
+        <i class="bi bi-arrow-left-right me-2 text-primary"></i>近期入出库记录
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0 small">
+            <thead class="table-light">
+                <tr><th>操作时间</th><th>品名</th><th>数量(吨)</th><th>库区</th><th>操作类型</th><th>操作人</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>09:15</td><td>带鱼（冷冻）</td><td>12.5</td><td>A区</td><td><span class="badge bg-success">入库</span></td><td>张管理</td></tr>
+                <tr><td>09:42</td><td>鲈鱼（冷藏）</td><td>8.0</td><td>B区</td><td><span class="badge bg-success">入库</span></td><td>李管理</td></tr>
+                <tr><td>10:10</td><td>虾仁（速冻）</td><td>5.0</td><td>D区</td><td><span class="badge bg-danger">出库</span></td><td>王管理</td></tr>
+                <tr><td>10:35</td><td>螃蟹（冷冻）</td><td>3.5</td><td>C区</td><td><span class="badge bg-success">入库</span></td><td>陈管理</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+new Chart(document.getElementById('tempChart'), {
+    type: 'line',
+    data: {
+        labels: ['00:00','04:00','08:00','12:00','16:00','20:00','24:00'],
+        datasets: [{
+            label: 'A区温度',
+            data: [-18,-18.2,-17.9,-18,-18.1,-18,-18],
+            borderColor: '#0d6efd',
+            tension: 0.4
+        },{
+            label: 'C区温度',
+            data: [-18,-17,-15,-15.5,-16,-15.8,-16],
+            borderColor: '#dc3545',
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } },
+        scales: { y: { reverse: true } }
+    }
+});
+</script>
+}

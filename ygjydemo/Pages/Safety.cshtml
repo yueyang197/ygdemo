@@ -1,0 +1,161 @@
+@page
+@model FishingPortDemo.Pages.SafetyModel
+@{
+    ViewData["Title"] = "安全生产管理";
+    ViewData["ActivePage"] = "Safety";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0"><i class="bi bi-shield-check me-2 text-success"></i>安全生产管理</h4>
+    <button class="btn btn-primary btn-sm" onclick="showToast('新建安全检查演示中')">
+        <i class="bi bi-plus-lg me-1"></i>新建检查
+    </button>
+</div>
+
+<!-- 安全概况 -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-success fs-1 fw-bold">365</div>
+            <div class="text-muted">安全生产天数</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-primary fs-1 fw-bold">12</div>
+            <div class="text-muted">本月检查次数</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-warning fs-1 fw-bold">3</div>
+            <div class="text-muted">待整改隐患</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-danger fs-1 fw-bold">0</div>
+            <div class="text-muted">本月安全事故</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <!-- 安全检查项 -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-list-check me-2 text-primary"></i>今日安全检查项
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div><i class="bi bi-check-circle-fill text-success me-2"></i>消防设施检查</div>
+                        <div>
+                            <span class="badge bg-success me-1">已完成</span>
+                            <small class="text-muted">08:00</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div><i class="bi bi-check-circle-fill text-success me-2"></i>电气线路检查</div>
+                        <div>
+                            <span class="badge bg-success me-1">已完成</span>
+                            <small class="text-muted">09:30</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div><i class="bi bi-exclamation-circle-fill text-warning me-2"></i>危险品存储检查</div>
+                        <div>
+                            <span class="badge bg-warning text-dark me-1">整改中</span>
+                            <small class="text-muted">10:15</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div><i class="bi bi-circle text-muted me-2"></i>码头防滑检查</div>
+                        <div>
+                            <span class="badge bg-secondary me-1">待检查</span>
+                            <small class="text-muted">14:00</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div><i class="bi bi-circle text-muted me-2"></i>救生设备检查</div>
+                        <div>
+                            <span class="badge bg-secondary me-1">待检查</span>
+                            <small class="text-muted">15:30</small>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 安全隐患 -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-exclamation-triangle me-2 text-warning"></i>安全隐患跟踪
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="fw-semibold small">危险品仓库通风不足</div>
+                                <small class="text-muted">发现时间：2024-01-14 | 负责人：张安全</small>
+                            </div>
+                            <span class="badge bg-warning text-dark">整改中</span>
+                        </div>
+                        <div class="progress mt-2" style="height:4px">
+                            <div class="progress-bar bg-warning" style="width:60%"></div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="fw-semibold small">B区码头防护栏损坏</div>
+                                <small class="text-muted">发现时间：2024-01-13 | 负责人：李安全</small>
+                            </div>
+                            <span class="badge bg-warning text-dark">整改中</span>
+                        </div>
+                        <div class="progress mt-2" style="height:4px">
+                            <div class="progress-bar bg-warning" style="width:30%"></div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="fw-semibold small">制冰机房消防标识缺失</div>
+                                <small class="text-muted">发现时间：2024-01-15 | 负责人：王安全</small>
+                            </div>
+                            <span class="badge bg-danger">待整改</span>
+                        </div>
+                        <div class="progress mt-2" style="height:4px">
+                            <div class="progress-bar bg-danger" style="width:5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 安全培训 -->
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-0 fw-semibold d-flex justify-content-between">
+        <span><i class="bi bi-people me-2 text-primary"></i>安全培训记录</span>
+        <button class="btn btn-sm btn-outline-primary" onclick="showToast('安排培训演示中')">安排培训</button>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0 small">
+            <thead class="table-light">
+                <tr><th>培训主题</th><th>培训日期</th><th>培训人数</th><th>培训讲师</th><th>考核结果</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>消防安全知识培训</td><td>2024-01-10</td><td>45人</td><td>消防队长</td><td><span class="badge bg-success">通过率 95%</span></td></tr>
+                <tr><td>危险品安全操作规程</td><td>2024-01-08</td><td>28人</td><td>安全主管</td><td><span class="badge bg-success">通过率 100%</span></td></tr>
+                <tr><td>水上救援应急演练</td><td>2024-01-05</td><td>60人</td><td>海事局</td><td><span class="badge bg-warning text-dark">通过率 88%</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>

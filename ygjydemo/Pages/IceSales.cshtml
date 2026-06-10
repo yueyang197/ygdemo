@@ -1,0 +1,151 @@
+@page
+@model FishingPortDemo.Pages.IceSalesModel
+@{
+    ViewData["Title"] = "智能售冰管理";
+    ViewData["ActivePage"] = "IceSales";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0"><i class="bi bi-snow me-2 text-info"></i>智能售冰管理</h4>
+    <button class="btn btn-primary btn-sm" onclick="showToast('新建售冰订单演示中')">
+        <i class="bi bi-plus-lg me-1"></i>新建订单
+    </button>
+</div>
+
+<!-- 售冰概况 -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-info fs-2 fw-bold">45.2吨</div>
+            <div class="text-muted small">今日售冰量</div>
+            <small class="text-danger">↓3% 较昨日</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-success fs-2 fw-bold">¥13,560</div>
+            <div class="text-muted small">今日售冰收入</div>
+            <small class="text-success">↑2% 较昨日</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-warning fs-2 fw-bold">320吨</div>
+            <div class="text-muted small">当前库存</div>
+            <small class="text-muted">库容率 64%</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-primary fs-2 fw-bold">28</div>
+            <div class="text-muted small">今日订单数</div>
+            <small class="text-success">↑5% 较昨日</small>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <!-- 制冰机状态 -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-cpu me-2 text-info"></i>制冰设备状态
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>制冰机 #1</span>
+                        <span class="badge bg-success">运行中</span>
+                    </div>
+                    <div class="progress" style="height:8px">
+                        <div class="progress-bar bg-info" style="width:92%"></div>
+                    </div>
+                    <small class="text-muted">产能利用率 92%</small>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>制冰机 #2</span>
+                        <span class="badge bg-success">运行中</span>
+                    </div>
+                    <div class="progress" style="height:8px">
+                        <div class="progress-bar bg-info" style="width:78%"></div>
+                    </div>
+                    <small class="text-muted">产能利用率 78%</small>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>制冰机 #3</span>
+                        <span class="badge bg-warning text-dark">维护中</span>
+                    </div>
+                    <div class="progress" style="height:8px">
+                        <div class="progress-bar bg-warning" style="width:0%"></div>
+                    </div>
+                    <small class="text-muted">预计 16:00 恢复</small>
+                </div>
+                <div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>储冰仓 A</span>
+                        <span class="badge bg-primary">320/500 吨</span>
+                    </div>
+                    <div class="progress" style="height:8px">
+                        <div class="progress-bar bg-primary" style="width:64%"></div>
+                    </div>
+                    <small class="text-muted">库容率 64%</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 售冰趋势 -->
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-graph-up me-2 text-primary"></i>近7日售冰量趋势（吨）
+            </div>
+            <div class="card-body">
+                <canvas id="iceChart" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 售冰订单 -->
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-0 fw-semibold">
+        <i class="bi bi-receipt me-2 text-primary"></i>今日售冰订单
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr><th>订单号</th><th>船名</th><th>冰品类型</th><th>数量(吨)</th><th>单价(元/吨)</th><th>金额</th><th>支付方式</th><th>状态</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>ICE-2401150001</td><td>闽渔008</td><td>片冰</td><td>5.0</td><td>¥300</td><td>¥1,500</td><td>微信支付</td><td><span class="badge bg-success">已完成</span></td></tr>
+                <tr><td>ICE-2401150002</td><td>粤渔126</td><td>碎冰</td><td>3.5</td><td>¥280</td><td>¥980</td><td>银行转账</td><td><span class="badge bg-success">已完成</span></td></tr>
+                <tr><td>ICE-2401150003</td><td>浙渔301</td><td>块冰</td><td>8.0</td><td>¥320</td><td>¥2,560</td><td>月结账户</td><td><span class="badge bg-info">配送中</span></td></tr>
+                <tr><td>ICE-2401150004</td><td>琼渔044</td><td>片冰</td><td>2.0</td><td>¥300</td><td>¥600</td><td>现金</td><td><span class="badge bg-warning text-dark">待支付</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+new Chart(document.getElementById('iceChart'), {
+    type: 'line',
+    data: {
+        labels: ['1/9','1/10','1/11','1/12','1/13','1/14','1/15'],
+        datasets: [{
+            label: '售冰量(吨)',
+            data: [38, 42, 46, 52, 48, 46, 45],
+            borderColor: '#0dcaf0',
+            backgroundColor: 'rgba(13,202,240,0.15)',
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } } }
+});
+</script>
+}

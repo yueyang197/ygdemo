@@ -1,0 +1,126 @@
+@page
+@model FishingPortDemo.Pages.TradingModel
+@{
+    ViewData["Title"] = "水产品交易管理";
+    ViewData["ActivePage"] = "Trading";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0"><i class="bi bi-cart3 me-2 text-success"></i>水产品交易管理</h4>
+    <button class="btn btn-success btn-sm" onclick="showToast('新建交易单功能演示中')">
+        <i class="bi bi-plus-lg me-1"></i>新建交易
+    </button>
+</div>
+
+<!-- 交易概况 -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-success fs-2 fw-bold">¥86.4万</div>
+            <div class="text-muted small">今日交易额</div>
+            <small class="text-success">↑8% 较昨日</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-primary fs-2 fw-bold">326吨</div>
+            <div class="text-muted small">今日交易量</div>
+            <small class="text-success">↑5% 较昨日</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-warning fs-2 fw-bold">142笔</div>
+            <div class="text-muted small">今日交易笔数</div>
+            <small class="text-success">↑3% 较昨日</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-info fs-2 fw-bold">¥2,645</div>
+            <div class="text-muted small">均价（元/吨）</div>
+            <small class="text-muted">较昨日持平</small>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <!-- 品类价格 -->
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-tags me-2 text-success"></i>今日水产品行情
+            </div>
+            <div class="card-body p-0">
+                <table class="table mb-0">
+                    <thead class="table-light">
+                        <tr><th>品名</th><th>规格</th><th>均价(元/斤)</th><th>涨跌</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>带鱼</td><td>中段</td><td>12.5</td><td><span class="text-success">↑0.5</span></td></tr>
+                        <tr><td>鲈鱼</td><td>1-2斤</td><td>28.0</td><td><span class="text-danger">↓1.0</span></td></tr>
+                        <tr><td>螃蟹</td><td>3两以上</td><td>45.0</td><td><span class="text-success">↑2.0</span></td></tr>
+                        <tr><td>对虾</td><td>20-30尾/斤</td><td>38.0</td><td><span class="text-muted">—</span></td></tr>
+                        <tr><td>黄鱼</td><td>大黄鱼</td><td>65.0</td><td><span class="text-success">↑3.0</span></td></tr>
+                        <tr><td>蛤蜊</td><td>鲜活</td><td>8.5</td><td><span class="text-danger">↓0.5</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 交易趋势 -->
+    <div class="col-md-7">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-graph-up me-2 text-primary"></i>今日各时段交易额（万元）
+            </div>
+            <div class="card-body">
+                <canvas id="tradingHourChart" height="160"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 交易记录 -->
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-0 fw-semibold d-flex justify-content-between">
+        <span><i class="bi bi-list-ul me-2 text-primary"></i>交易记录</span>
+        <button class="btn btn-sm btn-outline-secondary" onclick="showToast('导出报表功能演示中')">
+            <i class="bi bi-download me-1"></i>导出
+        </button>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0 small">
+            <thead class="table-light">
+                <tr><th>交易单号</th><th>品名</th><th>数量(kg)</th><th>单价</th><th>金额</th><th>买方</th><th>卖方</th><th>时间</th><th>状态</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>TRD-240115001</td><td>带鱼</td><td>2,500</td><td>¥25/kg</td><td>¥62,500</td><td>海鲜超市</td><td>闽渔008</td><td>08:30</td><td><span class="badge bg-success">已完成</span></td></tr>
+                <tr><td>TRD-240115002</td><td>螃蟹</td><td>800</td><td>¥90/kg</td><td>¥72,000</td><td>酒店采购</td><td>粤渔126</td><td>09:15</td><td><span class="badge bg-success">已完成</span></td></tr>
+                <tr><td>TRD-240115003</td><td>对虾</td><td>1,200</td><td>¥76/kg</td><td>¥91,200</td><td>水产批发商</td><td>浙渔301</td><td>09:42</td><td><span class="badge bg-info">结算中</span></td></tr>
+                <tr><td>TRD-240115004</td><td>鲈鱼</td><td>600</td><td>¥56/kg</td><td>¥33,600</td><td>餐饮公司</td><td>琼渔044</td><td>10:20</td><td><span class="badge bg-warning text-dark">待确认</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+new Chart(document.getElementById('tradingHourChart'), {
+    type: 'bar',
+    data: {
+        labels: ['6时','7时','8时','9时','10时','11时','12时','13时','14时','15时','16时','17时'],
+        datasets: [{
+            label: '交易额(万元)',
+            data: [2.1, 8.5, 15.2, 18.6, 12.3, 9.8, 6.2, 4.5, 5.8, 7.2, 6.1, 3.4],
+            backgroundColor: 'rgba(25,135,84,0.7)',
+            borderColor: '#198754',
+            borderWidth: 1
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } } }
+});
+</script>
+}

@@ -1,0 +1,195 @@
+@page
+@model FishingPortDemo.Pages.MobileAppModel
+@{
+    ViewData["Title"] = "移动应用展示";
+    ViewData["ActivePage"] = "MobileApp";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0"><i class="bi bi-phone me-2 text-primary"></i>移动应用展示</h4>
+    <div class="d-flex gap-2">
+        <button class="btn btn-primary btn-sm" onclick="showToast('下载iOS版演示中')">
+            <i class="bi bi-apple me-1"></i>iOS 下载
+        </button>
+        <button class="btn btn-success btn-sm" onclick="showToast('下载Android版演示中')">
+            <i class="bi bi-android2 me-1"></i>Android 下载
+        </button>
+    </div>
+</div>
+
+<!-- 应用概况 -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-primary fs-2 fw-bold">1,286</div>
+            <div class="text-muted small">注册用户数</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-success fs-2 fw-bold">348</div>
+            <div class="text-muted small">今日活跃用户</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-warning fs-2 fw-bold">4.8</div>
+            <div class="text-muted small">用户评分</div>
+            <small><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-half text-warning"></i></small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-info fs-2 fw-bold">V2.5.1</div>
+            <div class="text-muted small">当前版本</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <!-- 船长端功能 -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-primary text-white border-0 fw-semibold">
+                <i class="bi bi-person-badge me-2"></i>船长端 App
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="rounded-3 bg-light d-inline-block p-4">
+                        <i class="bi bi-phone fs-1 text-primary"></i>
+                    </div>
+                </div>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>一键申请进出港</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>实时泊位导航</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>在线购冰下单</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>安全证书管理</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>交易记录查询</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>SOS紧急求救</li>
+                </ul>
+                <button class="btn btn-primary w-100" onclick="showToast('查看船长端演示中')">
+                    <i class="bi bi-eye me-1"></i>查看演示
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 港务人员端 -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-success text-white border-0 fw-semibold">
+                <i class="bi bi-building me-2"></i>港务人员端 App
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="rounded-3 bg-light d-inline-block p-4">
+                        <i class="bi bi-phone fs-1 text-success"></i>
+                    </div>
+                </div>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>进出港审批</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>移动巡查打卡</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>设施故障上报</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>实时监控查看</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>安全隐患记录</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>数据统计报表</li>
+                </ul>
+                <button class="btn btn-success w-100" onclick="showToast('查看港务端演示中')">
+                    <i class="bi bi-eye me-1"></i>查看演示
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 消费者端 -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-warning text-dark border-0 fw-semibold">
+                <i class="bi bi-people me-2"></i>消费者溯源端 App
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="rounded-3 bg-light d-inline-block p-4">
+                        <i class="bi bi-phone fs-1 text-warning"></i>
+                    </div>
+                </div>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>扫码溯源查询</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>产品质检报告</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>产地信息核验</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>购买历史记录</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>投诉举报入口</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>优质商品推荐</li>
+                </ul>
+                <button class="btn btn-warning w-100" onclick="showToast('查看消费者端演示中')">
+                    <i class="bi bi-eye me-1"></i>查看演示
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 使用统计 -->
+<div class="row g-3">
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-graph-up me-2 text-primary"></i>近7日活跃用户趋势
+            </div>
+            <div class="card-body">
+                <canvas id="appChart" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-pie-chart me-2 text-success"></i>用户类型分布
+            </div>
+            <div class="card-body">
+                <canvas id="userTypeChart" height="180"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+new Chart(document.getElementById('appChart'), {
+    type: 'line',
+    data: {
+        labels: ['1/9','1/10','1/11','1/12','1/13','1/14','1/15'],
+        datasets: [{
+            label: '船长端',
+            data: [156, 162, 148, 175, 168, 155, 172],
+            borderColor: '#0d6efd',
+            tension: 0.4
+        },{
+            label: '港务端',
+            data: [88, 92, 85, 96, 90, 88, 94],
+            borderColor: '#198754',
+            tension: 0.4
+        },{
+            label: '消费者端',
+            data: [72, 68, 80, 76, 84, 78, 82],
+            borderColor: '#ffc107',
+            tension: 0.4
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'top' } } }
+});
+
+new Chart(document.getElementById('userTypeChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['船长/渔民','港务人员','消费者','管理员'],
+        datasets: [{
+            data: [680, 320, 256, 30],
+            backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545']
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+</script>
+}

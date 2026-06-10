@@ -1,0 +1,135 @@
+@page
+@model FishingPortDemo.Pages.HarborModel
+@{
+    ViewData["Title"] = "港口基础管理";
+    ViewData["ActivePage"] = "Harbor";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0"><i class="bi bi-building me-2 text-primary"></i>港口基础管理</h4>
+    <button class="btn btn-primary btn-sm" onclick="showToast('新增泊位功能演示中')">
+        <i class="bi bi-plus-lg me-1"></i>新增泊位
+    </button>
+</div>
+
+<!-- 港口概况 -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-primary fs-1 fw-bold">48</div>
+            <div class="text-muted">泊位总数</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-success fs-1 fw-bold">32</div>
+            <div class="text-muted">在用泊位</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-warning fs-1 fw-bold">12</div>
+            <div class="text-muted">空闲泊位</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+            <div class="text-danger fs-1 fw-bold">4</div>
+            <div class="text-muted">维修中</div>
+        </div>
+    </div>
+</div>
+
+<!-- 泊位列表 -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-white border-0 fw-semibold d-flex justify-content-between">
+        <span><i class="bi bi-grid me-2 text-primary"></i>泊位管理列表</span>
+        <div class="d-flex gap-2">
+            <input type="text" class="form-control form-control-sm" placeholder="搜索泊位..." style="width:200px" oninput="showToast('搜索功能演示中')">
+            <select class="form-select form-select-sm" style="width:120px" onchange="showToast('筛选功能演示中')">
+                <option>全部状态</option>
+                <option>使用中</option>
+                <option>空闲</option>
+                <option>维修</option>
+            </select>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr><th>泊位编号</th><th>泊位类型</th><th>长度(m)</th><th>深度(m)</th><th>当前船舶</th><th>状态</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>B001</td><td>大型渔船泊位</td><td>120</td><td>8.5</td><td>闽渔008</td><td><span class="badge bg-success">使用中</span></td><td><button class="btn btn-xs btn-outline-primary btn-sm" onclick="showToast('查看详情演示中')">详情</button></td></tr>
+                <tr><td>B002</td><td>中型渔船泊位</td><td>80</td><td>6.0</td><td>粤渔126</td><td><span class="badge bg-success">使用中</span></td><td><button class="btn btn-xs btn-outline-primary btn-sm" onclick="showToast('查看详情演示中')">详情</button></td></tr>
+                <tr><td>B003</td><td>小型渔船泊位</td><td>45</td><td>4.0</td><td>—</td><td><span class="badge bg-secondary">空闲</span></td><td><button class="btn btn-xs btn-outline-primary btn-sm" onclick="showToast('查看详情演示中')">详情</button></td></tr>
+                <tr><td>B004</td><td>冷藏运输船位</td><td>100</td><td>7.5</td><td>浙渔301</td><td><span class="badge bg-success">使用中</span></td><td><button class="btn btn-xs btn-outline-primary btn-sm" onclick="showToast('查看详情演示中')">详情</button></td></tr>
+                <tr><td>B005</td><td>中型渔船泊位</td><td>80</td><td>6.0</td><td>—</td><td><span class="badge bg-warning text-dark">维修中</span></td><td><button class="btn btn-xs btn-outline-primary btn-sm" onclick="showToast('查看详情演示中')">详情</button></td></tr>
+                <tr><td>B006</td><td>大型渔船泊位</td><td>120</td><td>8.5</td><td>闽渔215</td><td><span class="badge bg-success">使用中</span></td><td><button class="btn btn-xs btn-outline-primary btn-sm" onclick="showToast('查看详情演示中')">详情</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 港口设施 -->
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-tools me-2 text-warning"></i>港口基础设施
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><i class="bi bi-lightning-charge me-2 text-warning"></i>岸电设施</span>
+                        <span class="badge bg-success">正常运行</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><i class="bi bi-droplet me-2 text-info"></i>供水系统</span>
+                        <span class="badge bg-success">正常运行</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><i class="bi bi-recycle me-2 text-success"></i>污水处理</span>
+                        <span class="badge bg-success">正常运行</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><i class="bi bi-fuel-pump me-2 text-danger"></i>加油站</span>
+                        <span class="badge bg-warning text-dark">维护中</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-bar-chart me-2 text-info"></i>泊位利用率
+            </div>
+            <div class="card-body">
+                <canvas id="harborChart" height="160"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+new Chart(document.getElementById('harborChart'), {
+    type: 'bar',
+    data: {
+        labels: ['大型泊位','中型泊位','小型泊位','冷藏船位','维修区'],
+        datasets: [{
+            label: '利用率(%)',
+            data: [85, 72, 60, 90, 20],
+            backgroundColor: ['#0d6efd','#198754','#ffc107','#0dcaf0','#dc3545']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { max: 100 } }
+    }
+});
+</script>
+}

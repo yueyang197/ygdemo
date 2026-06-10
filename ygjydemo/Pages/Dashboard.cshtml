@@ -1,0 +1,192 @@
+@page
+@model FishingPortDemo.Pages.DashboardModel
+@{
+    ViewData["Title"] = "运营驾驶舱";
+    ViewData["ActivePage"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0"><i class="bi bi-speedometer2 me-2 text-primary"></i>运营驾驶舱</h4>
+    <span class="text-muted small">数据更新时间：2024-01-15 08:30:00</span>
+</div>
+
+<!-- KPI Cards -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-tsunami text-primary fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">今日进港船舶</div>
+                        <div class="fs-4 fw-bold">128 <small class="text-success fs-6">↑12%</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-cart3 text-success fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">今日交易额</div>
+                        <div class="fs-4 fw-bold">¥86.4万 <small class="text-success fs-6">↑8%</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-snow text-info fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">今日售冰量</div>
+                        <div class="fs-4 fw-bold">45.2吨 <small class="text-danger fs-6">↓3%</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-clipboard2-pulse text-warning fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">今日检测批次</div>
+                        <div class="fs-4 fw-bold">36批次 <small class="text-success fs-6">↑5%</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row -->
+<div class="row g-3 mb-4">
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-graph-up me-2 text-primary"></i>本月船舶进出港趋势
+            </div>
+            <div class="card-body">
+                <canvas id="vesselChart" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-pie-chart me-2 text-success"></i>水产品品类占比
+            </div>
+            <div class="card-body">
+                <canvas id="fishChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom Row -->
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-clock-history me-2 text-info"></i>最新进港记录
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0 small">
+                    <thead class="table-light">
+                        <tr><th>船名</th><th>船号</th><th>进港时间</th><th>状态</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>闽渔008</td><td>MIN008</td><td>08:15</td><td><span class="badge bg-success">已停泊</span></td></tr>
+                        <tr><td>粤渔126</td><td>YUE126</td><td>08:42</td><td><span class="badge bg-success">已停泊</span></td></tr>
+                        <tr><td>浙渔301</td><td>ZHE301</td><td>09:05</td><td><span class="badge bg-warning text-dark">检疫中</span></td></tr>
+                        <tr><td>闽渔215</td><td>MIN215</td><td>09:18</td><td><span class="badge bg-info">卸货中</span></td></tr>
+                        <tr><td>琼渔044</td><td>QIONG044</td><td>09:33</td><td><span class="badge bg-success">已停泊</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">
+                <i class="bi bi-bar-chart me-2 text-warning"></i>本月交易额趋势（万元）
+            </div>
+            <div class="card-body">
+                <canvas id="tradingChart" height="160"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+// 船舶进出港趋势
+new Chart(document.getElementById('vesselChart'), {
+    type: 'line',
+    data: {
+        labels: ['1日','3日','5日','7日','9日','11日','13日','15日'],
+        datasets: [{
+            label: '进港',
+            data: [98,112,105,130,118,125,142,128],
+            borderColor: '#0d6efd',
+            backgroundColor: 'rgba(13,110,253,0.1)',
+            fill: true,
+            tension: 0.4
+        },{
+            label: '出港',
+            data: [88,108,100,120,115,118,135,122],
+            borderColor: '#198754',
+            backgroundColor: 'rgba(25,135,84,0.1)',
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'top' } } }
+});
+
+// 水产品品类占比
+new Chart(document.getElementById('fishChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['带鱼','鲈鱼','螃蟹','虾类','贝类','其他'],
+        datasets: [{
+            data: [28,22,18,15,12,5],
+            backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545','#0dcaf0','#6c757d']
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+
+// 交易额趋势
+new Chart(document.getElementById('tradingChart'), {
+    type: 'bar',
+    data: {
+        labels: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+        datasets: [{
+            label: '交易额(万元)',
+            data: [650,520,780,820,900,860,950,1020,880,760,820,940],
+            backgroundColor: 'rgba(255,193,7,0.7)',
+            borderColor: '#ffc107',
+            borderWidth: 1
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } } }
+});
+</script>
+}
