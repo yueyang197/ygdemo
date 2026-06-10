@@ -6,7 +6,7 @@
     Layout = "_Layout";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="bi bi-clipboard2-pulse me-2 text-warning"></i>水产品安全检测</h4>
     <button class="btn btn-primary btn-sm" onclick="showToast('新建检测任务演示中')">
         <i class="bi bi-plus-lg me-1"></i>新建检测
@@ -14,41 +14,77 @@
 </div>
 
 <!-- 检测概况 -->
-<div class="row g-3 mb-4">
+<div class="row g-3 mb-3">
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm text-center p-3">
-            <div class="text-primary fs-2 fw-bold">36</div>
-            <div class="text-muted small">今日检测批次</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-clipboard2-pulse text-primary fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">今日检测批次</div>
+                        <div class="fs-4 fw-bold">36</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm text-center p-3">
-            <div class="text-success fs-2 fw-bold">34</div>
-            <div class="text-muted small">合格批次</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-check-circle text-success fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">合格批次</div>
+                        <div class="fs-4 fw-bold">34</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm text-center p-3">
-            <div class="text-danger fs-2 fw-bold">1</div>
-            <div class="text-muted small">不合格批次</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-x-circle text-danger fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">不合格批次</div>
+                        <div class="fs-4 fw-bold">1</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm text-center p-3">
-            <div class="text-warning fs-2 fw-bold">1</div>
-            <div class="text-muted small">待检测</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-hourglass-split text-warning fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">待检测</div>
+                        <div class="fs-4 fw-bold">1</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="row g-3 mb-4">
-    <!-- 检测项目 -->
+<!-- 检测项目配置 + 合格率趋势 -->
+<div class="row g-3 mb-3">
     <div class="col-md-4">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-0 fw-semibold">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
                 <i class="bi bi-list-check me-2 text-primary"></i>检测项目配置
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div><i class="bi bi-check-circle text-success me-2"></i>重金属检测</div>
@@ -74,47 +110,80 @@
                         <div><i class="bi bi-x-circle text-muted me-2"></i>放射性检测</div>
                         <span class="badge bg-secondary">未启用</span>
                     </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div><i class="bi bi-x-circle text-muted me-2"></i>寄生虫检测</div>
+                        <span class="badge bg-secondary">未启用</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div><i class="bi bi-check-circle text-success me-2"></i>禁用物质筛查</div>
+                        <span class="badge bg-success">已启用</span>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-
-    <!-- 合格率趋势 -->
     <div class="col-md-8">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-0 fw-semibold">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
                 <i class="bi bi-graph-up me-2 text-success"></i>近7日检测合格率趋势
             </div>
             <div class="card-body">
-                <canvas id="testChart" height="150"></canvas>
+                <canvas id="testChart" height="180"></canvas>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 检测记录 -->
+<!-- 品种分布 + 各项合格率 -->
+<div class="row g-3 mb-3">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-pie-chart me-2 text-info"></i>今日品种检测分布
+            </div>
+            <div class="card-body d-flex align-items-center justify-content-center">
+                <canvas id="testPieChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-bar-chart me-2 text-warning"></i>各检测项目合格率（近30日）
+            </div>
+            <div class="card-body">
+                <canvas id="testBarChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 今日检测记录 -->
 <div class="card border-0 shadow-sm">
-    <div class="card-header bg-white border-0 fw-semibold">
-        <i class="bi bi-clipboard-data me-2 text-primary"></i>今日检测记录
+    <div class="card-header bg-white border-0 fw-semibold py-2 d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-clipboard-data me-2 text-primary"></i>今日检测记录</span>
+        <button class="btn btn-sm btn-outline-secondary" onclick="showToast('导出报告演示中')">
+            <i class="bi bi-download me-1"></i>导出报告
+        </button>
     </div>
     <div class="card-body p-0">
         <table class="table table-hover mb-0 small">
             <thead class="table-light">
-                <tr><th>批次号</th><th>品名</th><th>来源船只</th><th>检测项目</th><th>检测时间</th><th>结果</th><th>操作</th></tr>
+                <tr><th>批次号</th><th>品名</th><th>来源船只</th><th>重量(kg)</th><th>检测项目</th><th>检测员</th><th>检测时间</th><th>结果</th><th>操作</th></tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>QC-240115001</td><td>带鱼</td><td>闽渔008</td><td>重金属+兽药残留</td><td>08:30</td>
+                    <td>QC-240115001</td><td>带鱼</td><td>闽渔008</td><td>320</td><td>重金属+兽药残留</td><td>王检员</td><td>08:30</td>
                     <td><span class="badge bg-success">合格</span></td>
                     <td><button class="btn btn-sm btn-outline-primary" onclick="showToast('查看报告演示中')">报告</button></td>
                 </tr>
                 <tr>
-                    <td>QC-240115002</td><td>螃蟹</td><td>粤渔126</td><td>微生物+鲜度</td><td>09:15</td>
+                    <td>QC-240115002</td><td>螃蟹</td><td>粤渔126</td><td>185</td><td>微生物+鲜度</td><td>李检员</td><td>09:15</td>
                     <td><span class="badge bg-success">合格</span></td>
                     <td><button class="btn btn-sm btn-outline-primary" onclick="showToast('查看报告演示中')">报告</button></td>
                 </tr>
                 <tr>
-                    <td>QC-240115003</td><td>对虾</td><td>浙渔301</td><td>农药残留+重金属</td><td>10:00</td>
+                    <td>QC-240115003</td><td>对虾</td><td>浙渔301</td><td>92</td><td>农药残留+重金属</td><td>王检员</td><td>10:00</td>
                     <td><span class="badge bg-danger">不合格</span></td>
                     <td>
                         <button class="btn btn-sm btn-outline-danger" onclick="showToast('查看不合格报告演示中')">报告</button>
@@ -122,9 +191,29 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>QC-240115004</td><td>黄鱼</td><td>琼渔044</td><td>全项检测</td><td>—</td>
+                    <td>QC-240115004</td><td>黄鱼</td><td>琼渔044</td><td>410</td><td>全项检测</td><td>张检员</td><td>—</td>
                     <td><span class="badge bg-warning text-dark">检测中</span></td>
                     <td><button class="btn btn-sm btn-outline-secondary" onclick="showToast('查看进度演示中')">进度</button></td>
+                </tr>
+                <tr>
+                    <td>QC-240115005</td><td>鲈鱼</td><td>浙岱渔01688</td><td>276</td><td>重金属+微生物</td><td>李检员</td><td>10:40</td>
+                    <td><span class="badge bg-success">合格</span></td>
+                    <td><button class="btn btn-sm btn-outline-primary" onclick="showToast('查看报告演示中')">报告</button></td>
+                </tr>
+                <tr>
+                    <td>QC-240115006</td><td>梭子蟹</td><td>浙甬渔00893</td><td>140</td><td>兽药残留+禁用物质</td><td>张检员</td><td>11:20</td>
+                    <td><span class="badge bg-success">合格</span></td>
+                    <td><button class="btn btn-sm btn-outline-primary" onclick="showToast('查看报告演示中')">报告</button></td>
+                </tr>
+                <tr>
+                    <td>QC-240115007</td><td>小黄鱼</td><td>浙普渔00512</td><td>380</td><td>全项检测</td><td>王检员</td><td>13:05</td>
+                    <td><span class="badge bg-success">合格</span></td>
+                    <td><button class="btn btn-sm btn-outline-primary" onclick="showToast('查看报告演示中')">报告</button></td>
+                </tr>
+                <tr>
+                    <td>QC-240115008</td><td>海蜇</td><td>浙岱渔03301</td><td>520</td><td>微生物+重金属</td><td>李检员</td><td>14:30</td>
+                    <td><span class="badge bg-success">合格</span></td>
+                    <td><button class="btn btn-sm btn-outline-primary" onclick="showToast('查看报告演示中')">报告</button></td>
                 </tr>
             </tbody>
         </table>
@@ -133,10 +222,11 @@
 
 @section Scripts {
 <script>
+// 合格率趋势
 new Chart(document.getElementById('testChart'), {
     type: 'line',
     data: {
-        labels: ['1/9','1/10','1/11','1/12','1/13','1/14','1/15'],
+        labels: ['6/4','6/5','6/6','6/7','6/8','6/9','6/10'],
         datasets: [{
             label: '合格率(%)',
             data: [98.2, 97.5, 100, 96.8, 98.5, 97.2, 94.4],
@@ -144,12 +234,78 @@ new Chart(document.getElementById('testChart'), {
             backgroundColor: 'rgba(25,135,84,0.1)',
             fill: true,
             tension: 0.4
+        },{
+            label: '检测批次',
+            data: [28, 32, 25, 38, 34, 30, 36],
+            borderColor: '#0d6efd',
+            backgroundColor: 'rgba(13,110,253,0.05)',
+            fill: true,
+            tension: 0.4,
+            yAxisID: 'y1'
         }]
     },
     options: {
         responsive: true,
-        plugins: { legend: { display: false }, datalabels: { display: true, align: 'top', anchor: 'end', font: { size: 10 }, color: '#198754', formatter: function(v){ return v+'%'; } } },
-        scales: { y: { min: 90, max: 100 } }
+        plugins: {
+            legend: { position: 'top', labels: { font: { size: 11 } } },
+            datalabels: { display: false }
+        },
+        scales: {
+            y: { min: 90, max: 100, title: { display: true, text: '合格率(%)' } },
+            y1: { position: 'right', title: { display: true, text: '批次数' }, grid: { drawOnChartArea: false } }
+        }
+    }
+});
+
+// 品种分布饼图
+new Chart(document.getElementById('testPieChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['带鱼','螃蟹','对虾','黄鱼','鲈鱼','其他'],
+        datasets: [{
+            data: [8, 6, 5, 7, 4, 6],
+            backgroundColor: ['#0d6efd','#198754','#dc3545','#ffc107','#0dcaf0','#6c757d']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { position: 'bottom', labels: { font: { size: 10 } } },
+            datalabels: {
+                display: true, color: '#fff',
+                font: { size: 10, weight: 'bold' },
+                formatter: function(v, ctx) {
+                    var sum = ctx.dataset.data.reduce(function(a, b) { return a + b; }, 0);
+                    return (v / sum * 100).toFixed(0) + '%';
+                }
+            }
+        }
+    }
+});
+
+// 各项合格率柱图
+new Chart(document.getElementById('testBarChart'), {
+    type: 'bar',
+    data: {
+        labels: ['重金属检测','兽药残留','微生物检测','农药残留','鲜度检测','禁用物质筛查'],
+        datasets: [{
+            label: '合格率(%)',
+            data: [99.1, 98.5, 97.8, 96.2, 99.5, 100],
+            backgroundColor: ['#198754','#0d6efd','#0dcaf0','#ffc107','#198754','#6610f2'],
+            borderRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            datalabels: {
+                display: true, anchor: 'end', align: 'top',
+                font: { size: 10 }, color: '#555',
+                formatter: function(v) { return v + '%'; }
+            }
+        },
+        scales: { y: { min: 90, max: 101 } }
     }
 });
 </script>

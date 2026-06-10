@@ -17,6 +17,11 @@
             </div>
             <nav class="sidebar-nav">
 
+                <!-- ===== 工作台总览（一级菜单）===== -->
+                <a href="/Workbench" class="nav-link @(ViewData["ActivePage"]?.ToString() == "Workbench" ? "active" : "")" style="font-weight:600;margin:4px 0;">
+                    <i class="bi bi-grid-1x2"></i><span>工作台总览</span>
+                </a>
+
                 <!-- ===== 系统一：智慧渔港运营 ===== -->
                 <div class="nav-group-header" data-bs-toggle="collapse" data-bs-target="#menuOps" aria-expanded="true">
                     <span class="nav-group-dot" style="background:#00c9ff"></span>

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(echo \"=== $f ===\")",
+      "Read(//d/AProject/ygjydemo/**)",
+      "Bash(done)",
+      "Bash(grep -rl \"card text-center border-0 shadow-sm\\\\|text-center p-3\\\\|border-primary border-2\\\\|border-success border-2\\\\|border-warning border-2\\\\|content-card text-center\" /d/AProject/ygjydemo/Pages --include=*.cshtml)",
+      "Bash(do echo:*)"
+    ]
+  }
+}

@@ -1,0 +1,539 @@
+@page
+@model FishingPortDemo.Pages.WorkbenchModel
+@{
+    ViewData["Title"] = "工作台总览";
+    ViewData["ActivePage"] = "Workbench";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0"><i class="bi bi-grid-1x2 me-2 text-primary"></i>工作台总览</h4>
+    <span class="text-muted small" id="wbTime"></span>
+</div>
+
+<!-- 第一行：8个核心统计指标 -->
+<div class="row g-3 mb-3">
+    <div class="col-md-3 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-box-arrow-in-right text-primary fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">今日进港</div>
+                        <div class="fs-4 fw-bold">24 <small class="text-success fs-6">↑3</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-box-arrow-right text-info fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">今日出港</div>
+                        <div class="fs-4 fw-bold">18 <small class="text-danger fs-6">↓2</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-ship text-success fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">在港船舶</div>
+                        <div class="fs-4 fw-bold">86</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-exclamation-circle text-warning fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">待处理事件</div>
+                        <div class="fs-4 fw-bold">12</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row g-3 mb-3">
+    <div class="col-md-3 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-hourglass-split text-primary fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">进行中任务</div>
+                        <div class="fs-4 fw-bold">8</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-check2-all text-success fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">已完成任务</div>
+                        <div class="fs-4 fw-bold">31</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-shield-exclamation text-danger fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">今日安全告警</div>
+                        <div class="fs-4 fw-bold">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-alarm text-danger fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">超期任务</div>
+                        <div class="fs-4 fw-bold">5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 第二行：图表 + 快捷入口 + 待办 -->
+<div class="row g-3 mb-3">
+    <!-- 左：趋势图 + 任务完成图 -->
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-graph-up me-2 text-primary"></i>近7日进出港趋势
+            </div>
+            <div class="card-body py-2">
+                <canvas id="wbVesselChart" height="130"></canvas>
+            </div>
+        </div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-bar-chart me-2 text-warning"></i>事件与任务处理趋势（近7日）
+            </div>
+            <div class="card-body py-2">
+                <canvas id="wbEventChart" height="130"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- 中：快捷入口 -->
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-lightning me-2 text-warning"></i>快捷入口
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-6">
+                        <a href="/Port/IncomingVessel" class="text-decoration-none">
+                            <div class="text-center p-3 rounded-3 border bg-light h-100" style="cursor:pointer;transition:background .15s" onmouseover="this.classList.add('bg-primary','text-white');this.classList.remove('bg-light')" onmouseout="this.classList.remove('bg-primary','text-white');this.classList.add('bg-light')">
+                                <i class="bi bi-ship text-primary fs-3"></i>
+                                <div class="small mt-1 fw-semibold" style="font-size:.78rem">来港船舶</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Event/Intake" class="text-decoration-none">
+                            <div class="text-center p-3 rounded-3 border bg-light h-100" style="cursor:pointer;transition:background .15s" onmouseover="this.classList.add('bg-warning');this.classList.remove('bg-light')" onmouseout="this.classList.remove('bg-warning');this.classList.add('bg-light')">
+                                <i class="bi bi-exclamation-circle text-warning fs-3"></i>
+                                <div class="small mt-1 fw-semibold" style="font-size:.78rem">事件接入</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Task/Initiate" class="text-decoration-none">
+                            <div class="text-center p-3 rounded-3 border bg-light h-100" style="cursor:pointer;transition:background .15s" onmouseover="this.classList.add('bg-success','text-white');this.classList.remove('bg-light')" onmouseout="this.classList.remove('bg-success','text-white');this.classList.add('bg-light')">
+                                <i class="bi bi-plus-circle text-success fs-3"></i>
+                                <div class="small mt-1 fw-semibold" style="font-size:.78rem">任务立项</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Monitor/PortMonitor" class="text-decoration-none">
+                            <div class="text-center p-3 rounded-3 border bg-light h-100" style="cursor:pointer;transition:background .15s" onmouseover="this.classList.add('bg-danger','text-white');this.classList.remove('bg-light')" onmouseout="this.classList.remove('bg-danger','text-white');this.classList.add('bg-light')">
+                                <i class="bi bi-camera-video text-danger fs-3"></i>
+                                <div class="small mt-1 fw-semibold" style="font-size:.78rem">港区监控</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Dashboard" class="text-decoration-none">
+                            <div class="text-center p-3 rounded-3 border bg-light h-100" style="cursor:pointer;transition:background .15s" onmouseover="this.classList.add('bg-info','text-white');this.classList.remove('bg-light')" onmouseout="this.classList.remove('bg-info','text-white');this.classList.add('bg-light')">
+                                <i class="bi bi-speedometer2 text-info fs-3"></i>
+                                <div class="small mt-1 fw-semibold" style="font-size:.78rem">运营驾驶舱</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Emergency/Incident" class="text-decoration-none">
+                            <div class="text-center p-3 rounded-3 border bg-light h-100" style="cursor:pointer;transition:background .15s" onmouseover="this.classList.add('bg-secondary','text-white');this.classList.remove('bg-light')" onmouseout="this.classList.remove('bg-secondary','text-white');this.classList.add('bg-light')">
+                                <i class="bi bi-shield-exclamation text-secondary fs-3"></i>
+                                <div class="small mt-1 fw-semibold" style="font-size:.78rem">应急事件</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右：我的待办 -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold py-2 d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-list-check me-2 text-primary"></i>我的待办</span>
+                <span class="badge bg-danger rounded-pill">12</span>
+            </div>
+            <div class="card-body p-0" style="overflow-y:auto;max-height:350px">
+                <div class="list-group list-group-flush">
+                    <a href="/Event/Receive" class="list-group-item list-group-item-action px-3 py-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div style="min-width:0">
+                                <div class="fw-semibold small text-truncate">待接收事件</div>
+                                <div class="text-muted text-truncate" style="font-size:.76rem">港区消防隐患上报待接收</div>
+                            </div>
+                            <span class="badge bg-danger ms-2 flex-shrink-0">紧急</span>
+                        </div>
+                    </a>
+                    <a href="/Task/Handle" class="list-group-item list-group-item-action px-3 py-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div style="min-width:0">
+                                <div class="fw-semibold small text-truncate">任务办理</div>
+                                <div class="text-muted text-truncate" style="font-size:.76rem">港区设施年检任务即将超期</div>
+                            </div>
+                            <span class="badge bg-warning text-dark ms-2 flex-shrink-0">即将超期</span>
+                        </div>
+                    </a>
+                    <a href="/Task/Assign" class="list-group-item list-group-item-action px-3 py-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div style="min-width:0">
+                                <div class="fw-semibold small text-truncate">待分派任务</div>
+                                <div class="text-muted text-truncate" style="font-size:.76rem">新进船员档案录入</div>
+                            </div>
+                            <span class="badge bg-secondary ms-2 flex-shrink-0">普通</span>
+                        </div>
+                    </a>
+                    <a href="/Event/Dispose" class="list-group-item list-group-item-action px-3 py-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div style="min-width:0">
+                                <div class="fw-semibold small text-truncate">事件处置</div>
+                                <div class="text-muted text-truncate" style="font-size:.76rem">泊位积水安全隐患</div>
+                            </div>
+                            <span class="badge bg-warning text-dark ms-2 flex-shrink-0">处理中</span>
+                        </div>
+                    </a>
+                    <a href="/Supervision/SupervisionList" class="list-group-item list-group-item-action px-3 py-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div style="min-width:0">
+                                <div class="fw-semibold small text-truncate">督办跟进</div>
+                                <div class="text-muted text-truncate" style="font-size:.76rem">船员安全培训组织</div>
+                            </div>
+                            <span class="badge bg-danger ms-2 flex-shrink-0">超期</span>
+                        </div>
+                    </a>
+                    <a href="/Task/Urge" class="list-group-item list-group-item-action px-3 py-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div style="min-width:0">
+                                <div class="fw-semibold small text-truncate">任务催办</div>
+                                <div class="text-muted text-truncate" style="font-size:.76rem">港区消防设施年检催办</div>
+                            </div>
+                            <span class="badge bg-danger ms-2 flex-shrink-0">超期3天</span>
+                        </div>
+                    </a>
+                    <a href="/Port/Duty" class="list-group-item list-group-item-action px-3 py-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div style="min-width:0">
+                                <div class="fw-semibold small text-truncate">值班交接</div>
+                                <div class="text-muted text-truncate" style="font-size:.76rem">今日值班记录待填报</div>
+                            </div>
+                            <span class="badge bg-secondary ms-2 flex-shrink-0">今日</span>
+                        </div>
+                    </a>
+                    <a href="/Event/Receive" class="list-group-item list-group-item-action px-3 py-2 text-center text-primary small">
+                        查看全部待办 <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 第三行：事件动态 + 船舶动态 + 公告 + 完成率 -->
+<div class="row g-3">
+    <!-- 最新事件动态 -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-clock-history me-2 text-info"></i>最新事件动态
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0 small">
+                    <thead class="table-light">
+                        <tr><th>类型</th><th>描述</th><th>时间</th><th>状态</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge bg-danger">安全</span></td>
+                            <td class="text-truncate" style="max-width:90px">危险区域越界告警</td>
+                            <td>07:23</td>
+                            <td><span class="badge bg-success">已处理</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-warning text-dark">设备</span></td>
+                            <td class="text-truncate" style="max-width:90px">CAM018摄像头离线</td>
+                            <td>10:02</td>
+                            <td><span class="badge bg-warning text-dark">处理中</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-primary">港务</span></td>
+                            <td class="text-truncate" style="max-width:90px">浙岱渔01688进港申报</td>
+                            <td>10:45</td>
+                            <td><span class="badge bg-success">已审批</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-info">环境</span></td>
+                            <td class="text-truncate" style="max-width:90px">港区垃圾清运完成</td>
+                            <td>11:30</td>
+                            <td><span class="badge bg-success">已完成</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-danger">安全</span></td>
+                            <td class="text-truncate" style="max-width:90px">消防通道占用上报</td>
+                            <td>13:10</td>
+                            <td><span class="badge bg-secondary">待处理</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-warning text-dark">设备</span></td>
+                            <td class="text-truncate" style="max-width:90px">船舶引导设备故障</td>
+                            <td>14:05</td>
+                            <td><span class="badge bg-danger">处理中</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 今日船舶动态 -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-ship me-2 text-primary"></i>今日船舶动态
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0 small">
+                    <thead class="table-light">
+                        <tr><th>船名/编号</th><th>动态</th><th>泊位</th><th>时间</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-truncate" style="max-width:90px">浙岱渔01688</td>
+                            <td><span class="badge bg-success">进港</span></td>
+                            <td>3号</td>
+                            <td>08:15</td>
+                        </tr>
+                        <tr>
+                            <td class="text-truncate" style="max-width:90px">浙甬渔00893</td>
+                            <td><span class="badge bg-info">出港</span></td>
+                            <td>—</td>
+                            <td>09:02</td>
+                        </tr>
+                        <tr>
+                            <td class="text-truncate" style="max-width:90px">浙岱渔02156</td>
+                            <td><span class="badge bg-warning text-dark">待审批</span></td>
+                            <td>—</td>
+                            <td>10:30</td>
+                        </tr>
+                        <tr>
+                            <td class="text-truncate" style="max-width:90px">浙普渔00512</td>
+                            <td><span class="badge bg-success">进港</span></td>
+                            <td>7号</td>
+                            <td>11:20</td>
+                        </tr>
+                        <tr>
+                            <td class="text-truncate" style="max-width:90px">浙岱渔03301</td>
+                            <td><span class="badge bg-info">出港</span></td>
+                            <td>—</td>
+                            <td>13:45</td>
+                        </tr>
+                        <tr>
+                            <td class="text-truncate" style="max-width:90px">浙甬渔01024</td>
+                            <td><span class="badge bg-success">进港</span></td>
+                            <td>5号</td>
+                            <td>14:10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右侧：公告 + 完成率 -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-megaphone me-2 text-warning"></i>系统公告
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item px-3 py-2">
+                        <div class="d-flex justify-content-between">
+                            <span class="small fw-semibold">夏季防汛应急预案更新</span>
+                            <small class="text-muted flex-shrink-0 ms-2">06-08</small>
+                        </div>
+                        <div class="text-muted text-truncate" style="font-size:.75rem">请各部门负责人下载最新版本并传达</div>
+                    </div>
+                    <div class="list-group-item px-3 py-2">
+                        <div class="d-flex justify-content-between">
+                            <span class="small fw-semibold">港区东侧道路施工通知</span>
+                            <small class="text-muted flex-shrink-0 ms-2">06-07</small>
+                        </div>
+                        <div class="text-muted text-truncate" style="font-size:.75rem">6月10日至15日东侧道路封闭施工</div>
+                    </div>
+                    <div class="list-group-item px-3 py-2">
+                        <div class="d-flex justify-content-between">
+                            <span class="small fw-semibold">船员证件核查专项行动</span>
+                            <small class="text-muted flex-shrink-0 ms-2">06-05</small>
+                        </div>
+                        <div class="text-muted text-truncate" style="font-size:.75rem">本月底前完成所有在港船员证件核查</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-pie-chart me-2 text-success"></i>今日工作完成率
+            </div>
+            <div class="card-body py-2 text-center">
+                <canvas id="wbPieChart" height="140"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.getElementById('wbTime').textContent = '数据更新时间：' + new Date().toLocaleString('zh-CN');
+
+    // 进出港趋势
+    new Chart(document.getElementById('wbVesselChart'), {
+        type: 'line',
+        data: {
+            labels: ['6/4','6/5','6/6','6/7','6/8','6/9','6/10'],
+            datasets: [{
+                label: '进港',
+                data: [20, 24, 18, 28, 22, 25, 24],
+                borderColor: '#0d6efd',
+                backgroundColor: 'rgba(13,110,253,0.08)',
+                fill: true,
+                tension: 0.4
+            },{
+                label: '出港',
+                data: [18, 20, 16, 24, 20, 22, 18],
+                borderColor: '#0dcaf0',
+                backgroundColor: 'rgba(13,202,240,0.08)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { position: 'top', labels: { font: { size: 11 } } }, datalabels: { display: false } } }
+    });
+
+    // 事件与任务趋势
+    new Chart(document.getElementById('wbEventChart'), {
+        type: 'bar',
+        data: {
+            labels: ['6/4','6/5','6/6','6/7','6/8','6/9','6/10'],
+            datasets: [{
+                label: '新增事件',
+                data: [8, 12, 7, 15, 10, 9, 12],
+                backgroundColor: 'rgba(255,193,7,0.7)',
+                borderColor: '#ffc107',
+                borderWidth: 1
+            },{
+                label: '完成任务',
+                data: [22, 28, 25, 31, 29, 27, 31],
+                backgroundColor: 'rgba(25,135,84,0.7)',
+                borderColor: '#198754',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 11 } } },
+                datalabels: { display: false }
+            }
+        }
+    });
+
+    // 工作完成率饼图
+    new Chart(document.getElementById('wbPieChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['已完成', '进行中', '待开始', '超期'],
+            datasets: [{
+                data: [31, 8, 13, 5],
+                backgroundColor: ['#198754','#ffc107','#6c757d','#dc3545']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom', labels: { font: { size: 10 } } },
+                datalabels: {
+                    display: true, color: '#fff',
+                    font: { size: 11, weight: 'bold' },
+                    formatter: function(v, ctx) {
+                        var sum = ctx.dataset.data.reduce(function(a,b){ return a+b; }, 0);
+                        return (v/sum*100).toFixed(1) + '%';
+                    }
+                }
+            }
+        }
+    });
+</script>
+}

@@ -6,7 +6,7 @@
     Layout = "_Layout";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="bi bi-link-45deg me-2 text-primary"></i>区块链溯源系统</h4>
     <div class="d-flex gap-2">
         <button class="btn btn-primary btn-sm" onclick="showToast('生成溯源码演示中')">
@@ -19,40 +19,76 @@
 </div>
 
 <!-- 区块链概况 -->
-<div class="row g-3 mb-4">
+<div class="row g-3 mb-3">
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm text-center p-3">
-            <div class="text-primary fs-2 fw-bold">12,580</div>
-            <div class="text-muted small">区块总数</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-link-45deg text-primary fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">区块总数</div>
+                        <div class="fs-4 fw-bold">12,580</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm text-center p-3">
-            <div class="text-success fs-2 fw-bold">89,432</div>
-            <div class="text-muted small">溯源记录总数</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-qr-code text-success fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">溯源记录总数</div>
+                        <div class="fs-4 fw-bold">89,432</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm text-center p-3">
-            <div class="text-warning fs-2 fw-bold">342</div>
-            <div class="text-muted small">今日上链数</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-cloud-upload text-warning fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">今日上链数</div>
+                        <div class="fs-4 fw-bold">342</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm text-center p-3">
-            <div class="text-info fs-2 fw-bold">5</div>
-            <div class="text-muted small">节点数量</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-diagram-3 text-info fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small">节点数量</div>
+                        <div class="fs-4 fw-bold">5</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- 溯源查询框 -->
-<div class="card border-0 shadow-sm mb-4">
-    <div class="card-header bg-white border-0 fw-semibold">
+<div class="card border-0 shadow-sm mb-3">
+    <div class="card-header bg-white border-0 fw-semibold py-2">
         <i class="bi bi-search me-2 text-primary"></i>溯源信息查询
     </div>
     <div class="card-body">
-        <div class="row g-2 align-items-end">
+        <div class="row g-2 align-items-end mb-4">
             <div class="col-md-4">
                 <label class="form-label small">溯源码 / 交易单号</label>
                 <input type="text" class="form-control" value="TRD-240115001" oninput="showToast('输入溯源码演示中')">
@@ -64,75 +100,207 @@
             </div>
         </div>
 
-        <!-- 溯源结果展示 -->
-        <div class="mt-4">
-            <h6 class="fw-semibold mb-3"><i class="bi bi-diagram-3 me-2 text-primary"></i>溯源链路：带鱼 - 批次TRD-240115001</h6>
-            <div class="d-flex align-items-start gap-0 flex-wrap">
-                <div class="text-center" style="min-width:130px">
-                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
-                        <i class="bi bi-water fs-5"></i>
-                    </div>
-                    <div class="small fw-semibold">捕捞</div>
-                    <div class="small text-muted">闽渔008<br>2024-01-12</div>
-                    <div class="small text-success"><i class="bi bi-shield-check"></i> 已上链</div>
+        <!-- 溯源链路 -->
+        <h6 class="fw-semibold mb-3"><i class="bi bi-diagram-3 me-2 text-primary"></i>溯源链路：带鱼 - 批次TRD-240115001</h6>
+        <div class="d-flex align-items-start flex-wrap gap-0">
+            <div class="text-center" style="min-width:130px">
+                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
+                    <i class="bi bi-water fs-5"></i>
                 </div>
-                <div class="d-flex align-items-center" style="padding-top:14px"><i class="bi bi-arrow-right text-muted fs-4"></i></div>
-                <div class="text-center" style="min-width:130px">
-                    <div class="rounded-circle bg-info text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
-                        <i class="bi bi-anchor fs-5"></i>
-                    </div>
-                    <div class="small fw-semibold">进港</div>
-                    <div class="small text-muted">某某渔港<br>2024-01-15 08:15</div>
-                    <div class="small text-success"><i class="bi bi-shield-check"></i> 已上链</div>
+                <div class="small fw-semibold">捕捞</div>
+                <div class="small text-muted">闽渔008<br>2024-01-12</div>
+                <div class="small text-success"><i class="bi bi-shield-check"></i> 已上链</div>
+            </div>
+            <div class="d-flex align-items-center" style="padding-top:14px"><i class="bi bi-arrow-right text-muted fs-4"></i></div>
+            <div class="text-center" style="min-width:130px">
+                <div class="rounded-circle bg-info text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
+                    <i class="bi bi-anchor fs-5"></i>
                 </div>
-                <div class="d-flex align-items-center" style="padding-top:14px"><i class="bi bi-arrow-right text-muted fs-4"></i></div>
-                <div class="text-center" style="min-width:130px">
-                    <div class="rounded-circle bg-warning text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
-                        <i class="bi bi-clipboard2-pulse fs-5"></i>
-                    </div>
-                    <div class="small fw-semibold">质检</div>
-                    <div class="small text-muted">港口检测站<br>2024-01-15 08:30</div>
-                    <div class="small text-success"><i class="bi bi-shield-check"></i> 已上链</div>
+                <div class="small fw-semibold">进港</div>
+                <div class="small text-muted">某某渔港<br>2024-01-15 08:15</div>
+                <div class="small text-success"><i class="bi bi-shield-check"></i> 已上链</div>
+            </div>
+            <div class="d-flex align-items-center" style="padding-top:14px"><i class="bi bi-arrow-right text-muted fs-4"></i></div>
+            <div class="text-center" style="min-width:130px">
+                <div class="rounded-circle bg-warning text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
+                    <i class="bi bi-clipboard2-pulse fs-5"></i>
                 </div>
-                <div class="d-flex align-items-center" style="padding-top:14px"><i class="bi bi-arrow-right text-muted fs-4"></i></div>
-                <div class="text-center" style="min-width:130px">
-                    <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
-                        <i class="bi bi-cart3 fs-5"></i>
-                    </div>
-                    <div class="small fw-semibold">交易</div>
-                    <div class="small text-muted">海鲜超市<br>2024-01-15 08:30</div>
-                    <div class="small text-success"><i class="bi bi-shield-check"></i> 已上链</div>
+                <div class="small fw-semibold">质检</div>
+                <div class="small text-muted">港口检测站<br>2024-01-15 08:30</div>
+                <div class="small text-success"><i class="bi bi-shield-check"></i> 已上链</div>
+            </div>
+            <div class="d-flex align-items-center" style="padding-top:14px"><i class="bi bi-arrow-right text-muted fs-4"></i></div>
+            <div class="text-center" style="min-width:130px">
+                <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
+                    <i class="bi bi-cart3 fs-5"></i>
                 </div>
-                <div class="d-flex align-items-center" style="padding-top:14px"><i class="bi bi-arrow-right text-muted fs-4"></i></div>
-                <div class="text-center" style="min-width:130px">
-                    <div class="rounded-circle bg-secondary text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
-                        <i class="bi bi-shop fs-5"></i>
-                    </div>
-                    <div class="small fw-semibold">零售</div>
-                    <div class="small text-muted">消费者端<br>待上链</div>
-                    <div class="small text-muted"><i class="bi bi-clock"></i> 待上链</div>
+                <div class="small fw-semibold">交易</div>
+                <div class="small text-muted">海鲜超市<br>2024-01-15 10:20</div>
+                <div class="small text-success"><i class="bi bi-shield-check"></i> 已上链</div>
+            </div>
+            <div class="d-flex align-items-center" style="padding-top:14px"><i class="bi bi-arrow-right text-muted fs-4"></i></div>
+            <div class="text-center" style="min-width:130px">
+                <div class="rounded-circle bg-secondary text-white d-inline-flex align-items-center justify-content-center mb-2" style="width:48px;height:48px">
+                    <i class="bi bi-shop fs-5"></i>
                 </div>
+                <div class="small fw-semibold">零售</div>
+                <div class="small text-muted">消费者端<br>待上链</div>
+                <div class="small text-muted"><i class="bi bi-clock"></i> 待上链</div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 最新区块 -->
+<!-- 上链趋势 + 节点状态 -->
+<div class="row g-3 mb-3">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-graph-up me-2 text-primary"></i>近7日上链数量趋势
+            </div>
+            <div class="card-body">
+                <canvas id="chainChart" height="180"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-diagram-3 me-2 text-info"></i>区块链节点状态
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-hdd-network text-success me-2"></i>
+                            <span class="small fw-semibold">主节点（渔港管理局）</span>
+                            <div class="text-muted ms-4" style="font-size:.75rem">192.168.1.10 · 区块高度 12580</div>
+                        </div>
+                        <span class="badge bg-success">运行中</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-hdd-network text-success me-2"></i>
+                            <span class="small fw-semibold">节点2（质检中心）</span>
+                            <div class="text-muted ms-4" style="font-size:.75rem">192.168.1.11 · 区块高度 12580</div>
+                        </div>
+                        <span class="badge bg-success">运行中</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-hdd-network text-success me-2"></i>
+                            <span class="small fw-semibold">节点3（市场监管局）</span>
+                            <div class="text-muted ms-4" style="font-size:.75rem">192.168.1.12 · 区块高度 12580</div>
+                        </div>
+                        <span class="badge bg-success">运行中</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-hdd-network text-success me-2"></i>
+                            <span class="small fw-semibold">节点4（农业农村局）</span>
+                            <div class="text-muted ms-4" style="font-size:.75rem">192.168.1.13 · 区块高度 12580</div>
+                        </div>
+                        <span class="badge bg-success">运行中</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-hdd-network text-warning me-2"></i>
+                            <span class="small fw-semibold">节点5（交易平台）</span>
+                            <div class="text-muted ms-4" style="font-size:.75rem">192.168.1.14 · 区块高度 12578</div>
+                        </div>
+                        <span class="badge bg-warning text-dark">同步中</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 fw-semibold py-2">
+                <i class="bi bi-pie-chart me-2 text-success"></i>溯源品种分布
+            </div>
+            <div class="card-body d-flex align-items-center justify-content-center">
+                <canvas id="tracePieChart" height="220"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 最新区块记录 -->
 <div class="card border-0 shadow-sm">
-    <div class="card-header bg-white border-0 fw-semibold">
+    <div class="card-header bg-white border-0 fw-semibold py-2">
         <i class="bi bi-boxes me-2 text-primary"></i>最新区块记录
     </div>
     <div class="card-body p-0">
         <table class="table table-hover mb-0 small font-monospace">
             <thead class="table-light">
-                <tr><th>区块高度</th><th>区块哈希</th><th>交易数</th><th>上链时间</th><th>状态</th></tr>
+                <tr><th>区块高度</th><th>区块哈希</th><th>前块哈希</th><th>交易数</th><th>上链时间</th><th>状态</th></tr>
             </thead>
             <tbody>
-                <tr><td>12580</td><td>0x3f8a...b291</td><td>8</td><td>10:35:22</td><td><span class="badge bg-success">已确认</span></td></tr>
-                <tr><td>12579</td><td>0x9d2c...a408</td><td>12</td><td>10:33:18</td><td><span class="badge bg-success">已确认</span></td></tr>
-                <tr><td>12578</td><td>0x1e7f...c563</td><td>6</td><td>10:31:05</td><td><span class="badge bg-success">已确认</span></td></tr>
-                <tr><td>12577</td><td>0x5b4a...d712</td><td>15</td><td>10:28:44</td><td><span class="badge bg-success">已确认</span></td></tr>
+                <tr><td>12580</td><td class="text-truncate" style="max-width:120px">0x3f8a...b291</td><td class="text-truncate" style="max-width:120px">0x9d2c...a408</td><td>8</td><td>10:35:22</td><td><span class="badge bg-success">已确认</span></td></tr>
+                <tr><td>12579</td><td class="text-truncate" style="max-width:120px">0x9d2c...a408</td><td class="text-truncate" style="max-width:120px">0x1e7f...c563</td><td>12</td><td>10:33:18</td><td><span class="badge bg-success">已确认</span></td></tr>
+                <tr><td>12578</td><td class="text-truncate" style="max-width:120px">0x1e7f...c563</td><td class="text-truncate" style="max-width:120px">0x5b4a...d712</td><td>6</td><td>10:31:05</td><td><span class="badge bg-success">已确认</span></td></tr>
+                <tr><td>12577</td><td class="text-truncate" style="max-width:120px">0x5b4a...d712</td><td class="text-truncate" style="max-width:120px">0x8c3e...f049</td><td>15</td><td>10:28:44</td><td><span class="badge bg-success">已确认</span></td></tr>
+                <tr><td>12576</td><td class="text-truncate" style="max-width:120px">0x8c3e...f049</td><td class="text-truncate" style="max-width:120px">0x2a71...e835</td><td>9</td><td>10:26:11</td><td><span class="badge bg-success">已确认</span></td></tr>
+                <tr><td>12575</td><td class="text-truncate" style="max-width:120px">0x2a71...e835</td><td class="text-truncate" style="max-width:120px">0xb6d4...7c12</td><td>11</td><td>10:23:58</td><td><span class="badge bg-success">已确认</span></td></tr>
             </tbody>
         </table>
     </div>
 </div>
+
+@section Scripts {
+<script>
+// 上链趋势
+new Chart(document.getElementById('chainChart'), {
+    type: 'bar',
+    data: {
+        labels: ['6/4','6/5','6/6','6/7','6/8','6/9','6/10'],
+        datasets: [{
+            label: '上链数量',
+            data: [280, 315, 298, 352, 330, 318, 342],
+            backgroundColor: 'rgba(13,110,253,0.7)',
+            borderColor: '#0d6efd',
+            borderWidth: 1,
+            borderRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            datalabels: {
+                display: true, anchor: 'end', align: 'top',
+                font: { size: 10 }, color: '#0d6efd',
+                formatter: function(v) { return v; }
+            }
+        }
+    }
+});
+
+// 溯源品种分布
+new Chart(document.getElementById('tracePieChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['带鱼','螃蟹','对虾','黄鱼','鲈鱼','其他'],
+        datasets: [{
+            data: [28, 18, 15, 20, 10, 9],
+            backgroundColor: ['#0d6efd','#198754','#dc3545','#ffc107','#0dcaf0','#6c757d']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { position: 'bottom', labels: { font: { size: 10 } } },
+            datalabels: {
+                display: true, color: '#fff',
+                font: { size: 10, weight: 'bold' },
+                formatter: function(v, ctx) {
+                    var sum = ctx.dataset.data.reduce(function(a, b) { return a + b; }, 0);
+                    return (v / sum * 100).toFixed(0) + '%';
+                }
+            }
+        }
+    }
+});
+</script>
+}
